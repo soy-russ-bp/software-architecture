@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 import controller.Organizator;
 
-public class main {
+public class Main {
 
     public static void main(String[] args) {
         Organizator o = new Organizator();
@@ -15,11 +15,9 @@ public class main {
 
         ArrayList<String> orderedNames = o.ascendendSort(newNames);
 
-        for( String name: orderedNames){
+        for (String name : orderedNames) {
             System.out.println(name);
         }
-        
 
-        
     }
 }
