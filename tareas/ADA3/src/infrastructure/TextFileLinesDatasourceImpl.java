@@ -10,7 +10,7 @@ public class TextFileLinesDatasourceImpl implements LinesDatasource{
 
     @Override
     public List<String> getLines() {
-        return reader.getList();
+        return reader.readerToList();
     }
     
 }

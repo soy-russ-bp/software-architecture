@@ -1,23 +1,24 @@
 import java.util.ArrayList;
 
 import controller.Organizator;
+import infrastructure.TextFileLinesDatasourceImpl;
 
 public class Main {
 
     public static void main(String[] args) {
-        Organizator o = new Organizator();
-        ArrayList<String> nombres = new ArrayList<String>();
-        nombres.add("vIcTor huGo");
-        nombres.add("peDRo PaRamO");
-        nombres.add("jUAn rUlFo");
+        Organizator organizator = new Organizator();
 
-        ArrayList<String> newNames = o.formatNames(nombres);
+        TextFileLinesDatasourceImpl namesRepository = new TextFileLinesDatasourceImpl();
 
-        ArrayList<String> orderedNames = o.ascendendSort(newNames);
+        ArrayList<String> newNames = organizator.formatNames(namesRepository.getLines());
+
+        ArrayList<String> orderedNames = organizator.ascendendSort(newNames);
 
         for (String name : orderedNames) {
             System.out.println(name);
         }
 
+        
+        
     }
 }

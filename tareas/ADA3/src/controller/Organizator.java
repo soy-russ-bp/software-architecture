@@ -1,5 +1,6 @@
 package controller;
 import java.util.ArrayList ;
+import java.util.List;
 
 public class Organizator {
     // instancias:
@@ -30,7 +31,7 @@ public class Organizator {
     }
     
 
-    public ArrayList<String> formatNames(ArrayList<String> names){
+    public ArrayList<String> formatNames(List<String> names){
         ArrayList<String> namesWithFormat = new ArrayList<String>();;
 
         for(String name: names){
@@ -41,7 +42,7 @@ public class Organizator {
     }
 
    
-    public ArrayList<String> ascendendSort(ArrayList<String> names) {
+    public ArrayList<String> ascendendSort(List<String> names) {
         ArrayList<String> sortedNames = new ArrayList<String>(names);
         sortedNames.sort(null);
         return sortedNames;
