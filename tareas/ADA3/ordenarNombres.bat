@@ -12,6 +12,9 @@ javac LinesRepositoryImpl.java
 javac Reader.java
 javac TextFileLinesDatasourceImpl.java
 cd ..
+cd .\view\
+javac OrganizatorView.java
+cd ..
 javac Main.java
 java Main
 pause
