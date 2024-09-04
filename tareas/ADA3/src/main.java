@@ -1,6 +1,7 @@
 
 import view.View;
-import repositoryLayer.domain.LinesDatasource;
+import repositoryLayer.domain.LinesRepository;
+import repositoryLayer.infrastructure.LinesRepositoryImpl;
 import repositoryLayer.infrastructure.TextFileLinesDatasourceImpl;
 import controller.TextFormatter;
 import controller.ListSorter;
@@ -11,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
 
         View view = new View();
-        LinesDatasource namesRepository = new TextFileLinesDatasourceImpl();
+        LinesRepository namesRepository = new LinesRepositoryImpl(new TextFileLinesDatasourceImpl());
         TextFormatter textFormatter = new TextFormatter();
         ListSorter sorter = new ListSorter();
         Controller controller = new Controller(namesRepository, textFormatter, sorter, view);
