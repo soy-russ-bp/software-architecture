@@ -1,15 +1,10 @@
 package controller;
-import java.util.ArrayList ;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class Organizator {
-    // instancias:
-    //View presentator=new View;
-    //Reader reader = new Reader; (getNames)
-    
-
-    // Metodos
-    private String formatName(String name) {
+public class TextFormatter {
+     private String formatName(String name) {
         StringBuilder formattedName = new StringBuilder();
     
         for(int i = 0; i < name.length(); i++) {
@@ -41,12 +36,4 @@ public class Organizator {
         return namesWithFormat;
     }
 
-   
-    public ArrayList<String> ascendendSort(List<String> names) {
-        ArrayList<String> sortedNames = new ArrayList<String>(names);
-        sortedNames.sort(null);
-        return sortedNames;
-    }
-     
-    
 }

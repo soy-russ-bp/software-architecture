@@ -1,8 +1,8 @@
-package infrastructure;
+package repositoryLayer.infrastructure;
 
 import java.util.List;
 
-import domain.LinesDatasource;
+import repositoryLayer.domain.LinesDatasource;
 
 public class TextFileLinesDatasourceImpl implements LinesDatasource{
 

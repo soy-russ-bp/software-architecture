@@ -1,9 +1,9 @@
-package infrastructure;
+package repositoryLayer.infrastructure;
 
 import java.util.List;
 
-import domain.LinesDatasource;
-import domain.LinesRepository;
+import repositoryLayer.domain.LinesDatasource;
+import repositoryLayer.domain.LinesRepository;
 
 public class LinesRepositoryImpl implements LinesRepository {
 

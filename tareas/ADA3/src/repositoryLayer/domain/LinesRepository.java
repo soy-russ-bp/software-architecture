@@ -1,4 +1,4 @@
-package domain;
+package repositoryLayer.domain;
 
 import java.util.List;
 
