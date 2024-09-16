@@ -64,6 +64,7 @@ public class ScoreGui extends JDialog implements ActionListener
                                 cp.add(scorePanel); 
                            }//end very first if
                      }//end first while loop            
+                    br1.close();
                 }//end try
                 catch(IOException ex) {
                     JFrame frame = new JFrame("Alert");
