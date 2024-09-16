@@ -131,8 +131,7 @@ public class GameGui extends JFrame implements ActionListener {
         } // end New Game Command
         else if (e.getActionCommand().equals("EnterName"))// Allows user to enter their name for high score
         {
-            JOptionPane optionPane = new JOptionPane();
-            playerName = optionPane.showInputDialog("Please Enter your Earth Name");
+            playerName = JOptionPane.showInputDialog("Please Enter your Earth Name");
         } else if (e.getActionCommand().equals("HighScore"))// Displays the high scores
         {
             ScoreGui sg = new ScoreGui();
