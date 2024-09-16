@@ -8,8 +8,7 @@ import javax.swing.*;
 public class FileLoader {
     public void loadFile(String fileName) {
         try {
-            InputStream inputStream = getClass().getResourceAsStream("/levels/" + fileName);
-            BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
+            BufferedReader in = new BufferedReader(new FileReader(fileName));// open the file
             String x;
             int lineNum = 0;
             while ((x = in.readLine()) != null) {
