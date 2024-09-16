@@ -5,3 +5,7 @@
 build
 
 bin
+
+.DS_Store
+
+scores.txt
