@@ -16,7 +16,7 @@ public class GameGui extends JFrame implements ActionListener {
         super("Maze, a game of wondering"); // call super to initilize title bar of G.U.I.
         cp = getContentPane();
 
-        InputStream inputStream = getClass().getResourceAsStream("/images/yeababyyea.jpg");
+        InputStream inputStream = getClass().getResourceAsStream("/images/maze.jpg");
         shagLabel = new JLabel("", new ImageIcon(inputStream.readAllBytes()), JLabel.LEFT);// GUI background for initial
                                                                                            // load
         cp.add(shagLabel);
@@ -58,6 +58,12 @@ public class GameGui extends JFrame implements ActionListener {
         newMenu.add(itemHighScore);
         newMenu.add(itemSaveScore);
         newMenu.add(itemExit);
+
+         // Create the "Jugar" button
+        playButton = new JButton("Jugar");
+        playButton.setActionCommand("Play");
+        playButton.addActionListener(this);
+        cp.add(playButton, BorderLayout.SOUTH);
 
         // Add Exit Menu Item
         // Add Menu Bar
@@ -149,6 +155,11 @@ public class GameGui extends JFrame implements ActionListener {
                 theArc.setExit(fl.ExitXCord(), fl.ExitYCord());
                 loadMatrixGui("newLoad");
             }
+        }else if (e.getActionCommand().equals("Play")) {
+            fl.loadFileInternal(getClass().getResourceAsStream("/levels/level1.maz"));
+            theArc.setExit(fl.ExitXCord(), fl.ExitYCord());
+            playButton.setVisible(false);
+            loadMatrixGui("newLoad");
         }
     }// end actionPerformed method
 
@@ -314,6 +325,11 @@ public class GameGui extends JFrame implements ActionListener {
     private JMenuItem itemHighScore;
     private JMenuItem itemSaveScore;
     // end create menu items
+
+    //create buttons
+    private JButton playButton;
+
+
     private JLabel shagLabel;
     private int ix;
     private int jx;
