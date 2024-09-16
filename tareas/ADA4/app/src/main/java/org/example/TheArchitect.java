@@ -1,8 +1,5 @@
 package org.example;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
 import javax.swing.*;
 //Your life is the sum of a remainder of an unbalanced equation inherent to the programming
 //of the matrix

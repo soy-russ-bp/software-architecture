@@ -6,7 +6,6 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.swing.filechooser.*;
 
 public class GameGui extends JFrame implements ActionListener {
 

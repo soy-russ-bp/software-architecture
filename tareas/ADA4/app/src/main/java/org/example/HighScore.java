@@ -1,8 +1,6 @@
 package org.example;
 
-import java.util.*;
 import java.io.*;
-import java.beans.*; 
 
 public class HighScore
 {
