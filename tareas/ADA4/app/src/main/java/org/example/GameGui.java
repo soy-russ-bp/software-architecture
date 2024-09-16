@@ -136,7 +136,7 @@ public class GameGui extends JFrame implements ActionListener {
         } else if (e.getActionCommand().equals("HighScore"))// Displays the high scores
         {
             ScoreGui sg = new ScoreGui();
-            sg.ScoreGui();
+            sg.ShowScoreGui();
         } else if (e.getActionCommand().equals("SaveScore"))// allows the user to save their score at any time.
         {
             hs.addHighScore(playerName, tk.getMinutes(), tk.getSeconds(), levelNum);
@@ -235,7 +235,7 @@ public class GameGui extends JFrame implements ActionListener {
 
     public void nextLevelLoad() {
         levelNum += 1;
-        tk.TimeKeeper(timeLeft, ix);// The TimeKeeper object keeps a running tab of the total time the player has
+        tk.KeepTime(timeLeft, ix);// The TimeKeeper object keeps a running tab of the total time the player has
                                     // used.(for high score)
         timely.stop();// dont count while we are loading the next level.
         theArc = new TheArchitect();// flush everything from TheArchitect so we dont get goffee results

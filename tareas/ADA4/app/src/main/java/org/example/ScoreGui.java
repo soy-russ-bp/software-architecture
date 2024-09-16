@@ -11,7 +11,7 @@ public class ScoreGui extends JDialog implements ActionListener {
         super();
     }
 
-    public void ScoreGui()// the ScoreGui Method displays the scores in order from lowest to highest.
+    public void ShowScoreGui()// the ScoreGui Method displays the scores in order from lowest to highest.
     {
         Container cp = getContentPane();
         JButton ok = new JButton("OK");

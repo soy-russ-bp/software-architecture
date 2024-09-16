@@ -1,7 +1,7 @@
 package org.example;
 
 public class TimeKeeper {
-	public void TimeKeeper(int min, int sec)// a class to keep track of the total seconds and minuntes the player has
+	public void KeepTime(int min, int sec)// a class to keep track of the total seconds and minuntes the player has
 											// used to get to a level
 	{
 		if (sec + seconds <= 60) {
