@@ -2,21 +2,19 @@ package org.example;
 
 import java.io.*;
 
-public class HighScore
-{
-    public void addHighScore(String name, int min, int sec,int level)
-    {
-        try{
-               String outData="PlayerName: "+name+" Total Time for Levels:"+min+":"+sec+ "(Minutes:Seconds)"+ "Level Reached:*" + level;
-               PrintWriter out = new PrintWriter(new FileOutputStream("scores.txt",true));
-               out.println("");
-               out.println(outData);
-               out.close();
-    }//prints the highscore data to scores.txt
-        catch(Exception ex){
+public class HighScore {
+    public void addHighScore(String name, int min, int sec, int level) {
+        try {
+            String outData = "PlayerName: " + name + " Total Time for Levels:" + min + ":" + sec + "(Minutes:Seconds)"
+                    + "Level Reached:*" + level;
+            PrintWriter out = new PrintWriter(new FileOutputStream("scores.txt", true));
+            out.println("");
+            out.println(outData);
+            out.close();
+        } // prints the highscore data to scores.txt
+        catch (Exception ex) {
             System.out.println(ex);
-       }//end catch
-	    
-    }//end addHighScore   
-}//end class
+        } // end catch
 
+    }// end addHighScore
+}// end class

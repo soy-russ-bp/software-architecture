@@ -6,7 +6,6 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 public class GameGui extends JFrame implements ActionListener {
 
     public static void main(String[] args) throws IOException {
@@ -242,7 +241,7 @@ public class GameGui extends JFrame implements ActionListener {
         theArc = new TheArchitect();// flush everything from TheArchitect so we dont get goffee results
         catFileName += 01;// the next file to be loaded (number)
         InputStream fileName = getClass().getResourceAsStream("/levels/level" + catFileName + ".maz");
-         // "level" + catFileName + ".maz";
+        // "level" + catFileName + ".maz";
         System.gc();
         fl.loadFileInternal(fileName);// load the file we need
         scrapMatrix = fl.getGameMatrix();// get the new matrix from the fileloader for the next level.

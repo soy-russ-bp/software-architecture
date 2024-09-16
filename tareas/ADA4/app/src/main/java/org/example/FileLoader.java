@@ -20,14 +20,15 @@ public class FileLoader {
             JOptionPane.showMessageDialog(frame, "Ooops IOException error, i did it again!" + e.getMessage());
         } // end catch
     }// end load file method
-    
+
     /**
-    * TODO: esto es un parche temporal
-    * `loadFileInternal` (antes `loadFile`) permite permite seguir cargando niveles
-    * pero entra en conflicto con seleccionar el nivel desde cualquier lugar del disco 
-    * (cuestión del `JFileChooser` que se integra con `loadFile`)
-    */
-    public void loadFileInternal(InputStream fileInput){
+     * TODO: esto es un parche temporal
+     * `loadFileInternal` (antes `loadFile`) permite permite seguir cargando niveles
+     * pero entra en conflicto con seleccionar el nivel desde cualquier lugar del
+     * disco
+     * (cuestión del `JFileChooser` que se integra con `loadFile`)
+     */
+    public void loadFileInternal(InputStream fileInput) {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(fileInput));// open the file
             String x;
@@ -42,6 +43,7 @@ public class FileLoader {
             JOptionPane.showMessageDialog(frame, "Ooops IOException error, i did it again!" + e.getMessage());
         } // end catch
     }
+
     public void MatrixLoader(String fileTextLine, int lineNum) throws gameFileError {
         // exitCount=0;//we must reset our variables to zero for the next level.
 
