@@ -35,12 +35,7 @@ public class GameGui extends JFrame implements ActionListener {
         itemEnterName = new JMenuItem("Enter Player Name");
         itemEnterName.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));// press CTRL+N to enter
                                                                                                 // your name if you want
-        newGameItem = new JMenuItem("New Game");
-        openFileItem = new JMenuItem("Open Maze File.");
-        openFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));// press CTRL+O to open a
-                                                                                               // level if you want
-        newGameItem.setActionCommand("New Game");
-        newGameItem.addActionListener(this);
+        
         itemEnterName.setActionCommand("EnterName");
         itemEnterName.addActionListener(this);
         itemSaveScore.setActionCommand("SaveScore");
@@ -49,12 +44,10 @@ public class GameGui extends JFrame implements ActionListener {
         itemHighScore.addActionListener(this);
         itemExit.setActionCommand("Exit");
         itemExit.addActionListener(this);
-        openFileItem.setActionCommand("Open");
-        openFileItem.addActionListener(this);
+        
         newMenu = new JMenu("File");
-        newMenu.add(newGameItem);
+        
         newMenu.add(itemEnterName);
-        newMenu.add(openFileItem);
         newMenu.add(itemHighScore);
         newMenu.add(itemSaveScore);
         newMenu.add(itemExit);
@@ -131,11 +124,7 @@ public class GameGui extends JFrame implements ActionListener {
         {
             new Timer(1000, updateCursorAction).stop();
             System.exit(0); // exit the system.
-        } else if (e.getActionCommand().equals("New Game"))// new game on the menu bar
-        {
-            return; // maybe implent this feature later
-        } // end New Game Command
-        else if (e.getActionCommand().equals("EnterName"))// Allows user to enter their name for high score
+        }else if (e.getActionCommand().equals("EnterName"))// Allows user to enter their name for high score
         {
             playerName = JOptionPane.showInputDialog("Please Enter your Earth Name");
         } else if (e.getActionCommand().equals("HighScore"))// Displays the high scores
@@ -145,17 +134,7 @@ public class GameGui extends JFrame implements ActionListener {
         } else if (e.getActionCommand().equals("SaveScore"))// allows the user to save their score at any time.
         {
             hs.addHighScore(playerName, tk.getMinutes(), tk.getSeconds(), levelNum);
-        } else if (e.getActionCommand().equals("Open"))// to start the game you have to open a maze file. this is on the
-                                                       // menu
-        {
-            JFileChooser chooser = new JFileChooser();
-            int returnVal = chooser.showOpenDialog(this);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                fl.loadFile(chooser.getSelectedFile().getAbsolutePath());// load the file we need
-                theArc.setExit(fl.ExitXCord(), fl.ExitYCord());
-                loadMatrixGui("newLoad");
-            }
-        }else if (e.getActionCommand().equals("Play")) {
+        } else if (e.getActionCommand().equals("Play")) {
             fl.loadFileInternal(getClass().getResourceAsStream("/levels/level1.maz"));
             theArc.setExit(fl.ExitXCord(), fl.ExitYCord());
             playButton.setVisible(false);
@@ -319,8 +298,7 @@ public class GameGui extends JFrame implements ActionListener {
     private JMenuBar menuBar;
     private JMenu newMenu;
     private JMenuItem itemExit;
-    private JMenuItem newGameItem;
-    private JMenuItem openFileItem;
+
     private JMenuItem itemEnterName;
     private JMenuItem itemHighScore;
     private JMenuItem itemSaveScore;
