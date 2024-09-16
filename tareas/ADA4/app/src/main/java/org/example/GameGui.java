@@ -22,22 +22,22 @@ public class GameGui extends JFrame implements ActionListener {
         cp.add(shagLabel);
         // Add Exit & New Game Menu Items
         itemExit = new JMenuItem("Exit");
-        itemExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_MASK));// press CTRL+X to exit if
+        itemExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));// press CTRL+X to exit if
                                                                                            // you want
         itemSaveScore = new JMenuItem("Save High Score");
-        itemSaveScore.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK));// press CTRL+S to save
+        itemSaveScore.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));// press CTRL+S to save
                                                                                                 // high score if you
                                                                                                 // want
         itemHighScore = new JMenuItem("High Score");
-        itemHighScore.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, KeyEvent.CTRL_MASK));// press CTRL+H to view
+        itemHighScore.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_DOWN_MASK));// press CTRL+H to view
                                                                                                 // high score if you
                                                                                                 // want
         itemEnterName = new JMenuItem("Enter Player Name");
-        itemEnterName.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_MASK));// press CTRL+N to enter
+        itemEnterName.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));// press CTRL+N to enter
                                                                                                 // your name if you want
         newGameItem = new JMenuItem("New Game");
         openFileItem = new JMenuItem("Open Maze File.");
-        openFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_MASK));// press CTRL+O to open a
+        openFileItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));// press CTRL+O to open a
                                                                                                // level if you want
         newGameItem.setActionCommand("New Game");
         newGameItem.addActionListener(this);
