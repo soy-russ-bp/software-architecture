@@ -202,7 +202,7 @@ public class GameGui extends JFrame implements ActionListener {
         }
         for (int i = 0; i < labelMatrix.length; i++) {
             for (int j = 0; j < labelMatrix[i].length; j++) {
-                labelMatrix[i][j] = mo = new mazeObject(scrapMatrix[i][j]);// add our maze images into the gui
+                labelMatrix[i][j] = new mazeObject(scrapMatrix[i][j]);// add our maze images into the gui
             }
         } // end double for loop
         cp.add(newPanel);
@@ -323,7 +323,6 @@ public class GameGui extends JFrame implements ActionListener {
     private JLabel[][] labelMatrix;
     private TimeCalculator timeCalc;
     private JProgressBar progressBar;
-    private mazeObject mo;
     private JPanel newPanel;// = new JPanel();
     private TheArchitect theArc = new TheArchitect();
     private String[][] scrapMatrix;
