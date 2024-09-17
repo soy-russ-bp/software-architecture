@@ -205,26 +205,21 @@ public class GameGui extends JFrame implements ActionListener {
             }
             if (timeLeft == 0 && ix == 0) {
                 timely.stop();
-                InputStream inputStream = getClass().getResourceAsStream("/images/yeababyyea.jpg");
-                JLabel yousuckLabel;
-                try {
-                    yousuckLabel = new JLabel("", new ImageIcon(inputStream.readAllBytes()), JLabel.LEFT);
-                    cp.add(yousuckLabel);
-                } catch (IOException e1) {
-                    // TODO ESTO ESTÁ MAL Y DEBERÍA SER MANEJADO DE OTRA FORMA
-                    e1.printStackTrace();
-                }
 
                 remove(newPanel);
                 remove(progBarPanel);
                 pack();
                 setVisible(true);
                 timely.stop();
-                catFileName -= 01;
-                if (catFileName < 01)
-                    throw new SlowAssPlayer("Slow ass took to long.");
-                else
-                    loadMatrixGui("newLoad");
+                try {
+                    JFrame frame = new JFrame("Warning");
+                    JOptionPane.showMessageDialog(frame, "You Stupid Ass, Did you eat to much for dinner?  Move Faster!");
+                    dispose();
+                    new GameGui();
+                    
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             } // end first if
             progressBar.setValue(jx);
             progressBar.setString(timeLeft + ":" + ix);
