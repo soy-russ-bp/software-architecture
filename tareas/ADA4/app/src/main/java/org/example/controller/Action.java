@@ -6,10 +6,10 @@ import org.example.view.*;
 public class Action {
     private Game theArc;
     private String[][] scrapMatrix;
-    private FileLoader fl;
+    private GameMatrix fl;
     private GameGui gameGui; // Referencia a GameGui para poder llamar a sus métodos
 
-    public Action(Game theArc, String[][] scrapMatrix, FileLoader fl, GameGui gameGui) {
+    public Action(Game theArc, String[][] scrapMatrix, GameMatrix fl, GameGui gameGui) {
         this.theArc = theArc;
         this.scrapMatrix = scrapMatrix;
         this.fl = fl;

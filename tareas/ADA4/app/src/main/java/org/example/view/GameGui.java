@@ -2,6 +2,7 @@ package org.example.view;
 import javax.swing.*;
 
 import org.example.datasorce.FileLoader;
+import org.example.datasorce.GameMatrix;
 import org.example.controller.Game;
 import org.example.controller.Action;
 import org.example.controller.TimeCalculator;
@@ -56,7 +57,7 @@ public class GameGui extends JFrame implements ActionListener {
     private Action keyActionHandler;
 
     public MyKeyHandler() {
-        keyActionHandler = new Action(theArc, scrapMatrix, fl, GameGui.this);
+        keyActionHandler = new Action(theArc, scrapMatrix, matrix, GameGui.this);
     }
 
     @Override
@@ -90,7 +91,7 @@ public class GameGui extends JFrame implements ActionListener {
             new Timer(1000, updateCursorAction).stop();
             System.exit(0); // exit the system.
         }else if (e.getActionCommand().equals("Play")) {
-            fl.loadFileInternal(getClass().getResourceAsStream("/levels/level1.maz"));
+            matrix = fl.loadFileInternal(getClass().getResourceAsStream("/levels/level1.maz"));
             theArc.setExit(matrix.ExitXCord(), matrix.ExitYCord());
             playButton.setVisible(false);
             loadMatrixGui("newLoad");
