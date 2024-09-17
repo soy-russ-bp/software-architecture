@@ -76,7 +76,7 @@ public class GameGui extends JFrame implements ActionListener {
         public void keyPressed(KeyEvent theEvent) {
             switch (theEvent.getKeyCode()) {
                 case KeyEvent.VK_UP: {
-                    theArc.playerMove(-1, 0, scrapMatrix, fl.dimondCount());// let the Architect know we moved, along
+                    theArc.playerMove(-1, 0, scrapMatrix, matrix.dimondCount());// let the Architect know we moved, along
                                                                             // with the current matrix
                     loadMatrixGui("updateLoad");// reload the gui to show the move
                     if (theArc.getLevel() == true) {
@@ -85,7 +85,7 @@ public class GameGui extends JFrame implements ActionListener {
                     break;
                 }
                 case KeyEvent.VK_DOWN: {
-                    theArc.playerMove(1, 0, scrapMatrix, fl.dimondCount());// see above
+                    theArc.playerMove(1, 0, scrapMatrix, matrix.dimondCount());// see above
                     loadMatrixGui("updateLoad");// see above
                     if (theArc.getLevel() == true)// see above
                     {
@@ -94,7 +94,7 @@ public class GameGui extends JFrame implements ActionListener {
                     break;
                 }
                 case KeyEvent.VK_LEFT: {
-                    theArc.playerMove(0, -1, scrapMatrix, fl.dimondCount());// see above
+                    theArc.playerMove(0, -1, scrapMatrix, matrix.dimondCount());// see above
                     loadMatrixGui("updateLoad");// see above
                     if (theArc.getLevel() == true)// see above
                     {
@@ -103,7 +103,7 @@ public class GameGui extends JFrame implements ActionListener {
                     break;
                 }
                 case KeyEvent.VK_RIGHT: {
-                    theArc.playerMove(0, 1, scrapMatrix, fl.dimondCount()); // see above
+                    theArc.playerMove(0, 1, scrapMatrix, matrix.dimondCount()); // see above
                     loadMatrixGui("updateLoad");// see above
                     if (theArc.getLevel() == true) {
                         nextLevelLoad();// see above
@@ -136,7 +136,7 @@ public class GameGui extends JFrame implements ActionListener {
             hs.addHighScore(playerName, tk.getMinutes(), tk.getSeconds(), levelNum);
         } else if (e.getActionCommand().equals("Play")) {
             fl.loadFileInternal(getClass().getResourceAsStream("/levels/level1.maz"));
-            theArc.setExit(fl.ExitXCord(), fl.ExitYCord());
+            theArc.setExit(matrix.ExitXCord(), matrix.ExitYCord());
             playButton.setVisible(false);
             loadMatrixGui("newLoad");
         }
@@ -147,8 +147,8 @@ public class GameGui extends JFrame implements ActionListener {
             remove(newPanel);// remove the previous level's game from the screen
             if (progBarPanel != null)// remove the progress bar from the gui as long as its already been created.
                 remove(progBarPanel);
-            String[][] temp = fl.getGameMatrix();
-            scrapMatrix = new String[fl.getMatrixSizeRow()][fl.getMatrixSizeColumn()];
+            String[][] temp = matrix.getGameMatrix();
+            scrapMatrix = new String[matrix.getMatrixSizeRow()][matrix.getMatrixSizeColumn()];
             for (int i = 0; i < scrapMatrix.length; i++) {
                 for (int j = 0; j < scrapMatrix[i].length; j++) {
                     scrapMatrix[i][j] = temp[i][j];// create a new matrix so we dont have a refrence to another objects
@@ -157,7 +157,7 @@ public class GameGui extends JFrame implements ActionListener {
             } // end double for loop
             timeCalc = new TimeCalculator();// create the time calculator used to determine how much time each level is
                                             // given.
-            timeCalc.calcTimeforMaze(fl.dimondCount(), fl.getMatrixSizeRow(), fl.getMatrixSizeColumn());// let time
+            timeCalc.calcTimeforMaze(matrix.dimondCount(), matrix.getMatrixSizeRow(), matrix.getMatrixSizeColumn());// let time
                                                                                                         // calculator
                                                                                                         // know the
                                                                                                         // parameters of
@@ -174,10 +174,10 @@ public class GameGui extends JFrame implements ActionListener {
             progBarPanel.add(progressBar);
             cp.add(progBarPanel, BorderLayout.NORTH);
             newPanel = new JPanel();
-            newPanel.setLayout(new GridLayout(fl.getMatrixSizeRow(), fl.getMatrixSizeColumn()));// set our panel for the
+            newPanel.setLayout(new GridLayout(matrix.getMatrixSizeRow(), matrix.getMatrixSizeColumn()));// set our panel for the
                                                                                                 // game to the size of
                                                                                                 // the matrix
-            labelMatrix = new JLabel[fl.getMatrixSizeRow()][fl.getMatrixSizeColumn()];
+            labelMatrix = new JLabel[matrix.getMatrixSizeRow()][matrix.getMatrixSizeColumn()];
             newPanel.addKeyListener(new MyKeyHandler());
         } // end if
         else if (event == "updateLoad")// every time the player moves the gui must be updated.
@@ -185,7 +185,7 @@ public class GameGui extends JFrame implements ActionListener {
             scrapMatrix = theArc.getUpdatedMatrix();// get the new matrix to be displayed from the architect
             remove(newPanel);// remove the old game
             newPanel = new JPanel();
-            newPanel.setLayout(new GridLayout(fl.getMatrixSizeRow(), fl.getMatrixSizeColumn()));
+            newPanel.setLayout(new GridLayout(matrix.getMatrixSizeRow(), matrix.getMatrixSizeColumn()));
             newPanel.addKeyListener(new MyKeyHandler());
             newPanel.grabFocus();
         }
@@ -233,8 +233,8 @@ public class GameGui extends JFrame implements ActionListener {
         // "level" + catFileName + ".maz";
         System.gc();
         fl.loadFileInternal(fileName);// load the file we need
-        scrapMatrix = fl.getGameMatrix();// get the new matrix from the fileloader for the next level.
-        theArc.setExit(fl.ExitXCord(), fl.ExitYCord());
+        scrapMatrix = matrix.getGameMatrix();// get the new matrix from the fileloader for the next level.
+        theArc.setExit(matrix.ExitXCord(), matrix.ExitYCord());
         loadMatrixGui("newLoad");
     }
 
@@ -293,6 +293,7 @@ public class GameGui extends JFrame implements ActionListener {
     private HighScore hs;
     private int catFileName = 01;
     private Container cp;
+    private GameMatrix matrix = new GameMatrix();
     private FileLoader fl = new FileLoader();
     // create menu items
     private JMenuBar menuBar;
