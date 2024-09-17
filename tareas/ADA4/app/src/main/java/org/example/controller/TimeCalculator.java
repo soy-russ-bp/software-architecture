@@ -1,15 +1,13 @@
-package org.example;
+package org.example.controller;
 
 public class TimeCalculator {
     int minutes = 0;
     int seconds = 0;
 
-    public void calcTimeforMaze(int totalDimonds, int xSize, int ySize)// some kinda method that determines the time a
-                                                                       // player has for each level based on the level
-                                                                       // size and dimonds.
+    public void calcTimeforMaze(int totalDimonds, int xSize, int ySize)
+    // method that determines the time a player has for each level based on the level size and dimonds.
     {
-        if (xSize / ySize < 1)// this method should be changed in order to provide a more relistic time
-                              // system.
+        if (xSize / ySize < 1)// this method should be changed in order to provide a more relistic time system.
         {
             minutes += (ySize / xSize) * 1 + 1;
         } else
