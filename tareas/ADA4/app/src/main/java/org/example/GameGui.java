@@ -135,7 +135,7 @@ public class GameGui extends JFrame implements ActionListener {
         {
             hs.addHighScore(playerName, tk.getMinutes(), tk.getSeconds(), levelNum);
         } else if (e.getActionCommand().equals("Play")) {
-            fl.loadFileInternal(getClass().getResourceAsStream("/levels/level1.maz"));
+            matrix = fl.loadFileInternal(getClass().getResourceAsStream("/levels/level1.maz"));
             theArc.setExit(matrix.ExitXCord(), matrix.ExitYCord());
             playButton.setVisible(false);
             loadMatrixGui("newLoad");
