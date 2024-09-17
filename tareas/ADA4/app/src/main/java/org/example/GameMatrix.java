@@ -1,51 +1,10 @@
-package org.example.datasorce;
+package org.example;
 
-import java.io.*;
-import javax.swing.*;
+import org.exception.GameFileError;
 
-public class FileLoader {
+public class GameMatrix {
 
-    private GameMatrix matrix = new GameMatrix();
-
-    public void loadFile(String fileName) {
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(fileName));// open the file
-            String x;
-            int lineNum = 0;
-            while ((x = in.readLine()) != null) {
-                matrix.MatrixLoader(x, lineNum);// pass the Matrix loader method the line and the line number for parsing.
-                lineNum++;// we will use the line number later in this class
-            }
-            in.close();
-        } // end tryd try
-        catch (IOException e) {
-            JFrame frame = new JFrame("Alert");
-            JOptionPane.showMessageDialog(frame, "Ooops IOException error, i did it again!" + e.getMessage());
-        } // end catch
-    }// end load file method
-
-    /**
-     * TODO: esto es un parche temporal
-     * `loadFileInternal` (antes `loadFile`) permite permite seguir cargando niveles
-     * pero entra en conflicto con seleccionar el nivel desde cualquier lugar del
-     * disco
-     * (cuestión del `JFileChooser` que se integra con `loadFile`)
-     */
-    public void loadFileInternal(InputStream fileInput) {
-        try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(fileInput));// open the file
-            String x;
-            int lineNum = 0;
-            while ((x = in.readLine()) != null) {
-                matrix.MatrixLoader(x, lineNum);// pass the Matrix loader method the line and the line number for parsing.
-                lineNum++;// we will use the line number later in this class
-            }
-        } // end tryd try
-        catch (IOException e) {
-            JFrame frame = new JFrame("Alert");
-            JOptionPane.showMessageDialog(frame, "Ooops IOException error, i did it again!" + e.getMessage());
-        } // end catch
-    }
+    public GameMatrix(){}
 
     public void MatrixLoader(String fileTextLine, int lineNum) throws GameFileError {
         // exitCount=0;//we must reset our variables to zero for the next level.
@@ -65,7 +24,7 @@ public class FileLoader {
             String r1 = fileTextLine.substring(locationOfSpace + sum, fileTextLine.length());// see above
             column = Integer.parseInt(c1);
             row = Integer.parseInt(r1);
-            GameMatrix = new String[row][column];// create new matrix based on the size from the file
+            gameMatrix = new String[row][column];// create new matrix based on the size from the file
         } // end if
         else
             for (int i = 0; i < fileTextLine.length(); i++)// it is not the first line of the maze file
@@ -82,7 +41,7 @@ public class FileLoader {
                     // textVar='W';
                     textVar1 = "" + textVar;// turn the exit into a wall
                 }
-                GameMatrix[lineNum - 1][i] = textVar1; // load the matrix with values, aka N,W, D, H, etc
+                gameMatrix[lineNum - 1][i] = textVar1; // load the matrix with values, aka N,W, D, H, etc
             } // end for loop
 
     }// end matrixloader method
@@ -94,16 +53,19 @@ public class FileLoader {
         // playerCount=0;//we must reset our variables to zero for the next level.
         // before we will return the matrix we will quick do some error checking
         int playerCount = 0;
-        for (int i = 0; i < GameMatrix.length; i++) {
-            for (int j = 0; j < GameMatrix[i].length; j++) {
-                if (GameMatrix[i][j].equals("P")) {
+        for (int i = 0; i < gameMatrix.length; i++) {
+            for (int j = 0; j < gameMatrix[i].length; j++) {
+                if (gameMatrix[i][j].equals("P")) {
                     playerCount += 1;
 
-                } else if (GameMatrix[i][j].equals("E")) {
+                } else if (gameMatrix[i][j].equals("E")) {
                     exitCount += 1;
                     i1 = i;
                     j1 = j;
                 }
+                System.out.println(playerCount + "playerCount");
+                System.out.println(exitCount + "playerCount");
+
             }
         } // end double for loop
         if (playerCount > 1 || exitCount > 1) {
@@ -111,10 +73,21 @@ public class FileLoader {
             // exitCount=0;//we must reset our variables to zero for the next level.
             throw new GameFileError();
         } else
-            GameMatrix[i1][j1] = "W";
+            gameMatrix[i1][j1] = "W";
 
-        return GameMatrix;
+        return gameMatrix;
     }// end getGameMatrix method
+
+    public int dimondCount() {
+        int totalDimonds = 0;
+        for (int i = 0; i < gameMatrix.length; i++) {
+            for (int j = 0; j < gameMatrix[i].length; j++) {
+                if (gameMatrix[i][j].equals("D") || gameMatrix[i][j].equals("H"))
+                    totalDimonds += 1;
+            }
+        } // end double for loop
+        return totalDimonds;// return the total number of dimonds in the level
+    }
 
     public int getMatrixSizeColumn()// return the matrixsize-column
     {
@@ -137,21 +110,9 @@ public class FileLoader {
         return exitYCord;
     }
 
-    public int dimondCount() {
-        int totalDimonds = 0;
-        for (int i = 0; i < GameMatrix.length; i++) {
-            for (int j = 0; j < GameMatrix[i].length; j++) {
-                if (GameMatrix[i][j].equals("D") || GameMatrix[i][j].equals("H"))
-                    totalDimonds += 1;
-            }
-        } // end double for loop
-        return totalDimonds;// return the total number of dimonds in the level
-    }
-
     private int exitXCord = 0;
-    private int exitYCord = 0;;
-    private String[][] GameMatrix;
+    private int exitYCord = 0;
+    private String[][] gameMatrix;
     private int column;
     private int row;
-
-}// end class
+}
