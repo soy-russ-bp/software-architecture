@@ -257,7 +257,7 @@ public class GameGui extends JFrame implements ActionListener {
                 JLabel yousuckLabel;
                 InputStream inputStream = getClass().getResourceAsStream("/images/yousuck.jpg");
                 
-                //Esto no debería estar aquí, se superpone con la interfaz de la partida
+                //TODO: Esto no debería estar aquí, se superpone con la interfaz de la partida
                 /*
                 try {
                     yousuckLabel = new JLabel("", new ImageIcon(inputStream.readAllBytes()), JLabel.LEFT);
@@ -273,8 +273,19 @@ public class GameGui extends JFrame implements ActionListener {
                 pack();
                 setVisible(true);
                 timely.stop();
-                catFileName -= 01;
-                if (catFileName < 01){
+                try {
+                    JFrame frame = new JFrame("Warning");
+                    JOptionPane.showMessageDialog(frame, "You Stupid Ass, Did you eat to much for dinner?  Move Faster!");
+                    dispose();
+                    new GameGui();
+                    
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                //TODO: Reparar "loadMatrixGui" para que cargue el nivel anterior o implementar otro metodo
+                /*
+                 * catFileName -= 01;
+                 *  if (catFileName < 01){
                     try {
                         dispose();
                         new GameGui();
@@ -285,6 +296,8 @@ public class GameGui extends JFrame implements ActionListener {
                 }else{
                     loadMatrixGui("newLoad");
                 }
+                 * 
+                 */
                     
             } // end first if
             progressBar.setValue(jx);
