@@ -68,7 +68,9 @@ public class GameGui extends JFrame implements ActionListener {
         hs = new HighScore();
         tk = new TimeKeeper();
         pack();
-        setVisible(true);// show our menu bar and shagLabel.. Yea baby Yea! Whoa.. to much java.
+        setVisible(true);// show our menu bar and shagLabel.. Yea baby Yea! Whoa.. to much java.}
+
+
     }// end constructor
 
     private class MyKeyHandler extends KeyAdapter // captures arrow keys movement
@@ -163,6 +165,8 @@ public class GameGui extends JFrame implements ActionListener {
                                                                                                         // parameters of
                                                                                                         // the game
             timeLeft = timeCalc.getMinutes();// get the minutes allowed for the level
+
+            //timeLeft = 1;
             ix = timeCalc.getSeconds();// get the seconds allowed for the level;
             jx = 0;// reset the variable used for keeping time to zero since its a new level
             timely = new Timer(1000, updateCursorAction);// create a timer to update the progress bar
@@ -248,10 +252,13 @@ public class GameGui extends JFrame implements ActionListener {
                 ix = 60;
                 timeLeft -= 1;
             }
-            if (timeLeft == 0 && ix == 0) {
+            if (timeLeft == 0 && ix == 0) {//Se acaba el juego si el tiempo se acaba
                 timely.stop();
-                InputStream inputStream = getClass().getResourceAsStream("/images/yeababyyea.jpg");
                 JLabel yousuckLabel;
+                InputStream inputStream = getClass().getResourceAsStream("/images/yousuck.jpg");
+                
+                //Esto no debería estar aquí, se superpone con la interfaz de la partida
+                /*
                 try {
                     yousuckLabel = new JLabel("", new ImageIcon(inputStream.readAllBytes()), JLabel.LEFT);
                     cp.add(yousuckLabel);
@@ -259,23 +266,35 @@ public class GameGui extends JFrame implements ActionListener {
                     // TODO ESTO ESTÁ MAL Y DEBERÍA SER MANEJADO DE OTRA FORMA
                     e1.printStackTrace();
                 }
-
+                 * 
+                 */
                 remove(newPanel);
                 remove(progBarPanel);
                 pack();
                 setVisible(true);
                 timely.stop();
                 catFileName -= 01;
-                if (catFileName < 01)
+                if (catFileName < 01){
+                    try {
+                        dispose();
+                        new GameGui();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
                     throw new SlowAssPlayer("Slow ass took to long.");
-                else
+                }else{
                     loadMatrixGui("newLoad");
+                }
+                    
             } // end first if
             progressBar.setValue(jx);
             progressBar.setString(timeLeft + ":" + ix);
         }// end actionPerformed
     };// end class
 
+
+
+    
     private class SlowAssPlayer extends RuntimeException {
         public SlowAssPlayer(String event) {
             // the game is over, here we must tell our high score method to recond the
@@ -291,6 +310,7 @@ public class GameGui extends JFrame implements ActionListener {
     }// end class
 
     private HighScore hs;
+    //Cambiar este nombre de kk
     private int catFileName = 01;
     private Container cp;
     private FileLoader fl = new FileLoader();
