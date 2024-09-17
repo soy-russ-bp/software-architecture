@@ -2,6 +2,7 @@ package org.example.datasorce;
 
 import java.io.*;
 import javax.swing.*;
+import org.exception.GameFileError;
 
 public class FileLoader {
     public void loadFile(String fileName) {
@@ -44,7 +45,7 @@ public class FileLoader {
         } // end catch
     }
 
-    public void MatrixLoader(String fileTextLine, int lineNum) throws gameFileError {
+    public void MatrixLoader(String fileTextLine, int lineNum) throws GameFileError {
         // exitCount=0;//we must reset our variables to zero for the next level.
 
         int sum = 0;
@@ -106,7 +107,7 @@ public class FileLoader {
         if (playerCount > 1 || exitCount > 1) {
             // playerCount=0;//we must reset our variables to zero for the next level.
             // exitCount=0;//we must reset our variables to zero for the next level.
-            throw new gameFileError();
+            throw new GameFileError();
         } else
             GameMatrix[i1][j1] = "W";
 
@@ -144,16 +145,6 @@ public class FileLoader {
         } // end double for loop
         return totalDimonds;// return the total number of dimonds in the level
     }
-
-    private class gameFileError extends RuntimeException // if a level is loaded with ether two players or two exits
-                                                         // throw this
-    {
-        public gameFileError() {
-            JFrame frame = new JFrame("Alert");
-            JOptionPane.showMessageDialog(frame,
-                    "Your maze file ether had more than one player, or more than one exit.");
-        }
-    }// end inner class
 
     private int exitXCord = 0;
     private int exitYCord = 0;;
