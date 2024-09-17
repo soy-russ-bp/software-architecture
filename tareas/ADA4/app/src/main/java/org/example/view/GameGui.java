@@ -31,7 +31,7 @@ public class GameGui extends JFrame implements ActionListener {
         itemExit.setActionCommand("Exit");
         itemExit.addActionListener(this);
         
-        newMenu = new JMenu("File");
+        newMenu = new JMenu("Options");
         newMenu.add(itemExit);
 
          // Create the play button
@@ -234,11 +234,6 @@ public class GameGui extends JFrame implements ActionListener {
     private JMenuBar menuBar;
     private JMenu newMenu;
     private JMenuItem itemExit;
-
-    private JMenuItem itemEnterName;
-    private JMenuItem itemHighScore;
-    private JMenuItem itemSaveScore;
-    // end create menu items
 
     //create buttons
     private JButton playButton;

@@ -13,21 +13,27 @@ public class Game extends JFrame {
         gameMap = new Map();
     }
 
-    public void playerMove(int xScale, int yScale, String[][] currentMatrix, int totalDimonds) throws Player.StupidAssMove {
+    public void playerMove(int xScale, int yScale, String[][] currentMatrix, int totalDimonds) {
         globalTotalDimonds = totalDimonds;
         nextLevel(false); // no avanzar aún al siguiente nivel
-
-        boolean winned = player.movePlayer(xScale, yScale, currentMatrix);
-        if(winned){
-            nextLevel(true);
+    
+        try {
+            boolean winned = player.movePlayer(xScale, yScale, currentMatrix);
+    
+            if (winned) {
+                nextLevel(true); // Si ganó, avanza al siguiente nivel
+            }
+    
+            if (player.getCollected() == totalDimonds) {
+                gameMap.showExit();
+            }
+            gameMap.setMatrix(currentMatrix);
+            
+        } catch (Player.StupidAssMove e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());  //Show the GUI message
         }
-        if (player.getCollected() == totalDimonds) {
-            gameMap.showExit();
-        }
-
-        gameMap.setMatrix(currentMatrix); // actualiza la matriz después del movimiento del jugador
     }
-
+    
     public void setExit(int x, int y) {
         gameMap.setExit(x, y);
     }
