@@ -1,4 +1,4 @@
-package org.example;
+package org.example.datasorce;
 
 import java.io.*;
 import javax.swing.*;

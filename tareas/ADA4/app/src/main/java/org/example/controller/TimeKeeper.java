@@ -1,4 +1,4 @@
-package org.example;
+package org.example.controller;
 
 public class TimeKeeper {
 	public void KeepTime(int min, int sec)// a class to keep track of the total seconds and minuntes the player has
