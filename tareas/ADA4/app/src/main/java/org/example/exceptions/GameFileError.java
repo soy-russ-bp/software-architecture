@@ -1,4 +1,4 @@
-package org.exception;
+package org.example.exceptions;
 
 import javax.swing.*;
 // if a level is loaded with ether two players or two exits

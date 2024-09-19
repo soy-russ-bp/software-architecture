@@ -1,6 +1,6 @@
 package org.example.datasorce;
 
-import org.exception.GameFileError;
+import org.example.exceptions.GameFileError;
 
 public class GameMatrix {
 
