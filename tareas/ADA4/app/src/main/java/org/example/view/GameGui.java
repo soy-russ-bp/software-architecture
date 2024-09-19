@@ -179,7 +179,6 @@ public class GameGui extends JFrame implements ActionListener {
     }// end inner class
 
     public void nextLevelLoad() {
-        levelNum += 1;
         tk.KeepTime(timeLeft, ix);// The TimeKeeper object keeps a running tab of the total time the player has
                                     // used.(for high score)
         timely.stop();// dont count while we are loading the next level.
@@ -254,5 +253,4 @@ public class GameGui extends JFrame implements ActionListener {
     private String[][] scrapMatrix;
     private Timer timely;
     private TimeKeeper tk;
-    private int levelNum = 1;
 }// end class
