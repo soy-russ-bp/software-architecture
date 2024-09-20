@@ -1,13 +1,10 @@
 package ada5;
 
 import java.util.List;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 
 public class InputCleanerImpl implements InputCleaner{
     private VariationGenerationLayer variationGenerator;
-    private String myCleanString;
     public InputCleanerImpl(VariationGenerationLayer variationGenerator){
         this.variationGenerator = variationGenerator;
     }
@@ -15,7 +12,6 @@ public class InputCleanerImpl implements InputCleaner{
     public void KWICHandler(String text) {
         String normalizedString = clean(text);
         System.out.println(normalizedString);
-        this.myCleanString = normalizedString;
         
         variationGenerator.KWICHandler(normalizedString);
     }

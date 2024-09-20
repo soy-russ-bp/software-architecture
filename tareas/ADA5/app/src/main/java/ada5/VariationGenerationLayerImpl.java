@@ -6,7 +6,6 @@ import java.util.List;
 
 public class VariationGenerationLayerImpl implements VariationGenerationLayer{
     private SortingLayer sortingLayer;
-    private List<String> listWithVariations;
     public VariationGenerationLayerImpl(SortingLayer sortingLayer){
         this.sortingLayer = sortingLayer;
     }
@@ -14,7 +13,6 @@ public class VariationGenerationLayerImpl implements VariationGenerationLayer{
     public void KWICHandler(String normalizedString) {
         
         List<String> variationList = generateVariations(normalizedString);
-        this.listWithVariations = variationList;
         sortingLayer.KWICHandler(variationList);
     }
 
