@@ -8,8 +8,8 @@ import java.util.Set;
 
 public class StopWords {
 
-    private String filePath = "app/src/main/resources/StopWordsSpanish.txt"; // Cambia la ruta al archivo
-
+    //private String filePath = "app/src/main/resources/StopWordsSpanish.txt"; // Cambia la ruta al archivo
+    private String filePath = "C:/Users/luism/OneDrive - Universidad Autonoma de Yucatan/Semestre V/Arquitecturas de software/Names/tareas/ADA5/app/src/main/resources/StopWordsSpanish.txt"; // Cambia la ruta al archivo
     private Set<String> stopwords = new HashSet<>();
 
     public Set<String> getStopWords(){

@@ -16,13 +16,16 @@ public class InputCleanerImpl implements InputCleaner{
         String normalizedString = clean(text);
         System.out.println(normalizedString);
         this.myCleanString = normalizedString;
+        
         variationGenerator.KWICHandler(normalizedString);
     }
 
     private String clean(String lowerCased) {
         System.out.println("deleting empty words ...");
 
-        String[] words = lowerCased.split("\\s+"); // Divide el string en palabras, convirtiendo a minúsculas
+        //String[] words = lowerCased.split("\\s+"); // Divide el string en palabras, convirtiendo a minúsculas
+        String[] words = lowerCased.toLowerCase().split("\\s+"); // Divide el string en palabras, convirtiendo a minúsculas
+
         StringBuilder result = new StringBuilder();
         
         StopWords stopWords = new StopWords();

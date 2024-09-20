@@ -16,5 +16,8 @@ public class App {
 
         normalizationLayer.KWICHandler(stringKwic);
         List<String> finalList = normalizationLayer.bringList();
+        System.out.println("Result: ");
+        finalList.stream().forEach(System.out::println);
+        scanner.close();
     }
 }

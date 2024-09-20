@@ -12,6 +12,7 @@ public class VariationGenerationLayerImpl implements VariationGenerationLayer{
     }
     @Override
     public void KWICHandler(String normalizedString) {
+        
         List<String> variationList = generateVariations(normalizedString);
         this.listWithVariations = variationList;
         sortingLayer.KWICHandler(variationList);
@@ -32,9 +33,9 @@ public class VariationGenerationLayerImpl implements VariationGenerationLayer{
             words.add(firstWord);
 
             temporalString = String.join(" ", words);
-            
-            if (!newString.equals(originalString)) {
-                variatioansList.add(temporalString);
+        
+            if (!temporalString.equals(originalString)) {
+                variationsList.add(temporalString);
             }
         }
         
