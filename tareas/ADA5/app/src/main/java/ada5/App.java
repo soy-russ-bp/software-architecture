@@ -9,7 +9,7 @@ public class App {
         VariationGenerationLayer variationGenerationLayer = new VariationGenerationLayerImpl(sortingLayer);
         NormalizationLayer normalizationLayer = new NormalizationLayerImpl(variationGenerationLayer);
 
-        String stringKwic = "qwer asdf vxnzc";
+        String stringKwic = "qwSLKNDr a asUEDNdf for vUQWDUNxnzc";
 
         normalizationLayer.KWICHandler(stringKwic);
         List<String> finalList = normalizationLayer.bringList();
