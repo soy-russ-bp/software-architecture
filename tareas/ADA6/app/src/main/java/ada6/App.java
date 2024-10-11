@@ -9,17 +9,17 @@ public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-         /*Pipe toDisplay = new Pipe(new Display(null));
+         Pipe toDisplay = new Pipe(new Display(null));
          Pipe toSorter = new Pipe(new Sorter(toDisplay));
          Pipe toVariationGenerator = new Pipe(new VariationGenerator(toSorter));
-         Pipe toInputCleaner = new Pipe(new InputCleaner(toVariationGenerator));*/
+         Pipe toInputCleaner = new Pipe(new InputCleaner(toVariationGenerator));
 
-         Pipe toInputCleaner = 
+         /*Pipe toInputCleaner = 
             new Pipe(new InputCleaner(
             new Pipe(new VariationGenerator(
             new Pipe(new Sorter(
             new Pipe(new Display(null)
-            )))))));
+            )))))));*/
         
          String string = scanner.nextLine();
          toInputCleaner.sendToFilter(string);
