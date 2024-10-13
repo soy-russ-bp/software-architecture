@@ -8,9 +8,7 @@
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.ada7_base.controller.Controller_Main">
   <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
   </padding>
-
-  <Label fx:id="welcomeText"/>
-  <Button text="Hello!" onAction="#onHelloButtonClick"/>
+  <VBox fx:id="productosVBox" spacing="5" alignment="CENTER" />
 </VBox>
