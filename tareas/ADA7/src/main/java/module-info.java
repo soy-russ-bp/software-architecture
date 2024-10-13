@@ -8,4 +8,5 @@ module com.example.ada7_base {
     exports com.example.ada7_base;
     exports com.example.ada7_base.controller;
     opens com.example.ada7_base.controller to javafx.fxml;
+    exports com.example.ada7_base.data_model;
 }
