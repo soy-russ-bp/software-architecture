@@ -11,7 +11,13 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Controller_Main {
+
+    private static final Logger logger = LogManager.getLogger(Controller_Main.class);
+
     @FXML
     private VBox productosVBox;
 
@@ -22,6 +28,7 @@ public class Controller_Main {
 
     @FXML
     public void initialize() {
+        logger.info("Inicializando la vista principal");
         //provisional
         listaProductos = new ArrayList<>();
         listaProductos.add("maruchan");
@@ -43,6 +50,7 @@ public class Controller_Main {
             button.setOnAction(event -> {
                 //producto.votar();
                 System.out.println("votaste por: " + producto);
+                logger.info(producto + " votado");
             });
             productosVBox.getChildren().add(button);
         }
@@ -82,11 +90,15 @@ public class Controller_Main {
         productosVBox.getChildren().add(buttonBox);
 
         productosVBox.setAlignment(Pos.TOP_CENTER);
+
+        logger.info("Vista principal inicializada");
     }
     void mostrarPastel(){
         System.out.println("abriendo grafica de pastel");
+        logger.info("Mostrando gráfica de pastel");
     }
     void mostrarBarras(){
         System.out.println("abriendo grafica de barras");
+        logger.info("Mostrando gráfica de barras");
     }
 }

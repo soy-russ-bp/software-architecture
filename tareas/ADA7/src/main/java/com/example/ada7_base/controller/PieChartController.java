@@ -8,8 +8,13 @@ import javafx.scene.chart.PieChart;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class PieChartController{
+    private static final Logger logger = LogManager.getLogger(Controller_Main.class);
+
     @FXML
     private PieChart pieChart;
     private ObservableList<PieChart.Data> slices;
@@ -18,13 +23,16 @@ public class PieChartController{
 
 
     public void init(ListaProductos listaProductos){
+        logger.info("Inicializando grafica de pasteles");
         this.modeloListaProductos = listaProductos;
         this.slices = FXCollections.observableArrayList();
         this.generateSlices(this.modeloListaProductos.getProductos());
         pieChart.setData(this.slices);
         pieChart.setTitle("Resumen de votos por grafica de pasteles");
+        logger.info("Grafica de pasteles inicializada");
     }
     public void updatePieChart(String productVoted) {
+        logger.info("Actualizando grafica de pasteles");
         System.out.println("Actualizando grafica de pasteles");
         // Iterar sobre la lista hasta encontrar el producto votado
         for (PieChart.Data slice : this.pieChart.getData()) {
@@ -37,13 +45,16 @@ public class PieChartController{
                 break;
             }
         }
+        logger.info("Grafica de pasteles actualizada");
     }
         //Genera las rebanadas de la grafica de pasteles
         private void generateSlices(List<Producto> productos){
+            logger.info("Generando rebanadas de la grafica de pasteles");
             for (Producto producto : productos){
                 PieChart.Data data = new PieChart.Data(producto.getNombre() + " = " + producto.getTotalVotos(), producto.getTotalVotos());
                 this.slices.add(data);
 
             }
+            logger.info("Rebanadas de la grafica de pasteles generadas");
         }
 }

@@ -5,11 +5,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.example.ada7_base.controller.Controller_Main;
+
 public class Producto{
     private String nombre;
     private int totalVotos;
     private String imageUrl;
     private File archivo;
+
+    private static final Logger logger = LogManager.getLogger(Controller_Main.class);
 
     public Producto(String nombre, int totalVotos, String imageUrl){
         this.nombre=nombre;
@@ -35,6 +42,7 @@ public class Producto{
     //setters
     public void setNombre(String nombre){
         this.nombre=nombre;
+        
     }
     public void setTotalVotos(int totalVotos){
         this.totalVotos=totalVotos;
@@ -58,10 +66,12 @@ public class Producto{
             } else {
                 System.out.println("El archivo ya existe");
             }
+            logger.info("Archivo creado: " + archivo.getName());
     
         } catch (Exception e) {
             System.out.println("Ocurrió un error");
             e.printStackTrace();
+            logger.info("Error al crear el archivo");
         }
     }
     
@@ -73,9 +83,13 @@ public class Producto{
             FileWriter writer = new FileWriter(archivo, true); // Modo append
             writer.write(fechaHora + " - Voto\n");
             writer.close();
+            logger.info("Voto registrado en el archivo");
         } else {
             System.out.println("El archivo no existe");
+            logger.info("El archivo no existe");
         }
+
+        
     }
     
 
