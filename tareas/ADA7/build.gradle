@@ -17,6 +17,12 @@ ext {
   junitVersion = '5.10.2'
 }
 
+java{
+  toolchain{
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
+
 sourceCompatibility = '21'
 targetCompatibility = '21'
 
