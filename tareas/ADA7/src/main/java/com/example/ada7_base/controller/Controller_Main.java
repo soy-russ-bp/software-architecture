@@ -21,15 +21,15 @@ public class Controller_Main {
     @FXML
     private VBox productosVBox;
 
-    //provisional
+    // provisional
     private List<String> listaProductos;
 
-    //private ArrayList listaProductos = ListaProductos.getProductos();
+    // private ArrayList listaProductos = ListaProductos.getProductos();
 
     @FXML
     public void initialize() {
         logger.info("Inicializando la vista principal");
-        //provisional
+        // provisional
         listaProductos = new ArrayList<>();
         listaProductos.add("maruchan");
         listaProductos.add("principes");
@@ -48,39 +48,43 @@ public class Controller_Main {
 
             Button button = new Button("vota por: " + producto);
             button.setOnAction(event -> {
-                //producto.votar();
+                // producto.votar();
                 System.out.println("votaste por: " + producto);
                 logger.info(producto + " votado");
             });
             productosVBox.getChildren().add(button);
         }
 
-        /* version del codigo de iteración dinámica en momento de integración
-
-        for (Producto producto : listaProductos) {
-            Image imagen = new Image(getClass().getResourceAsStream(producto.getURL());
-            ImageView imagenView = new ImageView(imagen);
-            imagenView.setFitWidth(50);imagenView.setFitHeight(50);imagenView.setPreserveRatio(true);
-            productosVBox.getChildren().add(imagenView);
-
-            Label conteo = new Label("conteo de votos por" + producto + ": " + producto.getVotos() );
-            productosVBox.getChildren().add(conteo);
-
-            Button button = new Button("vota por: " + producto.getNombre();
-            button.setOnAction(event -> {
-                //producto.votar();
-            });
-            productosVBox.getChildren().add(button);
-        }
+        /*
+         * version del codigo de iteración dinámica en momento de integración
+         * 
+         * for (Producto producto : listaProductos) {
+         * Image imagen = new Image(getClass().getResourceAsStream(producto.getURL());
+         * ImageView imagenView = new ImageView(imagen);
+         * imagenView.setFitWidth(50);imagenView.setFitHeight(50);imagenView.
+         * setPreserveRatio(true);
+         * productosVBox.getChildren().add(imagenView);
+         * 
+         * Label conteo = new Label("conteo de votos por" + producto + ": " +
+         * producto.getVotos() );
+         * productosVBox.getChildren().add(conteo);
+         * 
+         * Button button = new Button("vota por: " + producto.getNombre();
+         * button.setOnAction(event -> {
+         * //producto.votar();
+         * });
+         * productosVBox.getChildren().add(button);
+         * }
          */
 
-
         Button button1 = new Button("Gráfica de pastel");
-        button1.setOnAction(event -> {mostrarPastel();});
+        button1.setOnAction(event -> {
+            mostrarPastel();
+        });
         Button button2 = new Button("Gráfica de barras");
-        button2.setOnAction(event -> {mostrarBarras();});
-
-
+        button2.setOnAction(event -> {
+            mostrarBarras();
+        });
 
         HBox buttonBox = new HBox();
         buttonBox.setSpacing(10); // Espaciado entre los botones
@@ -93,11 +97,13 @@ public class Controller_Main {
 
         logger.info("Vista principal inicializada");
     }
-    void mostrarPastel(){
+
+    void mostrarPastel() {
         System.out.println("abriendo grafica de pastel");
         logger.info("Mostrando gráfica de pastel");
     }
-    void mostrarBarras(){
+
+    void mostrarBarras() {
         System.out.println("abriendo grafica de barras");
         logger.info("Mostrando gráfica de barras");
     }

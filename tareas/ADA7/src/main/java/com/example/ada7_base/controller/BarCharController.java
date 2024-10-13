@@ -37,18 +37,18 @@ public class BarCharController {
 
         // Agregar los datos al gráfico
         stackedBarChart.getData().addAll(dataSeries);
-        
+
         logger.info("Gráfico de barras inicializado");
     }
 
-    public void updateBarChart(String productVoted){
+    public void updateBarChart(String productVoted) {
         System.out.println("Actualizando grafica de barras");
         // Iterar hasta encontrar el producto que se votó
-        for (XYChart.Series<String, Number> serie : dataSeries){
+        for (XYChart.Series<String, Number> serie : dataSeries) {
             XYChart.Data<String, Number> dataSerie = serie.getData().getFirst();
-            if (dataSerie.getXValue().equals(productVoted)){
+            if (dataSerie.getXValue().equals(productVoted)) {
                 int currentVotes = dataSerie.getYValue().intValue();
-                dataSerie.setYValue(currentVotes+1);
+                dataSerie.setYValue(currentVotes + 1);
                 break;
             }
 
@@ -56,11 +56,13 @@ public class BarCharController {
         logger.info("Gráfico de barras actualizado");
     }
 
-    // Crea las barras del grafico de barras, se considera a cada producto como una serie que contiene un solo dato (sus numeros de votos)
-    private void generateBars(List<Producto> productos){
-        for (Producto producto : productos){
+    // Crea las barras del grafico de barras, se considera a cada producto como una
+    // serie que contiene un solo dato (sus numeros de votos)
+    private void generateBars(List<Producto> productos) {
+        for (Producto producto : productos) {
             XYChart.Series<String, Number> serie = new XYChart.Series<String, Number>();
-            XYChart.Data<String, Number> dataSerie = new XYChart.Data<String, Number>(producto.getNombre(), producto.getTotalVotos());
+            XYChart.Data<String, Number> dataSerie = new XYChart.Data<String, Number>(producto.getNombre(),
+                    producto.getTotalVotos());
             serie.getData().add(dataSerie);
             dataSerie.getNode();
             serie.setName(producto.getNombre());

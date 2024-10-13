@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.example.ada7_base.controller.Controller_Main;
 
-public class Producto{
+public class Producto {
     private String nombre;
     private int totalVotos;
     private String imageUrl;
@@ -18,37 +18,42 @@ public class Producto{
 
     private static final Logger logger = LogManager.getLogger(Controller_Main.class);
 
-    public Producto(String nombre, int totalVotos, String imageUrl){
-        this.nombre=nombre;
-        this.totalVotos=totalVotos;
-        this.imageUrl=imageUrl;
+    public Producto(String nombre, int totalVotos, String imageUrl) {
+        this.nombre = nombre;
+        this.totalVotos = totalVotos;
+        this.imageUrl = imageUrl;
         crearArchivo(this.nombre);
     }
 
-    //getters
-    public String getNombre(){
+    // getters
+    public String getNombre() {
         return nombre;
     }
-    public int getTotalVotos(){
+
+    public int getTotalVotos() {
         return totalVotos;
     }
-    public String getImageUrl(){
+
+    public String getImageUrl() {
         return imageUrl;
     }
-    public File getArchivo(){
+
+    public File getArchivo() {
         return archivo;
     }
 
-    //setters
-    public void setNombre(String nombre){
-        this.nombre=nombre;
-        
+    // setters
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+
     }
-    public void setTotalVotos(int totalVotos){
-        this.totalVotos=totalVotos;
+
+    public void setTotalVotos(int totalVotos) {
+        this.totalVotos = totalVotos;
     }
-    public void setImageUrl(String imageUrl){
-        this.imageUrl=imageUrl;
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     private void crearArchivo(String nombre) {
@@ -58,27 +63,26 @@ public class Producto{
             if (!directorio.exists()) {
                 directorio.mkdirs(); // Crear el directorio si no existe
             }
-    
+
             archivo = new File(ruta + nombre + ".txt"); // Inicializar el archivo
-    
+
             if (archivo.createNewFile()) {
                 System.out.println("Archivo creado: " + archivo.getName());
             } else {
                 System.out.println("El archivo ya existe");
             }
             logger.info("Archivo creado: " + archivo.getName());
-    
+
         } catch (Exception e) {
             System.out.println("Ocurrió un error");
             e.printStackTrace();
             logger.info("Error al crear el archivo");
         }
     }
-    
 
     public void addVotosArchivo() throws IOException {
         LocalDateTime fechaHora = LocalDateTime.now();
-    
+
         if (archivo.exists()) {
             FileWriter writer = new FileWriter(archivo, true); // Modo append
             writer.write(fechaHora + " - Voto\n");
@@ -89,8 +93,6 @@ public class Producto{
             logger.info("El archivo no existe");
         }
 
-        
     }
-    
 
 }
