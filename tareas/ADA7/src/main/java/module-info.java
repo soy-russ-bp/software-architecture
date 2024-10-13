@@ -1,6 +1,7 @@
 module com.example.ada7_base {
     requires javafx.controls;
     requires javafx.fxml;
+    requires transitive javafx.graphics;
 
 
     opens com.example.ada7_base to javafx.fxml;
