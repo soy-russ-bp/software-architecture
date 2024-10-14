@@ -10,9 +10,9 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class BarCharController {
+public class BarChartController {
 
-    private static final Logger logger = LogManager.getLogger(BarCharController.class);
+    private static final Logger logger = LogManager.getLogger(BarChartController.class);
 
     @FXML
     private StackedBarChart<String, Number> stackedBarChart;

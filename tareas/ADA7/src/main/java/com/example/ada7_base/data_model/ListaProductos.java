@@ -12,14 +12,14 @@ import org.apache.logging.log4j.Logger;
 public class ListaProductos {
 
     private static final Logger logger = LogManager.getLogger(Controller_Main.class);
-    private List<Producto> productos = new ArrayList<Producto>();
+    private ArrayList<Producto> productos = new ArrayList<Producto>();
 
     public ListaProductos() {
         logger.info("Inicializando lista de productos");
         // crear productos dentro del constructor:
-        Producto agua = new Producto("agua", 0, "https://www.google.com");
-        Producto galletas = new Producto("galletas", 0, "https://www.google.com");
-        Producto papas = new Producto("papas", 0, "https://www.google.com");
+        Producto agua = new Producto("agua", 0, "/images/maruchan.jpg");
+        Producto galletas = new Producto("galletas", 0, "/images/encebollado.jpeg");
+        Producto papas = new Producto("papas", 0, "/images/galleta.jpg");
 
         // agregar productos a la lista
         this.productos.add(agua);
@@ -52,6 +52,16 @@ public class ListaProductos {
         logger.info("Voto registrado para el producto: " + nombre);
     }
 
+    public Producto encontrarProducto(String nombre) {
+        boolean encontrado = false;
+        for (Producto producto : this.productos) {
+            if (nombre.equals(producto.getNombre())) {
+                return producto;
+            }
+        }
+        return null;
+    }
+
     public void agregarProducto(String nombre, String imageUrl) {
         // implementar
     }
@@ -61,7 +71,7 @@ public class ListaProductos {
     }
 
     public ArrayList<Producto> getProductos() {
-        return null;
+        return productos;
     }
 
     public void leerProductos() {
