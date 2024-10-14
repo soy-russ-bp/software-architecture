@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -15,6 +16,10 @@ public class Main extends Application {
         stage.setTitle("Voting system");
         stage.setScene(scene);
         stage.show();
+
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            System.exit(0);
+        });
     }
 
     public static void main(String[] args) {
