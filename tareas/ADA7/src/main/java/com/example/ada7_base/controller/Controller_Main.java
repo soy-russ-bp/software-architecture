@@ -104,7 +104,6 @@ public class Controller_Main {
 
             this.pieChartController = fxmlLoader.getController();
             this.pieChartController.init(listaProductos);
-
             this.stagePie.setScene(new Scene(root));
             this.stagePie.setX(mainX-700);
             this.stagePie.setY(mainY);
@@ -138,8 +137,11 @@ public class Controller_Main {
         if (conteoLabel != null) {
             conteoLabel.setText("Conteo de votos por " + producto.getNombre() + ": " + producto.getTotalVotos());
         }
+        if (!(this.barCharController == null ||  this.pieChartController == null)){
+            this.barCharController.updateBarChart(productVoted);
+            this.pieChartController.updatePieChart(productVoted);
+        }
 
-        this.barCharController.updateBarChart(productVoted);
-        this.pieChartController.updatePieChart(productVoted);
     }
 }
+
