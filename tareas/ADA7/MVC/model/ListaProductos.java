@@ -43,12 +43,12 @@ public class ListaProductos {
                 encontrado = true; // Marcar que se encontró el producto
                 break; // Salir del ciclo una vez que se ha encontrado y votado
             }
-    }
+        }
 
-    if (!encontrado) {
-        System.out.println("Producto no encontrado");
+        if (!encontrado) {
+            System.out.println("Producto no encontrado");
+        }
     }
-}
 
     public Producto getProducto(int numlinea) {
         String[] datos = new String[3]; // Arreglo para nombre, votos, imagen
