@@ -58,7 +58,7 @@ public class Producto {
 
     private void crearArchivo(String nombre) {
         try {
-            String ruta = "model/";
+            String ruta = "MVC/model/";
             File directorio = new File(ruta);
             if (!directorio.exists()) {
                 directorio.mkdirs(); // Crear el directorio si no existe
