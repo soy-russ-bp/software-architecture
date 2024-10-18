@@ -58,7 +58,7 @@ public class Producto {
 
     private void crearArchivo(String nombre) {
         try {
-            String ruta = "MVC/model/";
+            String ruta = "src/main/java/com/example/ada7_base/data_model";
             File directorio = new File(ruta);
             if (!directorio.exists()) {
                 directorio.mkdirs(); // Crear el directorio si no existe
@@ -80,7 +80,7 @@ public class Producto {
         }
     }
 
-    public void addVotosArchivo() throws IOException {
+    public void addVotosArchivoPropio() throws IOException {
         LocalDateTime fechaHora = LocalDateTime.now();
 
         if (archivo.exists()) {

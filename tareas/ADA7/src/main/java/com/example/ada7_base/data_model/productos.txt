@@ -1,4 +1,4 @@
-2 agua https://www.google.com
-2 galletas https://www.google.com
-4 papas https://www.google.com
+6 agua /images/maruchan.jpg
+6 galletas /images/encebollado.jpeg
+12 papas /images/galleta.jpg
 

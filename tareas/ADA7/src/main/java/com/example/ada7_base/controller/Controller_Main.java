@@ -99,7 +99,7 @@ public class Controller_Main {
 
         if(this.stagePie == null || !this.stagePie.isShowing()) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-                                    "/com/example/ada7_base/View_GraphPastel.fxml"));
+                    "/com/example/ada7_base/View_GraphPastel.fxml"));
             Parent root = fxmlLoader.load();
 
             this.pieChartController = fxmlLoader.getController();
@@ -123,7 +123,7 @@ public class Controller_Main {
             this.barCharController = fxmlLoader.getController();
             this.barCharController.init(listaProductos);
             this.stageBar.setScene(new Scene(root));
-            this.stageBar.setX(mainX+820);
+            this.stageBar.setX(mainX);
             this.stageBar.setY(mainY);
         }
         this.stageBar.show();
