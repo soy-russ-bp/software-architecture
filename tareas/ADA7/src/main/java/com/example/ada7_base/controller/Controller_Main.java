@@ -25,6 +25,8 @@ import java.util.Map;
 public class Controller_Main {
 
     private static final Logger logger = LogManager.getLogger(Controller_Main.class);
+    private static final double mainY = 400;
+    private static final double mainX = 912;
 
     @FXML
     private VBox productosVBox;
@@ -102,9 +104,9 @@ public class Controller_Main {
 
             this.pieChartController = fxmlLoader.getController();
             this.pieChartController.init(listaProductos);
-
             this.stagePie.setScene(new Scene(root));
-            this.stagePie.show();
+            this.stagePie.setX(mainX-700);
+            this.stagePie.setY(mainY);
         }
         this.stagePie.show();
     }
@@ -114,16 +116,17 @@ public class Controller_Main {
         logger.info("Mostrando gráfica de barras");
 
         if(this.stageBar == null || !this.stageBar.isShowing()) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-                    "/com/example/ada7_base/View_GraphBarras.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    getClass()
+                    .getResource("/com/example/ada7_base/View_GraphBarras.fxml"));
             Parent root = fxmlLoader.load();
-
             this.barCharController = fxmlLoader.getController();
             this.barCharController.init(listaProductos);
-
             this.stageBar.setScene(new Scene(root));
-            this.stageBar.show();
+            this.stageBar.setX(mainX+820);
+            this.stageBar.setY(mainY);
         }
+        this.stageBar.show();
     }
 
     void actualizarNumeros(String productVoted){
@@ -134,8 +137,11 @@ public class Controller_Main {
         if (conteoLabel != null) {
             conteoLabel.setText("Conteo de votos por " + producto.getNombre() + ": " + producto.getTotalVotos());
         }
+        if (!(this.barCharController == null ||  this.pieChartController == null)){
+            this.barCharController.updateBarChart(productVoted);
+            this.pieChartController.updatePieChart(productVoted);
+        }
 
-        this.barCharController.updateBarChart(productVoted);
-        this.pieChartController.updatePieChart(productVoted);
     }
 }
+
