@@ -1,4 +1,4 @@
-6 agua /images/maruchan.jpg
-6 galletas /images/encebollado.jpeg
-12 papas /images/galleta.jpg
+15 agua /images/maruchan.jpg
+12 galletas /images/encebollado.jpeg
+16 papas /images/galleta.jpg
 
