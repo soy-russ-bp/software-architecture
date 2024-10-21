@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="409.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ada7_base.controller.PieChartController">
+   <children>
+      <PieChart fx:id="pieChart" layoutX="124.0" layoutY="138.0" prefHeight="232.0" prefWidth="327.0" />
+      <Label alignment="CENTER" cache="true" layoutX="28.0" layoutY="14.0" prefHeight="94.0" prefWidth="534.0" text="Grafica de pastel" textOverrun="CLIP">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

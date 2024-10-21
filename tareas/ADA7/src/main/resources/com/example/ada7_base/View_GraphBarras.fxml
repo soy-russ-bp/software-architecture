@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ada7_base.controller.BarChartController">
+   <children>
+       <Label alignment="CENTER" cache="true" layoutX="33.0" layoutY="14.0" prefHeight="94.0" prefWidth="534.0" text="Grafica de barras" textOverrun="CLIP">
+           <font>
+               <Font size="27.0" />
+           </font>
+       </Label>
+      <StackedBarChart fx:id="stackedBarChart" layoutX="91.0" layoutY="108.0" prefHeight="270.0" prefWidth="386.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </StackedBarChart>
+   </children>
+</AnchorPane>
