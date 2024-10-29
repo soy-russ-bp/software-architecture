@@ -1,3 +1,7 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "conventionalCommits.scopes": [
+        "ADA8-servidor",
+        "ADA8",
+    ]
 }

@@ -1,6 +1,7 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
     "conventionalCommits.scopes": [
-        "servidor"
+        "ADA8-broker",
+        "ADA8",
     ]
 }
