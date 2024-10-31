@@ -14,10 +14,10 @@ public class MensajeMapeador {
     /// estos parametros son usados internamente
     private static class ParametrosMensaje {
         public MensajeTipo mensajeTipo;
-        public final String campoServicio = "servicio";
+        public final String CAMPO_SERVICIO = "servicio";
         public String numeroVariablesORespuestas;
         public String variableUnicaORespuesta;
-        public final String valorUnico = "valor";
+        public final String VALOR_UNICO = "valor";
 
         public ParametrosMensaje(MensajeTipo mensajeTipo) {
             this.mensajeTipo = mensajeTipo;
@@ -61,7 +61,7 @@ public class MensajeMapeador {
 
         Mensaje mensaje = new Mensaje(parametrosMensaje.mensajeTipo);
 
-        String servicio = nodoRaiz.get(parametrosMensaje.campoServicio).asText();
+        String servicio = nodoRaiz.get(parametrosMensaje.CAMPO_SERVICIO).asText();
         mensaje.setServicio(servicio);
 
         int numeroVariables = nodoRaiz.get(parametrosMensaje.numeroVariablesORespuestas).asInt();
@@ -70,7 +70,7 @@ public class MensajeMapeador {
         for (int i = 1; i < mensaje.getNumeroVariables() + 1; i++) {
 
             String nombreVariable = nodoRaiz.get(parametrosMensaje.variableUnicaORespuesta + i).asText();
-            String valorVariable = nodoRaiz.get(parametrosMensaje.valorUnico + i).asText();
+            String valorVariable = nodoRaiz.get(parametrosMensaje.VALOR_UNICO + i).asText();
 
             Variable variable = new Variable(nombreVariable, valorVariable);
             mensaje.addVariable(variable);
@@ -86,14 +86,14 @@ public class MensajeMapeador {
         ObjectMapper mapeador = new ObjectMapper();
         ObjectNode nodoRaiz = mapeador.createObjectNode();
 
-        nodoRaiz.put(parametrosMensaje.campoServicio, mensaje.getServicio());
+        nodoRaiz.put(parametrosMensaje.CAMPO_SERVICIO, mensaje.getServicio());
         nodoRaiz.put(parametrosMensaje.numeroVariablesORespuestas, mensaje.getNumeroVariables());
 
         for (int i = 0; i < mensaje.getNumeroVariables(); i++) {
 
             Variable variable = mensaje.getVariable(i);
             nodoRaiz.put(parametrosMensaje.variableUnicaORespuesta + (i + 1), variable.getNombre());
-            nodoRaiz.put(parametrosMensaje.valorUnico + (i + 1), variable.getValor());
+            nodoRaiz.put(parametrosMensaje.VALOR_UNICO + (i + 1), variable.getValor());
         }
 
         return mapeador.writeValueAsString(nodoRaiz);

@@ -27,6 +27,10 @@ public class AppTest {
 
         String otroMensaje = MensajeMapeador.deObjetoAJson(mensaje);
 
+        System.err.println(content);
+        System.err.println("--------------------------------------------------");
         System.err.println(mensaje);
+        System.err.println("--------------------------------------------------");
+        System.err.println(otroMensaje);
     }
 }

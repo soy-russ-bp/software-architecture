@@ -1,12 +1,12 @@
 {
-    "servicio" : "registrar",
-    "variables" : 4,
-    "variable1" : "servidor",
-    "valor1" : "148.209.67.45",
-    "variable2" : "puerto",
-    "valor2" : 75,
-    "variable3" : "servicio",
-    "valor3" : "votar",
-    "variable4" : "parametros",
-    "valor4" : 1
-    }
+    "servicio": "listar",
+    "respuestas": 4,
+    "respuesta1": "contar",
+    "valor1": "148.209.67.45:75",
+    "respuesta2": "votar",
+    "valor2": "148.209.67.45:75",
+    "respuesta3": "registrar",
+    "valor3": "148.209.67.45:75",
+    "respuesta4": "listar",
+    "valor4": "148.209.67.45:75"
+}
