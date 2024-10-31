@@ -13,47 +13,47 @@ import com.example.ada7_base.controller.MainControlador;
 public class Producto {
     private String nombre;
     private int totalVotos;
-    private String imageUrl;
+    private String imagenUrl;
     private File archivo;
 
-    private static final Logger logger = LogManager.getLogger(MainControlador.class);
+    private static final Logger registrador = LogManager.getLogger(MainControlador.class);
 
-    public Producto(String nombre, int totalVotos, String imageUrl) {
+    public Producto(String nombre, int totalVotos, String imagenUrl) {
         this.nombre = nombre;
         this.totalVotos = totalVotos;
-        this.imageUrl = imageUrl;
+        this.imagenUrl = imagenUrl;
         crearArchivo(this.nombre);
     }
 
     // getters
-    public String getNombre() {
+    public String obtenerNombre() {
         return nombre;
     }
 
-    public int getTotalVotos() {
+    public int obtenerTotalVotos() {
         return totalVotos;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String obtenerImageUrl() {
+        return imagenUrl;
     }
 
-    public File getArchivo() {
+    public File obtenerArchivo() {
         return archivo;
     }
 
     // setters
-    public void setNombre(String nombre) {
+    public void colocarNombre(String nombre) {
         this.nombre = nombre;
 
     }
 
-    public void setTotalVotos(int totalVotos) {
+    public void colocarTotalVotos(int totalVotos) {
         this.totalVotos = totalVotos;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void colocarImageUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
     }
 
     private void crearArchivo(String nombre) {
@@ -71,26 +71,26 @@ public class Producto {
             } else {
                 System.out.println("El archivo ya existe");
             }
-            logger.info("Archivo creado: " + archivo.getName());
+            registrador.info("Archivo creado: " + archivo.getName());
 
-        } catch (Exception e) {
+        } catch (Exception exepcion) {
             System.out.println("Ocurrió un error");
-            e.printStackTrace();
-            logger.info("Error al crear el archivo");
+            exepcion.printStackTrace();
+            registrador.info("Error al crear el archivo");
         }
     }
 
-    public void addVotosArchivoPropio() throws IOException {
+    public void agregarVotosArchivoPropio() throws IOException {
         LocalDateTime fechaHora = LocalDateTime.now();
 
         if (archivo.exists()) {
-            FileWriter writer = new FileWriter(archivo, true); // Modo append
-            writer.write(fechaHora + " - Voto\n");
-            writer.close();
-            logger.info("Voto registrado en el archivo");
+            FileWriter escritor = new FileWriter(archivo, true); // Modo append
+            escritor.write(fechaHora + " - Voto\n");
+            escritor.close();
+            registrador.info("Voto registrado en el archivo");
         } else {
             System.out.println("El archivo no existe");
-            logger.info("El archivo no existe");
+            registrador.info("El archivo no existe");
         }
 
     }

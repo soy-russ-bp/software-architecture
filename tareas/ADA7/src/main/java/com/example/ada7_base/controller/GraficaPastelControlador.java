@@ -13,50 +13,47 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class GraficaPastelControlador {
-    private static final Logger logger = LogManager.getLogger(MainControlador.class);
+    private static final Logger registrador = LogManager.getLogger(MainControlador.class);
 
     @FXML
     private PieChart pastelBase;
     private ObservableList<PieChart.Data> rebanadas;
-    // Data model que contiene la lista de productos
     private ListaProductos modeloListaProductos;
 
     public void init(ListaProductos listaProductos) {
-        logger.info("Inicializando grafica de pasteles");
+        registrador.info("Inicializando gráfica de pasteles");
         this.modeloListaProductos = listaProductos;
         this.rebanadas = FXCollections.observableArrayList();
-        this.generarRebanadas(this.modeloListaProductos.getProductos());
+        this.generarRebanadas(this.modeloListaProductos.obtenerProductos());
         pastelBase.setData(this.rebanadas);
         pastelBase.setTitle("Resumen de votos por grafica de pasteles");
-        logger.info("Grafica de pasteles inicializada");
+        registrador.info("Gráfica de pasteles inicializada");
     }
 
     public void actualizarPastel(String productoVotado) {
-        logger.info("Actualizando grafica de pasteles");
+        registrador.info("Actualizando grafica de pasteles");
         System.out.println("Actualizando grafica de pasteles");
-        // Iterar sobre la lista hasta encontrar el producto votado
-        for (PieChart.Data slice : this.pastelBase.getData()) {
-            if (slice.getName().contains(productoVotado)) {
-                int oldValue = (int) slice.getPieValue();
-                int newValue = oldValue + 1;
-                slice.setPieValue(newValue);
-                String name = slice.getName();
-                slice.setName(name.replace(String.valueOf(oldValue), String.valueOf(newValue)));
+        for (PieChart.Data rebanada : this.pastelBase.getData()) {
+            if (rebanada.getName().contains(productoVotado)) {
+                int valorAnterior = (int) rebanada.getPieValue();
+                int valorNuevo = valorAnterior + 1;
+                rebanada.setPieValue(valorNuevo);
+                String nombreRebanada = rebanada.getName();
+                rebanada.setName(nombreRebanada.replace(String.valueOf(valorAnterior), String.valueOf(valorNuevo)));
                 break;
             }
         }
-        logger.info("Grafica de pasteles actualizada");
+        registrador.info("Gráfica de pasteles actualizada");
     }
 
-    // Genera las rebanadas de la grafica de pasteles
     private void generarRebanadas(List<Producto> productos) {
-        logger.info("Generando rebanadas de la grafica de pasteles");
+        registrador.info("Generando rebanadas de la gráfica de pasteles");
         for (Producto producto : productos) {
-            PieChart.Data data = new PieChart.Data(producto.getNombre() + " = " + producto.getTotalVotos(),
-                    producto.getTotalVotos());
-            this.rebanadas.add(data);
+            PieChart.Data datos = new PieChart.Data(producto.obtenerNombre() + " = " + producto.obtenerTotalVotos(),
+                    producto.obtenerTotalVotos());
+            this.rebanadas.add(datos);
 
         }
-        logger.info("Rebanadas de la grafica de pasteles generadas");
+        registrador.info("Rebanadas de la gráfica de pasteles generadas");
     }
 }
