@@ -86,12 +86,6 @@ public class MensajeMapeador {
 
         ParametrosMensaje parametrosMensaje = getParametrosMensaje(mensaje.getMensajeTipo());
 
-        return convertirAJson(mensaje, parametrosMensaje);
-    }
-
-    private static String convertirAJson(Mensaje mensaje, ParametrosMensaje parametrosMensaje)
-            throws JsonProcessingException {
-
         ObjectMapper mapeador = new ObjectMapper();
         ObjectNode nodoRaiz = mapeador.createObjectNode();
 
