@@ -32,7 +32,6 @@ public class GraficaPastelControlador {
 
     public void actualizarPastel(String productoVotado) {
         registrador.info("Actualizando grafica de pasteles");
-        System.out.println("Actualizando grafica de pasteles");
         for (PieChart.Data rebanada : this.pastelBase.getData()) {
             if (rebanada.getName().contains(productoVotado)) {
                 int valorAnterior = (int) rebanada.getPieValue();

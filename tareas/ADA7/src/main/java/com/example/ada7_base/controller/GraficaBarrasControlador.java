@@ -39,7 +39,6 @@ public class GraficaBarrasControlador {
     }
 
     public void actualizarBarras(String productoVotado) {
-        System.out.println("Actualizando grafica de barras");
         for (XYChart.Series<String, Number> serie : seriesDatos) {
             XYChart.Data<String, Number> serieDatos = serie.getData().getFirst();
             if (serieDatos.getXValue().equals(productoVotado)) {

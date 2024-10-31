@@ -40,49 +40,21 @@ public class MainControlador {
 
     @FXML
     public void initialize() {
-
         for (Producto producto : listaProductos.obtenerProductos()) {
-            Image imagen = new Image(getClass().getResourceAsStream(producto.obtenerImageUrl()));
-            ImageView imagenVista = new ImageView(imagen);
-            imagenVista.setFitWidth(50);
-            imagenVista.setFitHeight(50);
-            imagenVista.setPreserveRatio(true);
+            ImageView imagenVista = this.crearImagenProducto(producto);
             cajaVerticalProductos.getChildren().add(imagenVista);
 
-            Label conteo = new Label("conteo de votos por" + producto.obtenerNombre() + ": " +
-                    producto.obtenerTotalVotos());
-            etiquetasVotos.put(producto.obtenerNombre(), conteo);
+            Label conteo = this.crearEtiquetaVotos(producto);
             cajaVerticalProductos.getChildren().add(conteo);
 
-            Button boton = new Button("vota por: " + producto.obtenerNombre());
-            boton.setOnAction(evento -> {
-                listaProductos.votarProducto(producto.obtenerNombre());
-                actualizarNumeros(producto.obtenerNombre());
-            });
+            Button boton = this.crearBotonVoto(producto);
             cajaVerticalProductos.getChildren().add(boton);
         }
 
-        Button boton1 = new Button("Gráfica de pastel");
-        boton1.setOnAction(evento -> {
-            try {
-                mostrarPastel();
-            } catch (IOException exepcion) {
-                throw new RuntimeException(exepcion);
-            }
-        });
-        Button boton2 = new Button("Gráfica de barras");
-        boton2.setOnAction(evento -> {
-            try {
-                mostrarBarras();
-            } catch (IOException exepcion) {
-                throw new RuntimeException(exepcion);
-            }
-        });
+        Button btnPastel = this.crearBotonGrafica("Gráfica de pastel");
+        Button btnBarras = this.crearBotonGrafica("Gráfica de barras");
 
-        HBox cajaHorizontalBoton = new HBox();
-        cajaHorizontalBoton.setSpacing(10);
-        cajaHorizontalBoton.setAlignment(Pos.CENTER);
-        cajaHorizontalBoton.getChildren().addAll(boton1, boton2);
+        HBox cajaHorizontalBoton = this.crearContenedorDeBotonesDeGraficas(10, btnPastel, btnBarras);
 
         cajaVerticalProductos.getChildren().add(cajaHorizontalBoton);
 
@@ -95,7 +67,6 @@ public class MainControlador {
     }
 
     void mostrarPastel() throws IOException {
-        System.out.println("Abriendo gráfica de pastel");
         registrador.info("Mostrando gráfica de pastel");
 
         if (this.escenarioPastel == null || !this.escenarioPastel.isShowing()) {
@@ -113,7 +84,6 @@ public class MainControlador {
     }
 
     void mostrarBarras() throws IOException {
-        System.out.println("Abriendo gráfica de barras");
         registrador.info("Mostrando gráfica de barras");
 
         if (this.escenarioBarras == null || !this.escenarioBarras.isShowing()) {
@@ -129,7 +99,6 @@ public class MainControlador {
         }
         this.escenarioBarras.show();
     }
-
     void actualizarNumeros(String productoVotado) {
         Producto producto = listaProductos.encontrarProducto(productoVotado);
 
@@ -145,4 +114,75 @@ public class MainControlador {
         }
 
     }
+
+    private ImageView crearImagenProducto(Producto producto) {
+        Image imagen = new Image(getClass().getResourceAsStream(producto.obtenerImageUrl()));
+        ImageView imagenVista = new ImageView(imagen);
+        imagenVista.setFitWidth(50);
+        imagenVista.setFitHeight(50);
+        imagenVista.setPreserveRatio(true);
+        return imagenVista;
+    }
+
+    private Label crearEtiquetaVotos(Producto producto) {
+        Label conteo = new Label("Conteo de votos por " + producto.obtenerNombre() + ": " + producto.obtenerTotalVotos());
+        etiquetasVotos.put(producto.obtenerNombre(), conteo);
+        return conteo;
+    }
+
+    private Button crearBotonVoto(Producto producto) {
+        Button boton = new Button("Vota por: " + producto.obtenerNombre());
+        boton.setOnAction(evento -> {
+            listaProductos.votarProducto(producto.obtenerNombre());
+            actualizarNumeros(producto.obtenerNombre());
+        });
+        return boton;
+    }
+
+    private HBox crearContenedorDeBotonesDeGraficas(int spacing, Button btnPastel, Button btnBarras){
+        HBox cajaHorizontalBoton = new HBox();
+        cajaHorizontalBoton.setSpacing(spacing);
+        cajaHorizontalBoton.setAlignment(Pos.CENTER);
+        cajaHorizontalBoton.getChildren().addAll(btnPastel, btnBarras);
+        return cajaHorizontalBoton;
+
+    }
+    private Button crearBotonGrafica(String nombreGrafica){
+        Button botonGrafica = new Button(nombreGrafica);
+        botonGrafica.setOnAction(evento -> {
+            try {
+                if (nombreGrafica.equals("Gráfica de pastel")){
+                    mostrarPastel();
+                }else{
+                    mostrarBarras();
+                }
+            } catch (IOException exepcion) {
+                throw new RuntimeException(exepcion);
+            }
+        });
+        return botonGrafica;
+    }
+
+
+
+
+
+
+
+
+
+    /*
+    private void mostrarEscenario(Stage escenario, String fxmlPath, Object controlador) throws IOException {
+        if (escenario == null || !escenario.isShowing()) {
+            FXMLLoader cargadorFXML = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent nodoRaiz = cargadorFXML.load();
+            controlador = cargadorFXML.getController();
+            ((ControladorGrafico) controlador).init(listaProductos); // Asegúrate de que el controlador implemente una interfaz `ControladorGrafico`.
+            escenario.setScene(new Scene(nodoRaiz));
+            escenario.setX(this.localizadorHorizontal);
+            escenario.setY(this.localizadorVertical);
+        }
+        escenario.show();
+    }
+    */
 }
