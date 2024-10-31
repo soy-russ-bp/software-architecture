@@ -18,29 +18,26 @@ public class MensajeMapeador {
         public String numeroVariablesORespuestas;
         public String variableUnicaORespuesta;
         public final String valorUnico = "valor";
-    }
 
-    private static ParametrosMensaje getParametrosMensaje(MensajeTipo mensajeTipo) {
-        ParametrosMensaje parametrosMensaje = new ParametrosMensaje();
+        public ParametrosMensaje(MensajeTipo mensajeTipo) {
+            this.mensajeTipo = mensajeTipo;
 
-        parametrosMensaje.mensajeTipo = mensajeTipo;
+            switch (mensajeTipo) {
 
-        switch (mensajeTipo) {
+                case MensajeTipo.PETICION:
+                    numeroVariablesORespuestas = "variables";
+                    variableUnicaORespuesta = "variable";
+                    break;
 
-            case MensajeTipo.PETICION:
-                parametrosMensaje.numeroVariablesORespuestas = "variables";
-                parametrosMensaje.variableUnicaORespuesta = "variable";
-                break;
+                case MensajeTipo.RESPUESTA:
+                    numeroVariablesORespuestas = "respuestas";
+                    variableUnicaORespuesta = "respuesta";
+                    break;
 
-            case MensajeTipo.RESPUESTA:
-                parametrosMensaje.numeroVariablesORespuestas = "respuestas";
-                parametrosMensaje.variableUnicaORespuesta = "respuesta";
-                break;
-
-            default:
-                break;
+                default:
+                    break;
+            }
         }
-        return parametrosMensaje;
     }
 
     public static Mensaje deJsonAObjeto(String json)
@@ -55,7 +52,7 @@ public class MensajeMapeador {
         if (nodoRaiz.get("variables") != null)
             mensajeTipo = MensajeTipo.PETICION;
 
-        ParametrosMensaje parametrosMensaje = getParametrosMensaje(mensajeTipo);
+        ParametrosMensaje parametrosMensaje = new ParametrosMensaje(mensajeTipo);
 
         return convertirAObjeto(nodoRaiz, parametrosMensaje);
     }
@@ -84,7 +81,7 @@ public class MensajeMapeador {
 
     public static String deObjetoAJson(Mensaje mensaje) throws JsonProcessingException {
 
-        ParametrosMensaje parametrosMensaje = getParametrosMensaje(mensaje.getMensajeTipo());
+        ParametrosMensaje parametrosMensaje = new ParametrosMensaje(mensaje.getMensajeTipo());
 
         ObjectMapper mapeador = new ObjectMapper();
         ObjectNode nodoRaiz = mapeador.createObjectNode();
