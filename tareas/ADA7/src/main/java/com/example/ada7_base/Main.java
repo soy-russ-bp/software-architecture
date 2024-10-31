@@ -10,14 +10,14 @@ import java.io.IOException;
 
 public class Main extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Vista_Main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 720, 720);
-        stage.setTitle("Voting system");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage escenario) throws IOException {
+        FXMLLoader cargadorFXML = new FXMLLoader(Main.class.getResource("Vista_Main.fxml"));
+        Scene escena = new Scene(cargadorFXML.load(), 720, 720);
+        escenario.setTitle("Sistema de votaciones");
+        escenario.setScene(escena);
+        escenario.show();
 
-        stage.setOnCloseRequest((WindowEvent event) -> {
+        escenario.setOnCloseRequest((WindowEvent evento) -> {
             System.exit(0);
         });
     }

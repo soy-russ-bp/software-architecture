@@ -24,12 +24,12 @@ import java.util.Map;
 
 public class MainControlador {
 
-    private static final Logger logger = LogManager.getLogger(MainControlador.class);
-    private static final double mainY = 400;
-    private static final double mainX = 912;
+    private static final Logger registrador = LogManager.getLogger(MainControlador.class);
+    private static final double localizadorHorizontal = 400;
+    private static final double localizadorVertical = 912;
 
     @FXML
-    private VBox productosVBox;
+    private VBox cajaVerticalProductos;
     private Stage escenarioPastel;
     private Stage escenarioBarras;
 
@@ -41,107 +41,108 @@ public class MainControlador {
     @FXML
     public void initialize() {
 
-         for (Producto producto : listaProductos.getProductos()) {
-         Image imagen = new Image(getClass().getResourceAsStream( producto.getImageUrl() ) );
-         ImageView imagenView = new ImageView(imagen);
-         imagenView.setFitWidth(50);imagenView.setFitHeight(50);imagenView.setPreserveRatio(true);
-         productosVBox.getChildren().add(imagenView);
+        for (Producto producto : listaProductos.obtenerProductos()) {
+            Image imagen = new Image(getClass().getResourceAsStream(producto.obtenerImageUrl()));
+            ImageView imagenVista = new ImageView(imagen);
+            imagenVista.setFitWidth(50);
+            imagenVista.setFitHeight(50);
+            imagenVista.setPreserveRatio(true);
+            cajaVerticalProductos.getChildren().add(imagenVista);
 
-         Label conteo = new Label("conteo de votos por" + producto.getNombre() + ": " +
-         producto.getTotalVotos() );
-         etiquetasVotos.put(producto.getNombre(), conteo);
-         productosVBox.getChildren().add(conteo);
+            Label conteo = new Label("conteo de votos por" + producto.obtenerNombre() + ": " +
+                    producto.obtenerTotalVotos());
+            etiquetasVotos.put(producto.obtenerNombre(), conteo);
+            cajaVerticalProductos.getChildren().add(conteo);
 
-         Button button = new Button("vota por: " + producto.getNombre() );
-         button.setOnAction(event -> {
-            listaProductos.votarProducto(producto.getNombre());
-            actualizarNumeros(producto.getNombre());
-         });
-         productosVBox.getChildren().add(button);
-         }
+            Button boton = new Button("vota por: " + producto.obtenerNombre());
+            boton.setOnAction(evento -> {
+                listaProductos.votarProducto(producto.obtenerNombre());
+                actualizarNumeros(producto.obtenerNombre());
+            });
+            cajaVerticalProductos.getChildren().add(boton);
+        }
 
-
-        Button button1 = new Button("Gráfica de pastel");
-        button1.setOnAction(event -> {
+        Button boton1 = new Button("Gráfica de pastel");
+        boton1.setOnAction(evento -> {
             try {
                 mostrarPastel();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (IOException exepcion) {
+                throw new RuntimeException(exepcion);
             }
         });
-        Button button2 = new Button("Gráfica de barras");
-        button2.setOnAction(event -> {
+        Button boton2 = new Button("Gráfica de barras");
+        boton2.setOnAction(evento -> {
             try {
                 mostrarBarras();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (IOException exepcion) {
+                throw new RuntimeException(exepcion);
             }
         });
 
-        HBox buttonBox = new HBox();
-        buttonBox.setSpacing(10);
-        buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.getChildren().addAll(button1, button2);
+        HBox cajaHorizontalBoton = new HBox();
+        cajaHorizontalBoton.setSpacing(10);
+        cajaHorizontalBoton.setAlignment(Pos.CENTER);
+        cajaHorizontalBoton.getChildren().addAll(boton1, boton2);
 
-        productosVBox.getChildren().add(buttonBox);
+        cajaVerticalProductos.getChildren().add(cajaHorizontalBoton);
 
-        productosVBox.setAlignment(Pos.TOP_CENTER);
+        cajaVerticalProductos.setAlignment(Pos.TOP_CENTER);
 
-        logger.info("Vista principal inicializada");
+        registrador.info("Vista principal inicializada");
 
         this.escenarioPastel = new Stage();
         this.escenarioBarras = new Stage();
     }
 
     void mostrarPastel() throws IOException {
-        System.out.println("abriendo grafica de pastel");
-        logger.info("Mostrando gráfica de pastel");
+        System.out.println("Abriendo gráfica de pastel");
+        registrador.info("Mostrando gráfica de pastel");
 
-        if(this.escenarioPastel == null || !this.escenarioPastel.isShowing()) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
+        if (this.escenarioPastel == null || !this.escenarioPastel.isShowing()) {
+            FXMLLoader cargadorFXML = new FXMLLoader(getClass().getResource(
                     "/com/example/ada7_base/Vista_GraficaPastel.fxml"));
-            Parent root = fxmlLoader.load();
+            Parent nodoRaiz = cargadorFXML.load();
 
-            this.controladorPastel = fxmlLoader.getController();
+            this.controladorPastel = cargadorFXML.getController();
             this.controladorPastel.init(listaProductos);
-            this.escenarioPastel.setScene(new Scene(root));
-            this.escenarioPastel.setX(mainX-700);
-            this.escenarioPastel.setY(mainY);
+            this.escenarioPastel.setScene(new Scene(nodoRaiz));
+            this.escenarioPastel.setX(localizadorHorizontal - 700);
+            this.escenarioPastel.setY(localizadorVertical);
         }
         this.escenarioPastel.show();
     }
 
     void mostrarBarras() throws IOException {
-        System.out.println("abriendo grafica de barras");
-        logger.info("Mostrando gráfica de barras");
+        System.out.println("Abriendo gráfica de barras");
+        registrador.info("Mostrando gráfica de barras");
 
-        if(this.escenarioBarras == null || !this.escenarioBarras.isShowing()) {
-            FXMLLoader fxmlLoader = new FXMLLoader(
+        if (this.escenarioBarras == null || !this.escenarioBarras.isShowing()) {
+            FXMLLoader cargadorFXML = new FXMLLoader(
                     getClass()
-                    .getResource("/com/example/ada7_base/Vista_GraficaBarras.fxml"));
-            Parent root = fxmlLoader.load();
-            this.controladorBarras = fxmlLoader.getController();
+                            .getResource("/com/example/ada7_base/Vista_GraficaBarras.fxml"));
+            Parent nodoRaiz = cargadorFXML.load();
+            this.controladorBarras = cargadorFXML.getController();
             this.controladorBarras.init(listaProductos);
-            this.escenarioBarras.setScene(new Scene(root));
-            this.escenarioBarras.setX(mainX);
-            this.escenarioBarras.setY(mainY);
+            this.escenarioBarras.setScene(new Scene(nodoRaiz));
+            this.escenarioBarras.setX(localizadorHorizontal);
+            this.escenarioBarras.setY(localizadorVertical);
         }
         this.escenarioBarras.show();
     }
 
-    void actualizarNumeros(String productoVotado){
+    void actualizarNumeros(String productoVotado) {
         Producto producto = listaProductos.encontrarProducto(productoVotado);
 
-        Label conteoLabel = etiquetasVotos.get(productoVotado);
+        Label etiquetaConteo = etiquetasVotos.get(productoVotado);
 
-        if (conteoLabel != null) {
-            conteoLabel.setText("Conteo de votos por " + producto.getNombre() + ": " + producto.getTotalVotos());
+        if (etiquetaConteo != null) {
+            etiquetaConteo
+                    .setText("Conteo de votos por " + producto.obtenerNombre() + ": " + producto.obtenerTotalVotos());
         }
-        if (!(this.controladorBarras == null ||  this.controladorPastel == null)){
+        if (!(this.controladorBarras == null || this.controladorPastel == null)) {
             this.controladorBarras.actualizarBarras(productoVotado);
             this.controladorPastel.actualizarPastel(productoVotado);
         }
 
     }
 }
-
