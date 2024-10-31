@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.example.ada7_base.controller.Controller_Main;
+import com.example.ada7_base.controller.MainControlador;
 
 public class Producto {
     private String nombre;
@@ -16,7 +16,7 @@ public class Producto {
     private String imageUrl;
     private File archivo;
 
-    private static final Logger logger = LogManager.getLogger(Controller_Main.class);
+    private static final Logger logger = LogManager.getLogger(MainControlador.class);
 
     public Producto(String nombre, int totalVotos, String imageUrl) {
         this.nombre = nombre;
