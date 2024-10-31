@@ -45,6 +45,10 @@ public class Mensaje {
         this.contenido = contenido;
     }
 
+    public Variable getVariable(int i) {
+        return this.contenido.get(i);
+    }
+
     @Override
     public String toString() {
         return "Mensaje [contenido=" + contenido + ", numeroVariables=" + numeroVariables + ", servicio=" + servicio

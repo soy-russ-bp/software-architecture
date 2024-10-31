@@ -4,12 +4,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.core.JsonGenerator;
 
 public class MensajeMapeador {
 
     /// esta clase es de implementación, no de diseño, así que no se documenta en el
     /// diagrama de clases
-    /// además, dado que la clase es privada, no sale de la clase MensajeMapeador, estos parametros son usados internamente
+    /// además, dado que la clase es privada, no sale de la clase MensajeMapeador,
+    /// estos parametros son usados internamente
     private static class ParametrosMensaje {
         public final String campoServicio = "servicio";
         public String numeroVariablesORespuestas;
@@ -17,11 +20,7 @@ public class MensajeMapeador {
         public final String valorUnico = "valor";
     }
 
-    public static Mensaje deJsonAObjeto(String json, MensajeTipo mensajeTipo)
-            throws JsonMappingException, JsonProcessingException {
-
-        ObjectMapper mapeador = new ObjectMapper();
-        JsonNode nodoRaiz = mapeador.readTree(json);
+    private static ParametrosMensaje getParametrosMensaje(MensajeTipo mensajeTipo) {
         ParametrosMensaje parametrosMensaje = new ParametrosMensaje();
 
         switch (mensajeTipo) {
@@ -39,6 +38,16 @@ public class MensajeMapeador {
             default:
                 break;
         }
+        return parametrosMensaje;
+    }
+
+    public static Mensaje deJsonAObjeto(String json, MensajeTipo mensajeTipo)
+            throws JsonMappingException, JsonProcessingException {
+
+        ObjectMapper mapeador = new ObjectMapper();
+        JsonNode nodoRaiz = mapeador.readTree(json);
+
+        ParametrosMensaje parametrosMensaje = getParametrosMensaje(mensajeTipo);
 
         return convertirAObjeto(nodoRaiz, parametrosMensaje);
     }
@@ -63,6 +72,32 @@ public class MensajeMapeador {
         }
 
         return mensaje;
+    }
+
+    public static String deObjetoAJson(Mensaje mensaje, MensajeTipo mensajeTipo) throws JsonProcessingException {
+
+        ParametrosMensaje parametrosMensaje = getParametrosMensaje(mensajeTipo);
+
+        return convertirAJson(mensaje, parametrosMensaje);
+    }
+
+    private static String convertirAJson(Mensaje mensaje, ParametrosMensaje parametrosMensaje)
+            throws JsonProcessingException {
+
+        ObjectMapper mapeador = new ObjectMapper();
+        ObjectNode nodoRaiz = mapeador.createObjectNode();
+
+        nodoRaiz.put(parametrosMensaje.campoServicio, mensaje.getServicio());
+        nodoRaiz.put(parametrosMensaje.numeroVariablesORespuestas, mensaje.getNumeroVariables());
+
+        for (int i = 0; i < mensaje.getNumeroVariables(); i++) {
+
+            Variable variable = mensaje.getVariable(i);
+            nodoRaiz.put(parametrosMensaje.variableUnicaORespuesta + (i + 1), variable.getNombre());
+            nodoRaiz.put(parametrosMensaje.valorUnico + (i + 1), variable.getValor());
+        }
+
+        return mapeador.writeValueAsString(nodoRaiz);
     }
 
 }
