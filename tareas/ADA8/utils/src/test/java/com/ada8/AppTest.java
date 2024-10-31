@@ -24,7 +24,10 @@ public class AppTest
     {
           String content = Files.readString(Paths.get("C:/Users/rodri/Desktop/software-architecture/tareas/ADA8/utils/src/test/java/com/ada8/jsonTest.json"));
 
-        Mensaje mensaje  = MensajeMapeador.deJsonAObjeto(content, MensajeTipo.PETICION);
+        Mensaje mensaje  = MensajeMapeador.deJsonAObjeto(content);
+
+        String otroMensaje = MensajeMapeador.deObjetoAJson(mensaje);
+
         System.err.println(mensaje);
     }
 }

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.core.JsonGenerator;
 
 public class MensajeMapeador {
 
@@ -14,6 +13,7 @@ public class MensajeMapeador {
     /// además, dado que la clase es privada, no sale de la clase MensajeMapeador,
     /// estos parametros son usados internamente
     private static class ParametrosMensaje {
+        public MensajeTipo mensajeTipo;
         public final String campoServicio = "servicio";
         public String numeroVariablesORespuestas;
         public String variableUnicaORespuesta;
@@ -22,6 +22,8 @@ public class MensajeMapeador {
 
     private static ParametrosMensaje getParametrosMensaje(MensajeTipo mensajeTipo) {
         ParametrosMensaje parametrosMensaje = new ParametrosMensaje();
+
+        parametrosMensaje.mensajeTipo = mensajeTipo;
 
         switch (mensajeTipo) {
 
@@ -41,11 +43,17 @@ public class MensajeMapeador {
         return parametrosMensaje;
     }
 
-    public static Mensaje deJsonAObjeto(String json, MensajeTipo mensajeTipo)
+    public static Mensaje deJsonAObjeto(String json)
             throws JsonMappingException, JsonProcessingException {
 
         ObjectMapper mapeador = new ObjectMapper();
         JsonNode nodoRaiz = mapeador.readTree(json);
+        MensajeTipo mensajeTipo = null;
+
+        if (nodoRaiz.get("respuestas") != null)
+            mensajeTipo = MensajeTipo.RESPUESTA;
+        if (nodoRaiz.get("variables") != null)
+            mensajeTipo = MensajeTipo.PETICION;
 
         ParametrosMensaje parametrosMensaje = getParametrosMensaje(mensajeTipo);
 
@@ -54,7 +62,7 @@ public class MensajeMapeador {
 
     private static Mensaje convertirAObjeto(JsonNode nodoRaiz, ParametrosMensaje parametrosMensaje) {
 
-        Mensaje mensaje = new Mensaje();
+        Mensaje mensaje = new Mensaje(parametrosMensaje.mensajeTipo);
 
         String servicio = nodoRaiz.get(parametrosMensaje.campoServicio).asText();
         mensaje.setServicio(servicio);
@@ -74,9 +82,9 @@ public class MensajeMapeador {
         return mensaje;
     }
 
-    public static String deObjetoAJson(Mensaje mensaje, MensajeTipo mensajeTipo) throws JsonProcessingException {
+    public static String deObjetoAJson(Mensaje mensaje) throws JsonProcessingException {
 
-        ParametrosMensaje parametrosMensaje = getParametrosMensaje(mensajeTipo);
+        ParametrosMensaje parametrosMensaje = getParametrosMensaje(mensaje.getMensajeTipo());
 
         return convertirAJson(mensaje, parametrosMensaje);
     }

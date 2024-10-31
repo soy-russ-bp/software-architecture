@@ -1,8 +1,12 @@
 {
-    "servicio": "registrar",
-    "variables": 2,
-    "variable1": "evento",
-    "valor1": "Se registró un voto para Windows",
-    "variable2": "fecha",
-    "valor2": "5/11/2018 16:01"
-}
+    "servicio" : "registrar",
+    "variables" : 4,
+    "variable1" : "servidor",
+    "valor1" : "148.209.67.45",
+    "variable2" : "puerto",
+    "valor2" : 75,
+    "variable3" : "servicio",
+    "valor3" : "votar",
+    "variable4" : "parametros",
+    "valor4" : 1
+    }
