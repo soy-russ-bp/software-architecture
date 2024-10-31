@@ -22,21 +22,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Controller_Main {
+public class MainControlador {
 
-    private static final Logger logger = LogManager.getLogger(Controller_Main.class);
+    private static final Logger logger = LogManager.getLogger(MainControlador.class);
     private static final double mainY = 400;
     private static final double mainX = 912;
 
     @FXML
     private VBox productosVBox;
-    private Stage stagePie;
-    private Stage stageBar;
+    private Stage escenarioPastel;
+    private Stage escenarioBarras;
 
     private static ListaProductos listaProductos = new ListaProductos();
-    Map<String, Label> labelsDeVotos = new HashMap<>();
-    private PieChartController pieChartController;
-    private BarChartController barCharController;
+    Map<String, Label> etiquetasVotos = new HashMap<>();
+    private GraficaPastelControlador controladorPastel;
+    private GraficaBarrasControlador controladorBarras;
 
     @FXML
     public void initialize() {
@@ -49,7 +49,7 @@ public class Controller_Main {
 
          Label conteo = new Label("conteo de votos por" + producto.getNombre() + ": " +
          producto.getTotalVotos() );
-         labelsDeVotos.put(producto.getNombre(), conteo);
+         etiquetasVotos.put(producto.getNombre(), conteo);
          productosVBox.getChildren().add(conteo);
 
          Button button = new Button("vota por: " + producto.getNombre() );
@@ -89,57 +89,57 @@ public class Controller_Main {
 
         logger.info("Vista principal inicializada");
 
-        this.stagePie = new Stage();
-        this.stageBar = new Stage();
+        this.escenarioPastel = new Stage();
+        this.escenarioBarras = new Stage();
     }
 
     void mostrarPastel() throws IOException {
         System.out.println("abriendo grafica de pastel");
         logger.info("Mostrando gráfica de pastel");
 
-        if(this.stagePie == null || !this.stagePie.isShowing()) {
+        if(this.escenarioPastel == null || !this.escenarioPastel.isShowing()) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-                    "/com/example/ada7_base/View_GraphPastel.fxml"));
+                    "/com/example/ada7_base/Vista_GraficaPastel.fxml"));
             Parent root = fxmlLoader.load();
 
-            this.pieChartController = fxmlLoader.getController();
-            this.pieChartController.init(listaProductos);
-            this.stagePie.setScene(new Scene(root));
-            this.stagePie.setX(mainX-700);
-            this.stagePie.setY(mainY);
+            this.controladorPastel = fxmlLoader.getController();
+            this.controladorPastel.init(listaProductos);
+            this.escenarioPastel.setScene(new Scene(root));
+            this.escenarioPastel.setX(mainX-700);
+            this.escenarioPastel.setY(mainY);
         }
-        this.stagePie.show();
+        this.escenarioPastel.show();
     }
 
     void mostrarBarras() throws IOException {
         System.out.println("abriendo grafica de barras");
         logger.info("Mostrando gráfica de barras");
 
-        if(this.stageBar == null || !this.stageBar.isShowing()) {
+        if(this.escenarioBarras == null || !this.escenarioBarras.isShowing()) {
             FXMLLoader fxmlLoader = new FXMLLoader(
                     getClass()
-                    .getResource("/com/example/ada7_base/View_GraphBarras.fxml"));
+                    .getResource("/com/example/ada7_base/Vista_GraficaBarras.fxml"));
             Parent root = fxmlLoader.load();
-            this.barCharController = fxmlLoader.getController();
-            this.barCharController.init(listaProductos);
-            this.stageBar.setScene(new Scene(root));
-            this.stageBar.setX(mainX);
-            this.stageBar.setY(mainY);
+            this.controladorBarras = fxmlLoader.getController();
+            this.controladorBarras.init(listaProductos);
+            this.escenarioBarras.setScene(new Scene(root));
+            this.escenarioBarras.setX(mainX);
+            this.escenarioBarras.setY(mainY);
         }
-        this.stageBar.show();
+        this.escenarioBarras.show();
     }
 
-    void actualizarNumeros(String productVoted){
-        Producto producto = listaProductos.encontrarProducto(productVoted);
+    void actualizarNumeros(String productoVotado){
+        Producto producto = listaProductos.encontrarProducto(productoVotado);
 
-        Label conteoLabel = labelsDeVotos.get(productVoted);
+        Label conteoLabel = etiquetasVotos.get(productoVotado);
 
         if (conteoLabel != null) {
             conteoLabel.setText("Conteo de votos por " + producto.getNombre() + ": " + producto.getTotalVotos());
         }
-        if (!(this.barCharController == null ||  this.pieChartController == null)){
-            this.barCharController.updateBarChart(productVoted);
-            this.pieChartController.updatePieChart(productVoted);
+        if (!(this.controladorBarras == null ||  this.controladorPastel == null)){
+            this.controladorBarras.actualizarBarras(productoVotado);
+            this.controladorPastel.actualizarPastel(productoVotado);
         }
 
     }
