@@ -4,6 +4,7 @@ module com.example.ada7_base {
     requires transitive javafx.graphics;
     requires org.apache.logging.log4j;
     requires org.apache.logging.log4j.core;
+    requires java.desktop;
 
     opens com.example.ada7_base to javafx.fxml;
     opens com.example.ada7_base.controller to javafx.fxml;
