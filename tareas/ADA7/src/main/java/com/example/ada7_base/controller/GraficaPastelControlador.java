@@ -2,6 +2,7 @@ package com.example.ada7_base.controller;
 
 import com.example.ada7_base.data_model.ListaProductos;
 import com.example.ada7_base.data_model.Producto;
+import com.example.ada7_base.observer.IObservador;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,7 +13,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class GraficaPastelControlador {
+public class GraficaPastelControlador implements IObservador {
     private static final Logger registrador = LogManager.getLogger(MainControlador.class);
 
     @FXML
@@ -24,13 +25,13 @@ public class GraficaPastelControlador {
         registrador.info("Inicializando gráfica de pasteles");
         this.modeloListaProductos = listaProductos;
         this.rebanadas = FXCollections.observableArrayList();
-        this.generarRebanadas(this.modeloListaProductos.obtenerProductos());
+        this.rellenarGrafica(this.modeloListaProductos.obtenerProductos());
         pastelBase.setData(this.rebanadas);
         pastelBase.setTitle("Resumen de votos por grafica de pasteles");
         registrador.info("Gráfica de pasteles inicializada");
     }
-
-    public void actualizarPastel(String productoVotado) {
+    @Override
+    public void actualizarGrafica(String productoVotado) {
         registrador.info("Actualizando grafica de pasteles");
         for (PieChart.Data rebanada : this.pastelBase.getData()) {
             if (rebanada.getName().contains(productoVotado)) {
@@ -44,8 +45,8 @@ public class GraficaPastelControlador {
         }
         registrador.info("Gráfica de pasteles actualizada");
     }
-
-    private void generarRebanadas(List<Producto> productos) {
+    @Override
+    public void rellenarGrafica(List<Producto> productos) {
         registrador.info("Generando rebanadas de la gráfica de pasteles");
         for (Producto producto : productos) {
             PieChart.Data datos = new PieChart.Data(producto.obtenerNombre() + " = " + producto.obtenerTotalVotos(),
