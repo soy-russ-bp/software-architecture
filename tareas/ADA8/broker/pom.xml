@@ -69,7 +69,7 @@
             </execution>
           </executions>
           <configuration>
-            <mainClass>com.ada8.broker.Main</mainClass>
+            <mainClass>ada8.broker.Main</mainClass>
             <arguments>
             </arguments>
             <systemProperties>
