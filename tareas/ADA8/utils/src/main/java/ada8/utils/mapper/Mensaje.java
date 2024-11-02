@@ -1,4 +1,4 @@
-package com.ada8.mapper;
+package ada8.utils.mapper;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.ada8.broker.dominio.mensaje;
+package ada8.broker.dominio.mensaje;
 
 public class MensajeMapper {
     public static Mensaje deJsonAObjecto(String json) {

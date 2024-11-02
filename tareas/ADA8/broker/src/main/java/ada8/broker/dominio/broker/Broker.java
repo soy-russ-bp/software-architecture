@@ -1,4 +1,4 @@
-package com.ada8.broker.dominio.broker;
+package ada8.broker.dominio.broker;
 
 import java.util.ArrayList;
 

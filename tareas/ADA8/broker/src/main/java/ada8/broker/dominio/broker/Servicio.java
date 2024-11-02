@@ -1,6 +1,6 @@
-package com.ada8.broker.dominio.broker;
+package ada8.broker.dominio.broker;
 
-import com.ada8.broker.dominio.mensaje.Mensaje;
+import ada8.broker.dominio.mensaje.Mensaje;
 
 public class Servicio {
 

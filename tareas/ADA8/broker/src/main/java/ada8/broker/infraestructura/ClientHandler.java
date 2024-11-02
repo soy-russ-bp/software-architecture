@@ -1,4 +1,4 @@
-package com.ada8.broker.infraestructura;
+package ada8.broker.infraestructura;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,11 +8,12 @@ import java.lang.reflect.Type;
 import java.net.*;
 import java.util.ArrayList;
 
-import com.ada8.broker.dominio.broker.Broker;
-import com.ada8.broker.dominio.broker.Servicio;
-import com.ada8.broker.dominio.mensaje.Mensaje;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import ada8.broker.dominio.broker.Broker;
+import ada8.broker.dominio.broker.Servicio;
+import ada8.broker.dominio.mensaje.Mensaje;
 
 public class ClientHandler implements Runnable {
 

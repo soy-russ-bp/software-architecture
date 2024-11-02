@@ -1,4 +1,4 @@
-package com.ada8.broker;
+package ada8.broker;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -6,9 +6,9 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.ada8.broker.dominio.broker.Broker;
-import com.ada8.broker.infraestructura.BrokerImpl;
-import com.ada8.broker.infraestructura.ClientHandler;
+import ada8.broker.dominio.broker.Broker;
+import ada8.broker.infraestructura.BrokerImpl;
+import ada8.broker.infraestructura.ClientHandler;
 
 public class Main {
 

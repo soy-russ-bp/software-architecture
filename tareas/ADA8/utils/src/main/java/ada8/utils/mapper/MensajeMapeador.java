@@ -1,4 +1,4 @@
-package com.ada8.mapper;
+package ada8.utils.mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
