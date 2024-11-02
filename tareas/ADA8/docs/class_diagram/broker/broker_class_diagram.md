@@ -7,6 +7,7 @@
 ---
 title: Broker
 ---
+
 classDiagram
 
 namespace JavaAPI{
@@ -43,36 +44,72 @@ class AbstractExecutorService{
     <<abstract>>
 }
 
-Broker *-- ExecutorService
-Broker ..> ClientHandler
-Broker ..> ThreadPoolExecutor
-class Broker{
+BrokerImpl *-- ExecutorService
+BrokerImpl ..> ClientHandler
+BrokerImpl ..> ThreadPoolExecutor
+Broker <|.. BrokerImpl
+Broker --> Servicio
+class BrokerImpl{
     -int PORT = 1234 $
     -ExecutorService pool $
-    -List~Servicio~ servicios $
-    +getServicios() Servicio$
+    +getServicios() Servicio
+    +addServicio(Servicio servicio) void
+    +buscarServicioRegistrado(String nombreServicio) Servicio
     +main() void$
 }
-
-Runnable <|.. ClientHandler
-ClientHandler o--> Servicio
-note for ClientHandler "cuando se ejecute `run()` se ejecutará el servicio deseado"
-class ClientHandler{
-    -Socket clientSocket
-    -ClientHandler(Socket socketClient) Constructor
-    +buscarServicioRegistrado(String nombreServicio, List~Servicio~) Servicio
-    +registrarServicio(String ip, int puerto, String nombreServicio, numeroVariables)
-    +listarServicios(List~Servicio~ servicios) String
-    +ejecutarServicio(String nombreServicio, Parametros) String
-    +run() void
+class Broker{
+    <<abstract>>
+    -List~Servicio~ servicios 
+    +getServicios() Servicio
+    +addServicio(Servicio servicio) void
+    +buscarServicioRegistrado(String nombreServicio) Servicio
 }
 
+Servicio --> MensajeMapper
 class Servicio{
     String ipServidor
     int puertoServidor
     String nombreServicio
     int numeroParametros
     int identificador
-    +ejecutar(Parametros parametros) String
+    +ejecutar(Mensaje mensaje) Mensaje
+}
+
+Runnable <|.. ClientHandler
+ClientHandler o--> Servicio
+ClientHandler --> MensajeMapper
+ClientHandler --> Mensaje
+ClientHandler --> Broker
+note for ClientHandler "cuando se ejecute `run()` se ejecutará el servicio deseado"
+note for ClientHandler "en la función run() reponserá al cliente"
+class ClientHandler{
+    -Socket clientSocket
+    -Broker broker
+    -ClientHandler(Socket socketClient) Constructor
+    +registrarServicio(String ip, int puerto, String nombreServicio, numeroVariables) Mensaje
+    +listarServicios(String palabraClave, List~Servicio~ servicios) Mensaje
+    +ejecutarServicio(String nombreServicio, Parametros) Mensaje
+    +run() void
+}
+
+
+
+
+Mensaje --> Variable
+class Mensaje{
+    String servicio
+    int numeroVariables
+    List~Variable~ contenido
+}
+
+class Variable{
+    String variable
+    String valor
+}
+
+MensajeMapper --> Mensaje
+class MensajeMapper{
+    +deJsonAObjeto(String) Mensaje
+    +deObjetoAJson(Mensaje) String
 }
 ```

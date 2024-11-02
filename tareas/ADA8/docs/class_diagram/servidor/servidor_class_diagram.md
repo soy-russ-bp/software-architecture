@@ -37,35 +37,33 @@ ExecutorService <|-- AbstractExecutorService
 class AbstractExecutorService{
     <<abstract>>
 }
-Servidor *-- ExecutorService
-Servidor ..> ClientHandler
-Servidor ..> ThreadPoolExecutor
-class Servidor{
+ServidorImpl *-- ExecutorService
+ServidorImpl ..> ClientHandler
+ServidorImpl ..> ThreadPoolExecutor
+Servidor <|.. ServidorImpl
+class ServidorImpl{
     -int PORT = 1234 $
     -ExecutorService pool $
-
     -String IP_BROKER $
     -int PUERTO_BROKER $
-    -List~Servicio~ servicios $
-    + registrarServiciosAlBroker() void $
-    + getServicios() List~Servicio~$
+    
     +main() void$
 }
-Runnable <|.. ClientHandler
-ClientHandler o--> Servicio
-note for ClientHandler "cuando se ejecute `run()` se ejecutará el servicio deseado"
-class ClientHandler{
-    -Socket clientSocket
-    + buscarServicio(String nombreServicio ,List~Servicio~ servicios) Servicio
-    ClientHandler(Socket clientSocket) Constructor
-    +run() void
+
+class Servidor{
+    <<abstract>>
+    -List~Servicio~ servicios 
+    + registrarServiciosAlBroker() void 
+    + getServicios() List~Servicio~
 }
+
 Servicio --> Parametros
+Servicio --> Mensaje
 class Servicio{
     <<abstract>>
     -int identificador
     - String archivoURL
-    +ejecutar(Parametros parametros) String
+    +ejecutar(Parametros parametros) Mensaje
 }
 class Parametros{
     <<interfaz>>
@@ -82,10 +80,43 @@ ServicioContarVotos --> ParametrosContarVotos
 ServicioListarEventos --> ParametrosListarEventos
 ServicioVotar --> ParametrosVotar
 ServicioRegistrarEvento --> ParametrosRegistrarEvento
+
  ParametrosContarVotos ..|> Parametros
  ParametrosListarEventos ..|> Parametros
  ParametrosVotar ..|> Parametros
  ParametrosRegistrarEvento ..|> Parametros
 
+Runnable <|.. ClientHandler
+ClientHandler o--> Servicio
+ClientHandler --> MensajeMapper
+ClientHandler --> Mensaje
+ClientHandler --> Servidor
+note for ClientHandler "cuando se ejecute `run()` se ejecutará el servicio deseado"
+class ClientHandler{
+    -Servidor servidor
+    -Socket clientSocket
+    -ClientHandler(Socket socketClient, Servidor servidor) Constructor
+    +listarServicios(String palabraClave) Mensaje
+    +ejecutarServicio(String nombreServicio, Parametros parametros) Mensaje
+    +run() void
+}
 
+Mensaje --> Variable
+class Mensaje{
+
+    String servicio
+    int numeroVariables
+    List~Variable~ contenido
+}
+
+class Variable{
+    String variable
+    String valor
+}
+
+MensajeMapper --> Mensaje
+class MensajeMapper{
+    +deJsonAObjeto(String) Mensaje
+    +deObjetoAJson(Mensaje) String
+}
 ```
