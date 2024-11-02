@@ -1,4 +1,4 @@
-package ada8.utils.mapper;
+package ada8.utilidades;
 
 public class Variable {
     private String nombre;

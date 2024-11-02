@@ -6,8 +6,8 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 
-import ada8.utils.mapper.Mensaje;
-import ada8.utils.mapper.MensajeMapeador;
+import ada8.utilidades.Mensaje;
+import ada8.utilidades.MensajeMapeador;
 
 /**
  * Unit test for simple App.

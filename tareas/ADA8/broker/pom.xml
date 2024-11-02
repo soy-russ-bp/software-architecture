@@ -26,6 +26,11 @@
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>com.ada8</groupId>
+      <artifactId>utils</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
 
     <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
     <dependency>

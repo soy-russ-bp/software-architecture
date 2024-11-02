@@ -13,7 +13,8 @@ import com.google.gson.reflect.TypeToken;
 
 import ada8.broker.dominio.broker.Broker;
 import ada8.broker.dominio.broker.Servicio;
-import ada8.broker.dominio.mensaje.Mensaje;
+import ada8.utilidades.Mensaje;
+import ada8.utilidades.MensajeTipo;
 
 public class ClientHandler implements Runnable {
 
@@ -78,18 +79,18 @@ public class ClientHandler implements Runnable {
     private Mensaje registrarServicio(String ip, int puerto, String nombreServicio, int numeroVariables) {
 
         broker.addServicio(new Servicio());
-        return new Mensaje();
+        return new Mensaje(MensajeTipo.PETICION);
     }
 
     private Mensaje listarServicios(String palabraClave) {
 
-        return new Mensaje();
+        return new Mensaje(MensajeTipo.PETICION);
     }
 
     private Mensaje ejecutarServicio(String nombreServicio) {
         // buscar servicio
 
-        return new Mensaje();
+        return new Mensaje(MensajeTipo.PETICION);
     }
 
 }

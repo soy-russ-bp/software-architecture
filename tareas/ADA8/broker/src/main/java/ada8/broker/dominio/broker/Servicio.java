@@ -1,6 +1,7 @@
 package ada8.broker.dominio.broker;
 
-import ada8.broker.dominio.mensaje.Mensaje;
+import ada8.utilidades.Mensaje;
+import ada8.utilidades.MensajeTipo;
 
 public class Servicio {
 
@@ -19,7 +20,7 @@ public class Servicio {
 
         // devolver respuesta 
         
-        return new Mensaje();
+        return new Mensaje(MensajeTipo.PETICION);
 
     }
 
