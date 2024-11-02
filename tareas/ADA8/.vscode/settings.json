@@ -1,0 +1,9 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "conventionalCommits.scopes": [
+        "ADA8",
+        "ADA8-broker",
+        "ADA8-servidor",
+        "ADA8-utilidades",
+    ],
+}
