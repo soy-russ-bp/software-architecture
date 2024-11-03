@@ -12,8 +12,9 @@ public class ServicioListarEventos extends Servicio {
     }
 
     @Override
-    public Mensaje ejecutar(Mensaje solicitud) {
+    public Mensaje ejecutar(Parametros parametros) {
 
+        ParametrosListarEventos parametrosListarEventos = (ParametrosListarEventos) parametros;
 
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'ejecutar'");

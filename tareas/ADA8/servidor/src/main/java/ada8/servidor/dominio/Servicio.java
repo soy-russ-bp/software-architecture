@@ -17,5 +17,5 @@ public abstract class Servicio {
     public void setIdentificador(int identificador) {
         this.identificador = identificador;
     }
-    public abstract Mensaje ejecutar(Mensaje solicitud);
+    public abstract Mensaje ejecutar(Parametros parametros);
 }

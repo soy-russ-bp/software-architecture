@@ -38,7 +38,7 @@ public class ClientHandler implements Runnable {
 
             Servicio servicio = servidor.buscarServicioPorNombre(mensaje.getServicio());
 
-            Mensaje respuesta = servicio.ejecutar(mensaje);
+            Mensaje respuesta = servicio.ejecutar(new ParametrosVotar());
 
             // Responder al cliente
             out.println(MensajeMapeador.deObjetoAJson(respuesta));

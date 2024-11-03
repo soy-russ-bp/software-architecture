@@ -12,7 +12,10 @@ public class ServicioVotar extends Servicio {
     }
 
     @Override
-    public Mensaje ejecutar(Mensaje solicitud) {
+    public Mensaje ejecutar(Parametros parametros) {
+
+        ParametrosVotar parametrosVotar = (ParametrosVotar) parametros;
+
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'ejecutar'");
     }
