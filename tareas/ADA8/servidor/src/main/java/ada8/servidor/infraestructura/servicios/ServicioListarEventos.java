@@ -7,10 +7,13 @@ import ada8.utilidades.Mensaje;
 
 public class ServicioListarEventos extends Servicio {
 
-    @Override
-    public Mensaje ejecutar(Parametros parametros) {
+    public ServicioListarEventos() {
+        this.nombre = "listar";
+    }
 
-        ParametrosListarEventos parametrosListarEventos = (ParametrosListarEventos) parametros;
+    @Override
+    public Mensaje ejecutar(Mensaje solicitud) {
+
 
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'ejecutar'");

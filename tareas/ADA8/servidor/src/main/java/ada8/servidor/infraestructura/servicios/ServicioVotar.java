@@ -5,15 +5,18 @@ import ada8.servidor.dominio.Servicio;
 import ada8.servidor.infraestructura.parametros.ParametrosVotar;
 import ada8.utilidades.Mensaje;
 
-public class ServicioVotar extends Servicio{
+public class ServicioVotar extends Servicio {
+    
+    public ServicioVotar() {
+        this.nombre = "votar";
+    }
 
     @Override
-    public Mensaje ejecutar(Parametros parametros) {
-
-        ParametrosVotar parametrosVotar = (ParametrosVotar) parametros;
-
+    public Mensaje ejecutar(Mensaje solicitud) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'ejecutar'");
     }
+
     
+
 }

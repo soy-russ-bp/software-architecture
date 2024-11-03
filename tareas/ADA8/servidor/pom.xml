@@ -60,7 +60,7 @@
             </execution>
           </executions>
           <configuration>
-            <mainClass>com.ada8.App</mainClass>
+            <mainClass>ada8.servidor.App</mainClass>
           </configuration>
         </plugin>
         <!-- default lifecycle, jar packaging: see

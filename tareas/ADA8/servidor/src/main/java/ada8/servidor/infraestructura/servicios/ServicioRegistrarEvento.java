@@ -7,10 +7,12 @@ import ada8.utilidades.Mensaje;
 
 public class ServicioRegistrarEvento extends Servicio{
 
-    @Override
-    public Mensaje ejecutar(Parametros parametros) {
+    public ServicioRegistrarEvento() {
+        this.nombre = "registrar";
+    }
 
-        ParametrosRegistrarEvento parametrosRegistrarEvento = (ParametrosRegistrarEvento) parametros;
+    @Override
+    public Mensaje ejecutar(Mensaje solicitud) {
 
 
         // TODO Auto-generated method stub
