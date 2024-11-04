@@ -2,8 +2,6 @@ package ada8.servidor;
 
 import ada8.servidor.infraestructura.ClientHandler;
 import ada8.servidor.infraestructura.ServidorImpl;
-import ada8.servidor.infraestructura.parametros.ParametrosContarVotos;
-import ada8.servidor.infraestructura.servicios.ServicioContarVotos;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -17,7 +15,7 @@ import ada8.servidor.dominio.*;
  * Hello world!
  *
  */
-public class App {
+public class ServidorApp {
     private static ExecutorService picinaHilos = Executors.newFixedThreadPool(5);
 
     public static void main(String[] args) {
