@@ -27,6 +27,8 @@ public class App {
         try (ServerSocket serverSocket = new ServerSocket(servidor.getPuerto())) {
             System.out.println("Servidor iniciado y esperando clientes...");
 
+            servidor.registrarServiciosAlBroker();
+
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Cliente conectado: " + clientSocket.getInetAddress());
