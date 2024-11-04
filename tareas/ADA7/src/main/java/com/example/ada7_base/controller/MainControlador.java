@@ -28,7 +28,7 @@ public class MainControlador {
 
     private static final Logger registrador = LogManager.getLogger(MainControlador.class);
     private static final double localizadorHorizontal = 400;
-    private static final double localizadorVertical = 912;
+    private static final double localizadorVertical = 512;
 
     @FXML
     private VBox cajaVerticalProductos;
@@ -105,7 +105,11 @@ public class MainControlador {
     private Button crearBotonVoto(Producto producto) {
         Button boton = new Button("Vota por: " + producto.obtenerNombre());
         boton.setOnAction(evento -> {
-            listaProductos.votarProducto(producto.obtenerNombre());
+            try {
+                listaProductos.votarProducto(producto.obtenerNombre());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             actualizarNumeros(producto.obtenerNombre());
         });
         return boton;
@@ -139,10 +143,10 @@ public class MainControlador {
         FXMLLoader cargadorFXML = new FXMLLoader(getClass().getResource(fxmlRuta));
         Parent nodoRaiz = cargadorFXML.load();
         var controlador = (IObservador)cargadorFXML.getController();
-        this.controladoresDeGraficas.agregarObservador(controlador, this.listaProductos);
+        this.controladoresDeGraficas.agregarObservador(controlador, listaProductos);
         escenarioGrafica.setScene(new Scene(nodoRaiz));
-        escenarioGrafica.setX(this.localizadorHorizontal);
-        escenarioGrafica.setY(this.localizadorVertical);
+        escenarioGrafica.setX(localizadorHorizontal);
+        escenarioGrafica.setY(localizadorVertical);
         return escenarioGrafica;
     }
 
