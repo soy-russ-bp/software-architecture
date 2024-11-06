@@ -6,8 +6,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import com.example.ada7_base.data_model.ListaProductos;
 import utils.Mensaje;
 import utils.MensajeMapeador;
 import utils.MensajeTipo;
@@ -53,6 +56,7 @@ public class Cliente {
 
     private static void rellenarDiccionarioServicios(String servicio, Mensaje msjServicio) throws IOException {
         Mensaje respuestaBroker = enviarSolicitud(msjServicio);
+        //Obtener valor1 del json
         String idSinFormato = respuestaBroker.getVariable(1).getValor();
         int idContar = Integer.parseInt(idSinFormato);
         serviciosRegistrados.put(servicio, idContar);
@@ -60,11 +64,16 @@ public class Cliente {
 
     private static Mensaje generarMensajeRegistrarServicio(String servidorIP, int puerto, String servicio, String numParametos) {
         Mensaje mensaje = new Mensaje(MensajeTipo.PETICION);
+        mensaje.setServicio("registrar");
         mensaje.setNumeroVariables(4);
-        mensaje.addVariable(new Variable("servidor", servidorIP));
-        mensaje.addVariable(new Variable("puerto", Integer.toString(puerto)));
-        mensaje.addVariable(new Variable("servicio", servicio));
-        mensaje.addVariable(new Variable("parametros", numParametos));
+        mensaje.addVariable(new Variable("variable1", "servidor"));
+        mensaje.addVariable(new Variable("valor1", servidorIP));
+        mensaje.addVariable(new Variable("variable2", "puerto"));
+        mensaje.addVariable(new Variable("valor2", Integer.toString(puerto)));
+        mensaje.addVariable(new Variable("servicio3", "servicio"));
+        mensaje.addVariable(new Variable("valor3", servicio));
+        mensaje.addVariable(new Variable("variable4", "parametros"));
+        mensaje.addVariable(new Variable("valor4", numParametos));
 
         return mensaje;
     }
