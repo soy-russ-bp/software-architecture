@@ -58,12 +58,14 @@ public class Cliente {
         serviciosRegistrados.put(servicio, idContar);
     }
 
-    private static Mensaje generarMensajeRegistrarServicio(String servidorIP, int puerto, String servicio, String numParametos){
+    private static Mensaje generarMensajeRegistrarServicio(String servidorIP, int puerto, String servicio, String numParametos) {
         Mensaje mensaje = new Mensaje(MensajeTipo.PETICION);
         mensaje.setNumeroVariables(4);
         mensaje.addVariable(new Variable("servidor", servidorIP));
-        mensaje.addVariable(new Variable("puerto", Integer.toString(puerto));
+        mensaje.addVariable(new Variable("puerto", Integer.toString(puerto)));
         mensaje.addVariable(new Variable("servicio", servicio));
         mensaje.addVariable(new Variable("parametros", numParametos));
+
+        return mensaje;
     }
 }
