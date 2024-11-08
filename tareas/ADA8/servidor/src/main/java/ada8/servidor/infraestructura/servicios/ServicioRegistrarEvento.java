@@ -22,7 +22,7 @@ public class ServicioRegistrarEvento extends Servicio{
         LocalDateTime fechaHora = parametrosRegistrarEvento.getFechaHora();
 
         //registrar evento
-        baseDatos.agregarDato(rutaArchivo,evento + "," + fechaHora.toString());
+        baseDatos.agregarDato(rutaArchivo,fechaHora.toString() + "," + evento);
 
         //generar mensaje
         Mensaje respuesta = new Mensaje(MensajeTipo.RESPUESTA);

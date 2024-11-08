@@ -25,7 +25,7 @@ public class ServicioListarEventos extends Servicio {
 
         //escribe el cuerpo del mensaje
         respuesta.setNumeroVariables(eventosRegistros.size());
-        eventosRegistros.forEach((registro,fechaRegistro)->{
+        eventosRegistros.forEach((fechaRegistro,registro)->{
             Variable variable = new Variable(registro,fechaRegistro);
             respuesta.addVariable(variable);
         });
