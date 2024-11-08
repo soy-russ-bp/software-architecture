@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class BaseDatosImpl implements BaseDatos {
 
     @Override
-    public Object leerBaseDatos(String url) {
+    public HashMap<String,String> leerBaseDatos(String url) {
         HashMap<String,String> baseDatos = new HashMap<>();
         try (BufferedReader br = new BufferedReader(new FileReader(url))) {
             String linea = br.readLine();
@@ -25,8 +25,8 @@ public class BaseDatosImpl implements BaseDatos {
     }
 
     @Override
-    public void actualizarBaseDatos(String url,Object datos) {
-        HashMap<String,String> nuevaBaseDatos = datos instanceof HashMap ? (HashMap<String,String>)datos : null;
+    public void actualizarBaseDatos(String url,HashMap<String,String> datos) {
+        HashMap<String,String> nuevaBaseDatos = datos;
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(url))) {
             assert nuevaBaseDatos != null;
             for (String parUno : nuevaBaseDatos.keySet()) {
@@ -39,15 +39,27 @@ public class BaseDatosImpl implements BaseDatos {
     }
 
     @Override
-    public void agregarDato(String url,Object dato) {
-        String nuevoDato = (String) dato;
-        System.out.println("dato a agregar: " + nuevoDato);
+    public void agregarDato(String url,String dato) {
+        System.out.println("dato a agregar: " + dato);
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(url, true))) {
-            bw.write(nuevoDato);
+            bw.write(dato);
             bw.newLine();
         } catch (IOException e) {
             System.out.println("Error al escribir el archivo: " + e.getMessage());
         }
-        System.out.println("dato agregado: " + nuevoDato);
+        System.out.println("dato agregado: " + dato);
+    }
+
+    @Override
+    public int dimension(String url) {
+        int contadorLineas = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader(url))) {
+            while (br.readLine() != null) {
+                contadorLineas++;
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
+        return contadorLineas;
     }
 }

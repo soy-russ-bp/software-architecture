@@ -10,7 +10,6 @@ import java.util.HashMap;
 
 public class ServicioContarVotos extends Servicio {
     private final String rutaArchivo = "Productos.txt";
-
     public ServicioContarVotos() {
         this.nombre = "contar";
     }
@@ -18,15 +17,15 @@ public class ServicioContarVotos extends Servicio {
     @Override
     public Mensaje ejecutar(Parametros parametros) {
         Mensaje respuesta = new Mensaje(MensajeTipo.RESPUESTA);
-        respuesta.setServicio("contar");
+        respuesta.setServicio(nombre);
 
         //lee los productos y sus votos
-        HashMap<String,String> VotosProductos = (HashMap<String, String>) baseDatos.leerBaseDatos(rutaArchivo);
+        HashMap<String,String> votosProductos = baseDatos.leerBaseDatos(rutaArchivo);
 
         //escribe el cuerpo del mensaje
-        respuesta.setNumeroVariables(VotosProductos.size());
-        VotosProductos.forEach((nombre, votos)->{
-            Variable variable = new Variable(nombre,votos.toString());
+        respuesta.setNumeroVariables(votosProductos.size());
+        votosProductos.forEach((nombre, votos)->{
+            Variable variable = new Variable(nombre,votos);
             respuesta.addVariable(variable);
         });
 
