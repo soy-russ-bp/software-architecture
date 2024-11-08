@@ -21,23 +21,29 @@ public class ServicioVotar extends Servicio {
         String producto = parametrosVotar.getNombreProducto();
         int votosPorAgregar = parametrosVotar.getNumeroVotos();
 
-        //obtiene la cuenta de votos
         HashMap<String,String> votosProductos = baseDatos.leerBaseDatos(rutaArchivo);
-        String numeroVotos = votosProductos.get(producto);
+        
+        boolean existeElProducto = votosProductos.containsKey(producto);
+        if (existeElProducto) {
+            //obtiene la cuenta de votos
+            String numeroVotos = votosProductos.get(producto);
+            //sumar los votos
+            int numeroVotosNuevo = 0;
+            try {
+                numeroVotosNuevo = Integer.parseInt(numeroVotos);
+                numeroVotosNuevo += votosPorAgregar;
+            }
+            catch (NumberFormatException e) {System.out.println("El string no contiene un número válido");}
+            numeroVotos = numeroVotosNuevo + "";
 
-        //sumar los votos
-        int numeroVotosNuevo = 0;
-        try {
-            numeroVotosNuevo = Integer.parseInt(numeroVotos);
-            numeroVotosNuevo += votosPorAgregar;
+            //establecer los votos
+            votosProductos.put(producto, numeroVotos);
+            baseDatos.actualizarBaseDatos(rutaArchivo, votosProductos);
+
+
+        }else{
+            baseDatos.agregarDato(rutaArchivo, producto + "," + votosPorAgregar);
         }
-        catch (NumberFormatException e) {System.out.println("El string no contiene un número válido");}
-        numeroVotos = numeroVotosNuevo + "";
-
-        //establecer los votos
-        votosProductos.put(producto, numeroVotos);
-        baseDatos.actualizarBaseDatos(rutaArchivo, votosProductos);
-
         //generar respuesta
         Mensaje respuesta = new Mensaje(MensajeTipo.RESPUESTA);
         respuesta.setServicio(nombre);
