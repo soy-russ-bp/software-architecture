@@ -12,7 +12,7 @@ import java.util.HashMap;
     Servicio de votacion soporta hacer uno o mas votos por un solo producto
  */
 public class ServicioVotar extends Servicio {
-    private final String rutaArchivo = "Productos.txt";
+    private final String rutaArchivo = "servidor/data/Productos.txt";
     public ServicioVotar() {this.nombre = "votar";}
 
     @Override
@@ -43,6 +43,7 @@ public class ServicioVotar extends Servicio {
 
         }else{
             baseDatos.agregarDato(rutaArchivo, producto + "," + votosPorAgregar);
+            votosProductos.put(producto,votosPorAgregar+"");
         }
         //generar respuesta
         Mensaje respuesta = new Mensaje(MensajeTipo.RESPUESTA);

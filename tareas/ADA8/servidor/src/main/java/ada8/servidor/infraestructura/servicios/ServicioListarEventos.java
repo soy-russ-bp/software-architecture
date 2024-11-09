@@ -10,7 +10,7 @@ import ada8.utilidades.Variable;
 import java.util.HashMap;
 
 public class ServicioListarEventos extends Servicio {
-    private String rutaArchivo = "Registros.txt";
+    private String rutaArchivo = "servidor/data/Registros.txt";
     public ServicioListarEventos() {
         this.nombre = "listar";
     }

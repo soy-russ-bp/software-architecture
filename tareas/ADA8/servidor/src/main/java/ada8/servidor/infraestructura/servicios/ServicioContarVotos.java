@@ -9,13 +9,14 @@ import ada8.utilidades.Variable;
 import java.util.HashMap;
 
 public class ServicioContarVotos extends Servicio {
-    private final String rutaArchivo = "Productos.txt";
+    private final String rutaArchivo = "servidor/data/Productos.txt";
     public ServicioContarVotos() {
         this.nombre = "contar";
     }
 
     @Override
     public Mensaje ejecutar(Parametros parametros) {
+
         Mensaje respuesta = new Mensaje(MensajeTipo.RESPUESTA);
         respuesta.setServicio(nombre);
 

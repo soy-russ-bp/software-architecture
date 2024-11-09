@@ -8,9 +8,10 @@ import ada8.utilidades.MensajeTipo;
 import ada8.utilidades.Variable;
 
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 
 public class ServicioRegistrarEvento extends Servicio{
-    private String rutaArchivo = "Registros.txt";
+    private String rutaArchivo = "servidor/data/Registros.txt";
     public ServicioRegistrarEvento() {
         this.nombre = "registrar";
     }
@@ -19,10 +20,11 @@ public class ServicioRegistrarEvento extends Servicio{
     public Mensaje ejecutar(Parametros parametros) {
         ParametrosRegistrarEvento parametrosRegistrarEvento = (ParametrosRegistrarEvento) parametros;
         String evento = parametrosRegistrarEvento.getEvento();
-        LocalDateTime fechaHora = parametrosRegistrarEvento.getFechaHora();
+        String fechaHora = parametrosRegistrarEvento.getFechaHora();
 
         //registrar evento
-        baseDatos.agregarDato(rutaArchivo,fechaHora.toString() + "," + evento);
+        LocalDateTime ahora = LocalDateTime.now();
+        baseDatos.agregarDato(rutaArchivo,fechaHora+":"+ahora.getSecond() + "," + evento);
 
         //generar mensaje
         Mensaje respuesta = new Mensaje(MensajeTipo.RESPUESTA);

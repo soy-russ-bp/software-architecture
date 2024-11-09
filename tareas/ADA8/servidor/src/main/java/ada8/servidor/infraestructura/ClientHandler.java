@@ -64,8 +64,8 @@ public class ClientHandler implements Runnable {
             return new ParametrosVotar(nombreProducto, numeroVotos);
 
         } else if (mensaje.getServicio().equals("registrar")) {
-            String nombreEvento = mensaje.getVariable(0).getNombre();
-            LocalDateTime fechaHora = LocalDateTime.parse(mensaje.getVariable(0).getValor());
+            String nombreEvento = mensaje.getVariable(0).getValor();
+            String fechaHora = mensaje.getVariable(1).getValor();
             return new ParametrosRegistrarEvento(nombreEvento, fechaHora);
         } else {
             // para el caso de listar y contar que no requieren parametros

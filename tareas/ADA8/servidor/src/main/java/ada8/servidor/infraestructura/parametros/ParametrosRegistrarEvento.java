@@ -10,9 +10,9 @@ import ada8.servidor.dominio.Parametros;
 public class ParametrosRegistrarEvento implements Parametros {
 
     private String evento;
-    private LocalDateTime fechaHora;
+    private String fechaHora;
 
-    public ParametrosRegistrarEvento(String evento, LocalDateTime fechaHora) {
+    public ParametrosRegistrarEvento(String evento, String fechaHora) {
         this.evento = evento;
         this.fechaHora = fechaHora;
     }
@@ -21,7 +21,7 @@ public class ParametrosRegistrarEvento implements Parametros {
         return evento;
     }
 
-    public LocalDateTime getFechaHora() {
+    public String getFechaHora() {
         return fechaHora;
     }
 }

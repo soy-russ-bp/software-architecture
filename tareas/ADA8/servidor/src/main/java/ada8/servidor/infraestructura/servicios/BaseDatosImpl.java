@@ -17,6 +17,7 @@ public class BaseDatosImpl implements BaseDatos {
                 String parUno = valores[0];
                 String ParDos = valores[1];
                 baseDatos.put(parUno, ParDos);
+                linea = br.readLine();
             }
         }catch (Exception e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
