@@ -1,6 +1,7 @@
 package com.example.ada7_base.controller;
 
 import com.example.ada7_base.data_model.ListaProductos;
+import com.example.ada7_base.data_model.ListaRegistros;
 import com.example.ada7_base.data_model.Producto;
 import com.example.ada7_base.observer.IObservador;
 import com.example.ada7_base.observer.Observable;
@@ -17,29 +18,26 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import javafx.stage.Stage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainControlador {
 
-    private static final Logger registrador = LogManager.getLogger(MainControlador.class);
     private static final double localizadorHorizontal = 400;
     private static final double localizadorVertical = 512;
 
     @FXML
     private VBox cajaVerticalProductos;
-    private Map<String, Stage> escenariosGraficas = new HashMap<>();
+    private Map<String, Stage> escenariosVistas = new HashMap<>();
     private Map<String, Label> etiquetasVotos = new HashMap<>();
     private static ListaProductos listaProductos = new ListaProductos();
 
-    private Observable controladoresDeGraficas = new Observable();
+    private Observable controladoresVistas = new Observable();
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
+        listaProductos.contarProductos();
         for (Producto producto : listaProductos.obtenerProductos()) {
             ImageView imagenVista = this.crearImagenProducto(producto);
             cajaVerticalProductos.getChildren().add(imagenVista);
@@ -50,31 +48,36 @@ public class MainControlador {
             Button boton = this.crearBotonVoto(producto);
             cajaVerticalProductos.getChildren().add(boton);
         }
-        this.escenariosGraficas.put("Pastel", new Stage());
-        this.escenariosGraficas.put("Barras", new Stage());
+        this.escenariosVistas.put("Pastel", new Stage());
+        this.escenariosVistas.put("Barras", new Stage());
 
-        Button btnPastel = this.crearBotonGrafica("Gráfica de pastel");
-        Button btnBarras = this.crearBotonGrafica("Gráfica de barras");
+        Button btnPastel = this.crearBotonAbrirVista("Gráfica de pastel");
+        Button btnBarras = this.crearBotonAbrirVista("Gráfica de barras");
+        Button btnListar = this.crearBotonAbrirVista("Listar productos");
 
-        HBox cajaHorizontalBoton = this.crearContenedorDeBotonesDeGraficas(10, btnPastel, btnBarras);
+        HBox cajaHorizontalBoton = this.crearContenedorDeBotonesDeVistas(10, btnPastel, btnBarras, btnListar);
         cajaVerticalProductos.getChildren().add(cajaHorizontalBoton);
         cajaVerticalProductos.setAlignment(Pos.TOP_CENTER);
 
-        registrador.info("Vista principal inicializada");
     }
     void mostrarPastel() throws IOException {
-        registrador.info("Mostrando gráfica de pastel");
-        Stage escenarioPastel = this.escenariosGraficas.get("Pastel");
-        escenarioPastel  = this.mostrarEscenarioGrafica("/com/example/ada7_base/Vista_GraficaPastel.fxml", escenarioPastel);
-        this.escenariosGraficas.get("Pastel").show();
+        Stage escenarioPastel = this.escenariosVistas.get("Pastel");
+        escenarioPastel  = this.mostrarEscenarioVistas("/com/example/ada7_base/Vista_GraficaPastel.fxml", escenarioPastel);
+        this.escenariosVistas.get("Pastel").show();
     }
 
     void mostrarBarras() throws IOException {
-        registrador.info("Mostrando gráfica de barras");
-        Stage escenarioBarras = this.escenariosGraficas.get("Barras");
-        escenarioBarras = this.escenariosGraficas.get("Barras");
-        escenarioBarras  = this.mostrarEscenarioGrafica("/com/example/ada7_base/Vista_GraficaBarras.fxml", escenarioBarras);
-        this.escenariosGraficas.get("Barras").show();
+        Stage escenarioBarras = this.escenariosVistas.get("Barras");
+        escenarioBarras = this.escenariosVistas.get("Barras");
+        escenarioBarras  = this.mostrarEscenarioVistas("/com/example/ada7_base/Vista_GraficaBarras.fxml", escenarioBarras);
+        this.escenariosVistas.get("Barras").show();
+    }
+
+    void mostrarRegistros() throws IOException {
+        Stage escenarioRegistros = this.escenariosVistas.get("Registros");
+        escenarioRegistros = this.escenariosVistas.get("Registros");
+        escenarioRegistros  = this.mostrarEscenarioVistas("/com/example/ada7_base/Vista_ListarRegistros.fxml", escenarioRegistros);
+        this.escenariosVistas.get("Registros").show();
     }
 
     void actualizarNumeros(String productoVotado) {
@@ -84,7 +87,7 @@ public class MainControlador {
             etiquetaConteo
                     .setText("Conteo de votos por " + producto.obtenerNombre() + ": " + producto.obtenerTotalVotos());
         }
-        this.controladoresDeGraficas.notificarObservadores(productoVotado);
+        this.controladoresVistas.notificarObservadores(productoVotado);
     }
 
     private ImageView crearImagenProducto(Producto producto) {
@@ -107,6 +110,7 @@ public class MainControlador {
         boton.setOnAction(evento -> {
             try {
                 listaProductos.votarProducto(producto.obtenerNombre());
+                ListaRegistros.registrarEvento(producto.obtenerNombre());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -115,22 +119,24 @@ public class MainControlador {
         return boton;
     }
 
-    private HBox crearContenedorDeBotonesDeGraficas(int spacing, Button btnPastel, Button btnBarras){
+    private HBox crearContenedorDeBotonesDeVistas(int spacing, Button btnPastel, Button btnBarras, Button btnListar) {
         HBox cajaHorizontalBoton = new HBox();
         cajaHorizontalBoton.setSpacing(spacing);
         cajaHorizontalBoton.setAlignment(Pos.CENTER);
-        cajaHorizontalBoton.getChildren().addAll(btnPastel, btnBarras);
+        cajaHorizontalBoton.getChildren().addAll(btnPastel, btnBarras, btnListar);
         return cajaHorizontalBoton;
 
     }
-    private Button crearBotonGrafica(String nombreGrafica){
-        Button botonGrafica = new Button(nombreGrafica);
+    private Button crearBotonAbrirVista(String nombreVista){
+        Button botonGrafica = new Button(nombreVista);
         botonGrafica.setOnAction(evento -> {
             try {
-                if (nombreGrafica.equals("Gráfica de pastel")){
+                if (nombreVista.equals("Gráfica de pastel")){
                     mostrarPastel();
-                }else{
+                }else if(nombreVista.equals("Gráfica de barras")){
                     mostrarBarras();
+                }else{
+                    mostrarRegistros();
                 }
             } catch (IOException exepcion) {
                 throw new RuntimeException(exepcion);
@@ -139,15 +145,15 @@ public class MainControlador {
         return botonGrafica;
     }
 
-    private Stage mostrarEscenarioGrafica(String fxmlRuta, Stage escenarioGrafica) throws IOException {
+    private Stage mostrarEscenarioVistas(String fxmlRuta, Stage escenarioVista) throws IOException {
         FXMLLoader cargadorFXML = new FXMLLoader(getClass().getResource(fxmlRuta));
         Parent nodoRaiz = cargadorFXML.load();
         var controlador = (IObservador)cargadorFXML.getController();
-        this.controladoresDeGraficas.agregarObservador(controlador, listaProductos);
-        escenarioGrafica.setScene(new Scene(nodoRaiz));
-        escenarioGrafica.setX(localizadorHorizontal);
-        escenarioGrafica.setY(localizadorVertical);
-        return escenarioGrafica;
+        this.controladoresVistas.agregarObservador(controlador);
+        escenarioVista.setScene(new Scene(nodoRaiz));
+        escenarioVista.setX(localizadorHorizontal);
+        escenarioVista.setY(localizadorVertical);
+        return escenarioVista;
     }
 
 }

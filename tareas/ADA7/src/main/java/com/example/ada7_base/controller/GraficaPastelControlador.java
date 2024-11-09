@@ -10,50 +10,36 @@ import javafx.scene.chart.PieChart;
 
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class GraficaPastelControlador implements IObservador {
-    private static final Logger registrador = LogManager.getLogger(MainControlador.class);
 
     @FXML
     private PieChart pastelBase;
     private ObservableList<PieChart.Data> rebanadas;
-    private ListaProductos modeloListaProductos;
 
-    public void init(ListaProductos listaProductos) {
-        registrador.info("Inicializando gráfica de pasteles");
-        this.modeloListaProductos = listaProductos;
+    public void init() {
         this.rebanadas = FXCollections.observableArrayList();
-        this.rellenarGrafica(this.modeloListaProductos.obtenerProductos());
+        this.rellenarGrafica();
         pastelBase.setData(this.rebanadas);
         pastelBase.setTitle("Resumen de votos por grafica de pasteles");
-        registrador.info("Gráfica de pasteles inicializada");
     }
+
     @Override
-    public void actualizarGrafica(String productoVotado) {
-        registrador.info("Actualizando grafica de pasteles");
-        for (PieChart.Data rebanada : this.pastelBase.getData()) {
-            if (rebanada.getName().contains(productoVotado)) {
-                int valorAnterior = (int) rebanada.getPieValue();
-                int valorNuevo = valorAnterior + 1;
-                rebanada.setPieValue(valorNuevo);
-                String nombreRebanada = rebanada.getName();
-                rebanada.setName(nombreRebanada.replace(String.valueOf(valorAnterior), String.valueOf(valorNuevo)));
-                break;
-            }
-        }
-        registrador.info("Gráfica de pasteles actualizada");
+    public void actualizarVista() {
+        rellenarGrafica();
     }
-    @Override
-    public void rellenarGrafica(List<Producto> productos) {
-        registrador.info("Generando rebanadas de la gráfica de pasteles");
-        for (Producto producto : productos) {
+
+    public void rellenarGrafica() {
+        limpiarGrafica();
+        for (Producto producto : ListaProductos.obtenerProductos()) {
             PieChart.Data datos = new PieChart.Data(producto.obtenerNombre() + " = " + producto.obtenerTotalVotos(),
                     producto.obtenerTotalVotos());
             this.rebanadas.add(datos);
 
         }
-        registrador.info("Rebanadas de la gráfica de pasteles generadas");
+    }
+
+    public void limpiarGrafica() {
+        this.rebanadas.clear();
     }
 }

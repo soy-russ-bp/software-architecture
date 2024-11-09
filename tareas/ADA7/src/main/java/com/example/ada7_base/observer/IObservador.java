@@ -7,8 +7,6 @@ import java.util.List;
 
 
 public interface IObservador {
-    void init(ListaProductos productos);
-    void rellenarGrafica(List<Producto> productos);
-    void actualizarGrafica(String productoVotado);
-
+    void init();
+    void actualizarVista();
 }

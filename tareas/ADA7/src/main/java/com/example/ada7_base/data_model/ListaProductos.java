@@ -10,15 +10,15 @@ import utils.MensajeTipo;
 import utils.Variable;
 
 public class ListaProductos {
-    private ArrayList<Producto> productos = new ArrayList<Producto>();
+    private static ArrayList<Producto> productos = new ArrayList<Producto>();
 
 
-    public ArrayList<Producto> obtenerProductos() {
+    public static ArrayList<Producto> obtenerProductos() {
         return productos;
     }
 
     public Producto encontrarProducto(String nombre) {
-        for (Producto producto : this.productos) {
+        for (Producto producto : ListaProductos.productos) {
             if (nombre.equals(producto.obtenerNombre())) {
                 return producto;
             }
@@ -34,9 +34,16 @@ public class ListaProductos {
         solicitud.addVariable(new Variable("valor1", "1")); // Un voto
 
         Mensaje respuesta = Cliente.enviarSolicitud(solicitud);
+
+        for (Producto producto : productos) {
+            String nombreVariabe = respuesta.getVariable(0).getNombre();
+            if( nombreVariabe.equals(producto.obtenerNombre())){
+                producto.colocarTotalVotos(Integer.parseInt(respuesta.getVariable(0).getValor()));
+            }
+        }
     }
 
-    private void contarProductos() throws IOException{
+    public void contarProductos() throws IOException{
         Mensaje solicitud = new Mensaje(MensajeTipo.PETICION);
         solicitud.setServicio("contar");
         solicitud.setNumeroVariables(0);
@@ -53,5 +60,4 @@ public class ListaProductos {
             productos.add(producto);
         }
     }
-    
 }

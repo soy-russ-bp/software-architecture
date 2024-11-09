@@ -6,11 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-import com.example.ada7_base.data_model.ListaProductos;
 import utils.Mensaje;
 import utils.MensajeMapeador;
 import utils.MensajeTipo;

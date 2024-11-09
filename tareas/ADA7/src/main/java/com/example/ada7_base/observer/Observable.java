@@ -9,9 +9,9 @@ import com.example.ada7_base.observer.IObservador;
 public class Observable {
     private List<IObservador> observadores = new ArrayList<>();
 
-    public void agregarObservador(IObservador observador,ListaProductos productos) {
+    public void agregarObservador(IObservador observador) {
         observadores.add(observador);
-        observador.init(productos);
+        observador.init();
     }
 
     public void eliminarObservador(IObservador observador) {
@@ -20,7 +20,7 @@ public class Observable {
 
     public void notificarObservadores(String productoVotado) {
         for (IObservador observador : observadores) {
-            observador.actualizarGrafica(productoVotado);
+            observador.actualizarVista();
         }
     }
 }
