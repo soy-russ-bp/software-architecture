@@ -15,10 +15,12 @@ public class BrokerImpl extends Broker {
 
     @Override
     public Servicio buscarServicioRegistrado(String nombreServicio) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarServicioRegistrado'");
+        for (Servicio servicio : getServicios()) {
+            if (servicio.getNombreServicio().equals(nombreServicio)) {
+                return servicio;
+            }
+        }
+        return null;
     }
-
-   
 
 }
