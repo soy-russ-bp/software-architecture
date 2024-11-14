@@ -17,7 +17,7 @@ public class BrokerImpl extends Broker {
                     mensaje.getVariableValor("servidor"),
                     Integer.parseInt(mensaje.getVariableValor("puerto")),
                     mensaje.getVariableValor("servicio"),
-                    Integer.parseInt(mensaje.getVariableValor("numeroParametros")));
+                    Integer.parseInt(mensaje.getVariableValor("parametros")));
 
         } else if (mensaje.getServicio().equals("listar")) {
 

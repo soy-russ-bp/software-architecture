@@ -7,20 +7,17 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import ada8.servidor.dominio.Parametros;
 import ada8.servidor.dominio.Servicio;
-import ada8.servidor.dominio.Servidor;
+import ada8.servidor.dominio.ServidorRemoto;
+import ada8.servidor.infraestructura.parametros.*;
 import ada8.servidor.infraestructura.servicios.*;
 import ada8.utilidades.Mensaje;
 import ada8.utilidades.MensajeMapeador;
 import ada8.utilidades.MensajeTipo;
 import ada8.utilidades.Variable;
 
-public class ServidorImpl extends Servidor {
-
-    private int puerto = 8787;
-
-    private final int PUERTO_BROKER = 1234;
-    private final String IP_BROKER = "";
+public class ServidorImpl extends ServidorRemoto {
 
     public ServidorImpl() {
         setServicios(
@@ -35,11 +32,15 @@ public class ServidorImpl extends Servidor {
 
     }
 
-    // TODO (mejorar performance): Aunque solo se usará una vez, se estaría creando
-    // una conexión al broker cada que se llame a este método
+    @Override
+    public void start() {
+        registrarServiciosAlBroker();
+        super.start();
+    }
+
     @Override
     public void registrarServiciosAlBroker() {
-        try (Socket socket = new Socket(IP_BROKER, PUERTO_BROKER);
+        try (Socket socket = new Socket(getIpBroker(), getPuertoBroker());
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);) {
 
@@ -53,7 +54,7 @@ public class ServidorImpl extends Servidor {
                 ArrayList<Variable> contenido = new ArrayList<Variable>() {
                     {
                         add(new Variable("servidor", socket.getLocalAddress().toString()));
-                        add(new Variable("puerto", String.valueOf(puerto)));
+                        add(new Variable("puerto", String.valueOf(getPuertoServidor())));
                         add(new Variable("servicio", servicio.getNombre()));
                         add(new Variable("parametros", String.valueOf(9999)));
 
@@ -70,8 +71,30 @@ public class ServidorImpl extends Servidor {
     }
 
     @Override
-    public int getPuerto() {
-        return puerto;
+    public Mensaje procesarMensaje(Mensaje mensaje) {
+
+        Servicio servicio = buscarServicioPorNombre(mensaje.getServicio());
+        Parametros parametros = getParametros(mensaje);
+        Mensaje respuestaMensaje = servicio.ejecutar(parametros);
+
+        return respuestaMensaje;
+    }
+
+    private Parametros getParametros(Mensaje mensaje) {
+
+        if (mensaje.getServicio().equals("vota r")) {
+            String nombreProducto = mensaje.getVariable(0).getNombre();
+            int numeroVotos = Integer.parseInt(mensaje.getVariable(0).getValor());
+            return new ParametrosVotar(nombreProducto, numeroVotos);
+
+        } else if (mensaje.getServicio().equals("registrar")) {
+            String nombreEvento = mensaje.getVariable(0).getValor();
+            String fechaHora = mensaje.getVariable(1).getValor();
+            return new ParametrosRegistrarEvento(nombreEvento, fechaHora);
+        } else {
+            // para el caso de listar y contar que no requieren parametros
+            return null;
+        }
     }
 
 }

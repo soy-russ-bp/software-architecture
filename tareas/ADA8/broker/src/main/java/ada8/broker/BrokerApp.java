@@ -3,7 +3,7 @@ package ada8.broker;
 import ada8.broker.dominio.broker.Broker;
 import ada8.broker.infraestructura.BrokerImpl;
 
-public class Main {
+public class BrokerApp {
 
     public static void main(String[] args) {
 

@@ -2,11 +2,30 @@ package ada8.servidor.dominio;
 
 import java.util.ArrayList;
 
-public abstract class Servidor {
+import ada8.servidor.Servidor;
+
+public abstract class ServidorRemoto extends Servidor {
     private ArrayList<Servicio> servicios;
 
-    
-    abstract public int getPuerto();
+    private String ipBroker;
+    private int puertoBroker;
+
+
+    public String getIpBroker() {
+        return ipBroker;
+    }
+
+    public void setIpBroker(String ipBroker) {
+        this.ipBroker = ipBroker;
+    }
+
+    public int getPuertoBroker() {
+        return puertoBroker;
+    }
+
+    public void setPuertoBroker(int puertoBroker) {
+        this.puertoBroker = puertoBroker;
+    }
 
     public ArrayList<Servicio> getServicios() {
         return servicios;
