@@ -54,6 +54,24 @@ public class Mensaje {
         return this.contenido.get(i);
     }
 
+    public Variable getVariable(String nombreVariable) {
+        for (Variable variable : contenido) {
+            if (variable.getNombre().equals(nombreVariable)) {
+                return variable;
+            }
+        }
+        return null;
+    }
+
+    public String getVariableValor(String nombreVariable) {
+        for (Variable variable : contenido) {
+            if (variable.getNombre().equals(nombreVariable)) {
+                return variable.getValor();
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Mensaje [tipo = " + mensajeTipo + "] [contenido=" + contenido + ", numeroVariables=" + numeroVariables
