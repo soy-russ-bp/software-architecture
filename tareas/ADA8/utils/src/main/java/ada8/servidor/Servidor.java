@@ -1,4 +1,4 @@
-package ada8.common;
+package ada8.servidor;
 
 import java.io.*;
 import java.net.*;
