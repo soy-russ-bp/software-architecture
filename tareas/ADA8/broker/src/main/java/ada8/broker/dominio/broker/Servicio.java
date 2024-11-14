@@ -11,6 +11,13 @@ public class Servicio {
     private int numeroParametros;
     private int identificador;
 
+    public Servicio(String ipServidor, int puertoServidor, String nombreServicio, int numeroParametros) {
+        this.ipServidor = ipServidor;
+        this.puertoServidor = puertoServidor;
+        this.nombreServicio = nombreServicio;
+        this.numeroParametros = numeroParametros;
+    }
+
     public Mensaje ejecutar(Mensaje mensaje) {
 
         // hacer la solicitud 
@@ -42,6 +49,10 @@ public class Servicio {
 
     public int getIdentificador() {
         return identificador;
+    }
+
+    public void setIdentificador(int identificador) {
+        this.identificador = identificador;
     }
 
     

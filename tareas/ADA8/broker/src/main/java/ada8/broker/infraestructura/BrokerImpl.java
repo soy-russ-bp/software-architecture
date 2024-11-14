@@ -7,7 +7,6 @@ import ada8.utilidades.Variable;
 
 public class BrokerImpl extends Broker {
 
-    private static int contadorServicios = 0;
 
     @Override
     public Mensaje procesarMensaje(Mensaje mensaje) {

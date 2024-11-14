@@ -1,4 +1,4 @@
-package ada8.common;
+package ada8.servidor;
 
 import java.io.*;
 import java.net.*;
@@ -9,8 +9,8 @@ import ada8.utilidades.Mensaje;
 public abstract class Servidor extends Thread {
 
     private int puertoServidor;
-    private int maxClientes;
-    private ExecutorService hilos = Executors.newFixedThreadPool(maxClientes); // Soporta hasta 5 clientes simultáneos
+    private int maxClientes = 0;
+    private ExecutorService hilos = Executors.newFixedThreadPool(maxClientes == 0 ? 10 : maxClientes); // Soporta hasta 5 clientes simultáneos
 
     public abstract Mensaje procesarMensaje(Mensaje mensaje);
 
