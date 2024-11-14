@@ -8,7 +8,6 @@ import ada8.utilidades.MensajeTipo;
 import ada8.utilidades.Variable;
 
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 
 public class ServicioRegistrarEvento extends Servicio{
     private String rutaArchivo = "servidor/data/Registros.txt";

@@ -1,6 +1,5 @@
 package ada8.servidor.infraestructura.parametros;
 
-import java.time.LocalDateTime;
 import ada8.servidor.dominio.Parametros;
 
 /**

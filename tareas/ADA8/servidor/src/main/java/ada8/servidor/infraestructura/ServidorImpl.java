@@ -82,7 +82,7 @@ public class ServidorImpl extends ServidorRemoto {
 
     private Parametros getParametros(Mensaje mensaje) {
 
-        if (mensaje.getServicio().equals("vota r")) {
+        if (mensaje.getServicio().equals("votar")) {
             String nombreProducto = mensaje.getVariable(0).getNombre();
             int numeroVotos = Integer.parseInt(mensaje.getVariable(0).getValor());
             return new ParametrosVotar(nombreProducto, numeroVotos);

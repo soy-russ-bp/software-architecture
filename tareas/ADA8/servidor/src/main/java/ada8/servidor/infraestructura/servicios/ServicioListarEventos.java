@@ -2,7 +2,6 @@ package ada8.servidor.infraestructura.servicios;
 
 import ada8.servidor.dominio.Parametros;
 import ada8.servidor.dominio.Servicio;
-import ada8.servidor.infraestructura.parametros.ParametrosListarEventos;
 import ada8.utilidades.Mensaje;
 import ada8.utilidades.MensajeTipo;
 import ada8.utilidades.Variable;
