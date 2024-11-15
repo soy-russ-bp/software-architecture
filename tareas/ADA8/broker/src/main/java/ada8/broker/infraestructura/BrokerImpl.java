@@ -49,12 +49,23 @@ public class BrokerImpl extends Broker {
         Mensaje mensaje = new Mensaje(MensajeTipo.RESPUESTA);
         mensaje.setServicio("listar");
 
-        for (Servicio servicio : getServicios()) {
-            mensaje.addVariable(
-                    new Variable(
-                            servicio.getNombreServicio(),
-                            servicio.getIpServidor() + ":" + servicio.getPuertoServidor()));
+        if (palabra == null) {
+            for (Servicio servicio : getServicios()) {
+                mensaje.addVariable(
+                        new Variable(
+                                servicio.getNombreServicio(),
+                                servicio.getIpServidor() + ":" + servicio.getPuertoServidor()));
 
+            }
+        } else {
+            for (Servicio servicio : getServicios()) {
+                if (servicio.getNombreServicio().contains(palabra)) {
+                    mensaje.addVariable(
+                            new Variable(
+                                    servicio.getNombreServicio(),
+                                    servicio.getIpServidor() + ":" + servicio.getPuertoServidor()));
+                }
+            }
         }
 
         mensaje.setNumeroVariables(mensaje.getContenido().size());
