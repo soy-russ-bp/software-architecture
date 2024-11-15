@@ -1,0 +1,6 @@
+{
+    "servicio": "listar",
+    "variables": 1,
+    "variable1": "palabra",
+    "valor1": "contar"
+}
