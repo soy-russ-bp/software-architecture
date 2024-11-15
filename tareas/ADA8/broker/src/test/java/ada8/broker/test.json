@@ -1,8 +1,7 @@
 {
-    "servicio": "ejecutar",
-    "variables": 2,
-    "variable1": "servicio",
-    "valor1": "votar",
-    "variable2": "Windows",
-    "valor2": "1"
+    "servicio": "listar",
+    "variables": 1,
+    "variable1": "palabra",
+    "valor1": "contar"
+    
 }
