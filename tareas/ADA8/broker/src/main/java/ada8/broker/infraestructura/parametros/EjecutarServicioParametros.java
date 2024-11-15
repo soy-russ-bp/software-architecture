@@ -3,7 +3,7 @@ package ada8.broker.infraestructura.parametros;
 import java.util.ArrayList;
 
 import ada8.broker.dominio.broker.Parametros;
-import ada8.utilidades.Variable;
+import ada8.comun.utilidades.Variable;
 
 public class EjecutarServicioParametros implements Parametros {
 

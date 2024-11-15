@@ -2,7 +2,7 @@ package ada8.servidor.dominio;
 
 import ada8.servidor.infraestructura.servicios.BaseDatos;
 import ada8.servidor.infraestructura.servicios.BaseDatosImpl;
-import ada8.utilidades.Mensaje;
+import ada8.comun.utilidades.Mensaje;
 
 public abstract class Servicio {
     protected String nombre;

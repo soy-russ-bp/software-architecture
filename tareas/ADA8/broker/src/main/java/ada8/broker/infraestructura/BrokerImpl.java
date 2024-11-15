@@ -1,12 +1,11 @@
 package ada8.broker.infraestructura;
 
 import ada8.broker.dominio.broker.*;
-import ada8.utilidades.Mensaje;
-import ada8.utilidades.MensajeTipo;
-import ada8.utilidades.Variable;
+import ada8.comun.utilidades.Mensaje;
+import ada8.comun.utilidades.MensajeTipo;
+import ada8.comun.utilidades.Variable;
 
 public class BrokerImpl extends Broker {
-
 
     @Override
     public Mensaje procesarMensaje(Mensaje mensaje) {
@@ -47,9 +46,20 @@ public class BrokerImpl extends Broker {
 
     private Mensaje listarServicios(String palabra) {
 
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+        Mensaje mensaje = new Mensaje(MensajeTipo.RESPUESTA);
+        mensaje.setServicio("listar");
 
-   
+        for (Servicio servicio : getServicios()) {
+            mensaje.addVariable(
+                    new Variable(
+                            servicio.getNombreServicio(),
+                            servicio.getIpServidor() + ":" + servicio.getPuertoServidor()));
+
+        }
+
+        mensaje.setNumeroVariables(mensaje.getContenido().size());
+
+        return mensaje;
+    }
 
 }

@@ -2,7 +2,7 @@ package ada8.broker.dominio.broker;
 
 import java.util.ArrayList;
 
-import ada8.servidor.*;
+import ada8.comun.servidor.*;
 
 public abstract class Broker extends Servidor {
 

@@ -1,4 +1,6 @@
-package ada8.servidor;
+package ada8.comun.servidor;
+
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,8 +8,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import ada8.utilidades.Mensaje;
-import ada8.utilidades.MensajeMapeador;
+import ada8.comun.utilidades.Mensaje;
+import ada8.comun.utilidades.MensajeMapeador;
 
 class ClienteGestor implements Runnable {
 

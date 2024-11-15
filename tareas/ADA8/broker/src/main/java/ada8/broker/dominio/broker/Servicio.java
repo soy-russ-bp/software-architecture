@@ -1,7 +1,7 @@
 package ada8.broker.dominio.broker;
 
-import ada8.utilidades.Mensaje;
-import ada8.utilidades.MensajeTipo;
+import ada8.comun.utilidades.Mensaje;
+import ada8.comun.utilidades.MensajeTipo;
 
 public class Servicio {
 

@@ -10,6 +10,7 @@ public class BrokerApp {
         Broker broker = new BrokerImpl();
         broker.setPuertoServidor(4040);
         broker.start();
+        System.err.println("joder");
 
     }
 }

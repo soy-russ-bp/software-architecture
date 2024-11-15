@@ -1,21 +1,17 @@
 package ada8.servidor.infraestructura;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import ada8.comun.cliente.Cliente;
 import ada8.servidor.dominio.Parametros;
 import ada8.servidor.dominio.Servicio;
 import ada8.servidor.dominio.ServidorRemoto;
 import ada8.servidor.infraestructura.parametros.*;
 import ada8.servidor.infraestructura.servicios.*;
-import ada8.utilidades.Mensaje;
-import ada8.utilidades.MensajeMapeador;
-import ada8.utilidades.MensajeTipo;
-import ada8.utilidades.Variable;
+import ada8.comun.utilidades.Mensaje;
+import ada8.comun.utilidades.MensajeTipo;
+import ada8.comun.utilidades.Variable;
 
 public class ServidorImpl extends ServidorRemoto {
 
@@ -40,20 +36,19 @@ public class ServidorImpl extends ServidorRemoto {
 
     @Override
     public void registrarServiciosAlBroker() {
-        try (Socket socket = new Socket(getIpBroker(), getPuertoBroker());
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);) {
+        Cliente cliente = new Cliente(getIpBroker(), getPuertoBroker());
 
-            System.out.println("Conectado al broker, iniciando registro de servicios...");
+        for (Servicio servicio : getServicios()) {
+            Mensaje mensaje = new Mensaje(MensajeTipo.PETICION);
 
-            for (Servicio servicio : getServicios()) {
-                Mensaje mensaje = new Mensaje(MensajeTipo.PETICION);
-
-                mensaje.setServicio("registrar");
-                mensaje.setNumeroVariables(4);
-                ArrayList<Variable> contenido = new ArrayList<Variable>() {
+            mensaje.setServicio("registrar");
+            mensaje.setNumeroVariables(4);
+            ArrayList<Variable> contenido;
+            try {
+                contenido = new ArrayList<Variable>() {
                     {
-                        add(new Variable("servidor", socket.getLocalAddress().toString()));
+                        add(new Variable("servidor", java.net.InetAddress.getLocalHost().getHostAddress()));
+
                         add(new Variable("puerto", String.valueOf(getPuertoServidor())));
                         add(new Variable("servicio", servicio.getNombre()));
                         add(new Variable("parametros", String.valueOf(9999)));
@@ -61,12 +56,11 @@ public class ServidorImpl extends ServidorRemoto {
                     }
                 };
                 mensaje.setContenido(contenido);
-                String mensajeJson = MensajeMapeador.deObjetoAJson(mensaje);
-                out.println(mensajeJson);
+                cliente.enviarMensaje(mensaje);
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

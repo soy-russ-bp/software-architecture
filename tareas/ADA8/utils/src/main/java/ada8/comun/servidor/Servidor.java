@@ -1,10 +1,12 @@
-package ada8.servidor;
+package ada8.comun.servidor;
+
+
 
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
 
-import ada8.utilidades.Mensaje;
+import ada8.comun.utilidades.Mensaje;
 
 public abstract class Servidor extends Thread {
 

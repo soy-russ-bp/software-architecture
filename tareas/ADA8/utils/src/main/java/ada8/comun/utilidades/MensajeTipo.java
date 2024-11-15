@@ -1,4 +1,4 @@
-package ada8.utilidades;
+package ada8.comun.utilidades;
 
 public enum MensajeTipo {
     PETICION, RESPUESTA

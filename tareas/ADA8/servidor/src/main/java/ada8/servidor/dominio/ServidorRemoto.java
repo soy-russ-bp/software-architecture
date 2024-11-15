@@ -2,7 +2,7 @@ package ada8.servidor.dominio;
 
 import java.util.ArrayList;
 
-import ada8.servidor.Servidor;
+import ada8.comun.servidor.Servidor;
 
 public abstract class ServidorRemoto extends Servidor {
     private ArrayList<Servicio> servicios;

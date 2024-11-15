@@ -3,9 +3,9 @@ package ada8.servidor.infraestructura.servicios;
 import ada8.servidor.dominio.Parametros;
 import ada8.servidor.dominio.Servicio;
 import ada8.servidor.infraestructura.parametros.ParametrosVotar;
-import ada8.utilidades.Mensaje;
-import ada8.utilidades.MensajeTipo;
-import ada8.utilidades.Variable;
+import ada8.comun.utilidades.Mensaje;
+import ada8.comun.utilidades.MensajeTipo;
+import ada8.comun.utilidades.Variable;
 
 import java.util.HashMap;
 /*
