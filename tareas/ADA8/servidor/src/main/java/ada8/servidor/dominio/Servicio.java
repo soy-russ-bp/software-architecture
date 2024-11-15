@@ -7,6 +7,8 @@ import ada8.comun.utilidades.Mensaje;
 public abstract class Servicio {
     protected String nombre;
     protected BaseDatos baseDatos = new BaseDatosImpl();
+    
+    public abstract int getNumeroDeParametros();
 
     public String getNombre() {
         return nombre;

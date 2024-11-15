@@ -12,7 +12,7 @@ public abstract class Servidor extends Thread {
 
     private int puertoServidor;
     private int maxClientes = 0;
-    private ExecutorService hilos = Executors.newFixedThreadPool(maxClientes == 0 ? 10 : maxClientes); // Soporta hasta 5 clientes simultáneos
+    private ExecutorService hilos = Executors.newFixedThreadPool(maxClientes == 0 ? 3 : maxClientes); // Soporta hasta 5 clientes simultáneos
 
     public abstract Mensaje procesarMensaje(Mensaje mensaje);
 

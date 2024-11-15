@@ -31,5 +31,10 @@ public class ServicioListarEventos extends Servicio {
 
         return respuesta;
     }
+
+    @Override
+    public int getNumeroDeParametros() {
+        return 0;
+    }
     
 }

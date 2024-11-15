@@ -35,6 +35,7 @@ public class AppTest
         broker.start();
 
         ServidorRemoto servidor = new ServidorImpl();
+        servidor.setPuertoServidor(6969);
         servidor.setIpBroker( "192.168.1.2");
         servidor.setPuertoBroker(4545);
         servidor.start();

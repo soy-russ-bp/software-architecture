@@ -89,7 +89,7 @@ public class MensajeMapeador {
         nodoRaiz.put(parametrosMensaje.CAMPO_SERVICIO, mensaje.getServicio());
         nodoRaiz.put(parametrosMensaje.numeroVariablesORespuestas, mensaje.getNumeroVariables());
 
-        for (int i = 0; i < mensaje.getNumeroVariables(); i++) {
+        for (int i = 0; i < mensaje.getContenido().size(); i++) {
 
             Variable variable = mensaje.getVariable(i);
             nodoRaiz.put(parametrosMensaje.variableUnicaORespuesta + (i + 1), variable.getNombre());

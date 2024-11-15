@@ -32,4 +32,9 @@ public class ServicioContarVotos extends Servicio {
 
         return respuesta;
     }
+
+    @Override
+    public int getNumeroDeParametros() {
+        return 0;
+    }
 }

@@ -23,7 +23,7 @@ public class BrokerImpl extends Broker {
             return listarServicios(mensaje.getVariableValor("palabra"));
 
         } else if (mensaje.getServicio().equals("ejecutar")) {
-            Servicio servicio = buscarServicioRegistrado(mensaje.getServicio());
+            Servicio servicio = buscarServicioRegistrado(mensaje.getVariableValor("servicio"));
             return servicio.ejecutar(mensaje);
         }
 

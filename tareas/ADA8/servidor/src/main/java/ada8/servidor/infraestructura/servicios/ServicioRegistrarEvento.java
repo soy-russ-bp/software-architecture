@@ -34,5 +34,10 @@ public class ServicioRegistrarEvento extends Servicio{
         respuesta.addVariable(registrosAcumulados);
         return respuesta;
     }
+
+    @Override
+    public int getNumeroDeParametros() {
+        return 2;
+    }
     
 }

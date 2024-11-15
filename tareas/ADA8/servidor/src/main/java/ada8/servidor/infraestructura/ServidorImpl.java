@@ -48,10 +48,9 @@ public class ServidorImpl extends ServidorRemoto {
                 contenido = new ArrayList<Variable>() {
                     {
                         add(new Variable("servidor", java.net.InetAddress.getLocalHost().getHostAddress()));
-
                         add(new Variable("puerto", String.valueOf(getPuertoServidor())));
                         add(new Variable("servicio", servicio.getNombre()));
-                        add(new Variable("parametros", String.valueOf(9999)));
+                        add(new Variable("parametros", String.valueOf(servicio.getNumeroDeParametros())));
 
                     }
                 };
