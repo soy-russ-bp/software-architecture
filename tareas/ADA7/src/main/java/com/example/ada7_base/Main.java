@@ -11,6 +11,8 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage escenario) throws IOException {
+        Cliente.iniciarConexion("1.19.7", 34);
+        
         FXMLLoader cargadorFXML = new FXMLLoader(Main.class.getResource("Vista_Main.fxml"));
         Scene escena = new Scene(cargadorFXML.load(), 720, 720);
         escenario.setTitle("Sistema de votaciones");

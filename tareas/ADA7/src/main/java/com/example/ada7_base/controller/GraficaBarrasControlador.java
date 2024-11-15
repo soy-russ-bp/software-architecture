@@ -13,16 +13,12 @@ import org.apache.logging.log4j.Logger;
 
 public class GraficaBarrasControlador implements IObservador {
 
-    private static final Logger regisrador = LogManager.getLogger(GraficaBarrasControlador.class);
-
     @FXML
     private StackedBarChart<String, Number> pilaBarras;
     private List<XYChart.Series<String, Number>> seriesDatos;
-    private ListaProductos modeloListaProductos;
 
-    public void init(ListaProductos listaProductos) {
+    public void init() {
 
-        this.modeloListaProductos = listaProductos;
         CategoryAxis ejeX = new CategoryAxis();
         ejeX.setLabel("Producto");
         ejeX.setCategories(FXCollections.observableArrayList());
@@ -32,31 +28,19 @@ public class GraficaBarrasControlador implements IObservador {
         pilaBarras.setTitle("Resultados de Votaciones");
 
         this.seriesDatos = new ArrayList<>();
-        this.rellenarGrafica(this.modeloListaProductos.obtenerProductos());
+        this.rellenarGrafica();
 
         pilaBarras.getData().addAll(seriesDatos);
 
-        regisrador.info("Gráfico de barras inicializado");
     }
     @Override
-    public void actualizarGrafica(String productoVotado) {
-        for (XYChart.Series<String, Number> serie : seriesDatos) {
-            XYChart.Data<String, Number> serieDatos = serie.getData().getFirst();
-            if (serieDatos.getXValue().equals(productoVotado)) {
-                int votosActual = serieDatos.getYValue().intValue();
-                serieDatos.setYValue(votosActual + 1);
-                break;
-            }
-
-        }
-        regisrador.info("Gráfico de barras actualizado");
+    public void actualizarVista() {
+        rellenarGrafica();
     }
 
-    // Crea las barras del grafico de barras, se considera a cada producto como una
-    // serie que contiene un solo dato (sus numeros de votos)
-    @Override
-    public void rellenarGrafica(List<Producto> productos) {
-        for (Producto producto : productos) {
+    public void rellenarGrafica() {
+        limpiarGrafica();
+        for (Producto producto : ListaProductos.obtenerProductos()) {
             XYChart.Series<String, Number> serie = new XYChart.Series<String, Number>();
             XYChart.Data<String, Number> seriedatos = new XYChart.Data<String, Number>(producto.obtenerNombre(),
                     producto.obtenerTotalVotos());
@@ -65,6 +49,13 @@ public class GraficaBarrasControlador implements IObservador {
             serie.setName(producto.obtenerNombre());
             this.seriesDatos.add(serie);
         }
-        regisrador.info("Barras generadas");
+    }
+
+    public void limpiarGrafica() {
+        for (XYChart.Series<String, Number> serie : seriesDatos) {
+            for (XYChart.Data<String, Number> serieDatos : serie.getData()) {
+                serieDatos.setYValue(0);
+            }
+        }
     }
 }
