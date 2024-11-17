@@ -16,7 +16,7 @@
   <modules>
     <module>broker</module>
     <module>servidor</module>
-    <module>utils</module>
+    <module>comun</module>
   </modules>
 
   <properties>

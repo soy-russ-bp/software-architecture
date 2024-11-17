@@ -1,7 +1,7 @@
 {
-    "servicio": "listar",
+    "servicio": "ejecutar",
     "variables": 1,
-    "variable1": "palabra",
-    "valor1": "contar"
+    "variable1": "servicio",
+    "valor1": "listar"
     
 }
