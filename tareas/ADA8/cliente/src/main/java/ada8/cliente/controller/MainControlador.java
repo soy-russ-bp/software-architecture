@@ -2,6 +2,7 @@ package ada8.cliente.controller;
 
 import ada8.cliente.data_model.ListaProductos;
 import ada8.cliente.data_model.ListaRegistros;
+import ada8.cliente.data_model.ListaServicios;
 import ada8.cliente.data_model.Producto;
 import ada8.cliente.observer.IObservador;
 import ada8.cliente.observer.Observable;
@@ -33,6 +34,7 @@ public class MainControlador {
     private Map<String, Label> etiquetasVotos = new HashMap<>();
     private static ListaProductos listaProductos = new ListaProductos();
     private static ListaRegistros ListaRegistros = new ListaRegistros();
+    private static ListaServicios ListaServicios = new ListaServicios();
 
     private Observable controladoresVistas = new Observable();
 
@@ -53,12 +55,14 @@ public class MainControlador {
         this.escenariosVistas.put("Pastel", new Stage());
         this.escenariosVistas.put("Barras", new Stage());
         this.escenariosVistas.put("Registros", new Stage());
+        this.escenariosVistas.put("Servicios", new Stage());
 
         Button btnPastel = this.crearBotonAbrirVista("Gráfica de pastel");
         Button btnBarras = this.crearBotonAbrirVista("Gráfica de barras");
         Button btnListar = this.crearBotonAbrirVista("Listar Eventos");
+        Button btnServicios = this.crearBotonAbrirVista("Servicios");
 
-        HBox cajaHorizontalBoton = this.crearContenedorDeBotonesDeVistas(10, btnPastel, btnBarras, btnListar);
+        HBox cajaHorizontalBoton = this.crearContenedorDeBotonesDeVistas(10, btnPastel, btnBarras, btnListar, btnServicios);
         cajaVerticalProductos.getChildren().add(cajaHorizontalBoton);
         cajaVerticalProductos.setAlignment(Pos.TOP_CENTER);
 
@@ -82,6 +86,14 @@ public class MainControlador {
         escenarioRegistros  = this.mostrarEscenarioVistas("/ada8/cliente/Vista_ListarRegistros.fxml", escenarioRegistros);
         this.escenariosVistas.get("Registros").show();
     }
+
+    void mostrarServicios() throws IOException {
+        Stage escenarioServicios = this.escenariosVistas.get("Servicios");
+        escenarioServicios = this.escenariosVistas.get("Servicios");
+        escenarioServicios  = this.mostrarEscenarioVistas("/ada8/cliente/Vista_ListarServicios.fxml", escenarioServicios);
+        this.escenariosVistas.get("Servicios").show();
+    }
+
 
     void actualizarNumeros(String productoVotado) {
         Producto producto = listaProductos.encontrarProducto(productoVotado);
@@ -122,11 +134,11 @@ public class MainControlador {
         return boton;
     }
 
-    private HBox crearContenedorDeBotonesDeVistas(int spacing, Button btnPastel, Button btnBarras, Button btnListar) {
+    private HBox crearContenedorDeBotonesDeVistas(int spacing, Button btnPastel, Button btnBarras, Button btnListar, Button btnServicios) {
         HBox cajaHorizontalBoton = new HBox();
         cajaHorizontalBoton.setSpacing(spacing);
         cajaHorizontalBoton.setAlignment(Pos.CENTER);
-        cajaHorizontalBoton.getChildren().addAll(btnPastel, btnBarras, btnListar);
+        cajaHorizontalBoton.getChildren().addAll(btnPastel, btnBarras, btnListar, btnServicios);
         return cajaHorizontalBoton;
 
     }
@@ -138,9 +150,12 @@ public class MainControlador {
                     mostrarPastel();
                 }else if(nombreVista.equals("Gráfica de barras")){
                     mostrarBarras();
-                }else{
+                }else if(nombreVista.equals("Listar Eventos")){
                     ListaRegistros.listarRegistros();
                     mostrarRegistros();
+                }else{
+                    mostrarServicios();
+                    
                 }
             } catch (IOException exepcion) {
                 throw new RuntimeException(exepcion);
