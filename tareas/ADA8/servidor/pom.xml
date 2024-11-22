@@ -36,7 +36,7 @@
 
     <dependency>
       <groupId>com.ada8</groupId>
-      <artifactId>utils</artifactId>
+      <artifactId>comun</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
 

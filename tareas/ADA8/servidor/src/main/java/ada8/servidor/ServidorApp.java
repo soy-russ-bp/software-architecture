@@ -14,7 +14,7 @@ public class ServidorApp {
         ServidorRemoto servidor = new ServidorImpl();
         servidor.setPuertoServidor(3030);
         servidor.setPuertoBroker(4040);
-        servidor.setIpBroker("192.168.1.2");
+        servidor.setIpBroker("192.168.1.5");
  
 
         servidor.start();

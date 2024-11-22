@@ -28,7 +28,7 @@
   <dependencies>
     <dependency>
       <groupId>com.ada8</groupId>
-      <artifactId>utils</artifactId>
+      <artifactId>comun</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
 
@@ -80,7 +80,7 @@
             </execution>
           </executions>
           <configuration>
-            <mainClass>ada8.broker.Main</mainClass>
+            <mainClass>ada8.broker.BrokerApp</mainClass>
             <arguments>
             </arguments>
             <systemProperties>
