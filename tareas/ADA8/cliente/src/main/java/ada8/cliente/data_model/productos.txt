@@ -1,0 +1,4 @@
+11 agua /images/maruchan.jpg
+10 galletas /images/encebollado.jpeg
+14 papas /images/galleta.jpg
+
