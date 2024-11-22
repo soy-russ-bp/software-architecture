@@ -1,3 +1,18 @@
 5/11/2018 16:01:6,Se registró un voto para Windows
 5/11/2018 16:01:9,Se registró un voto para Windows
 5/11/2018 16:01:12,Se registró un voto para Windows
+2024-11-22T03:21:59.092239700:17,Se registro un voto para Unix
+2024-11-22T03:23:18.484609600:21,Se registro un voto para Unix
+2024-11-22T03:23:58.616695:59,Se registro un voto para Unix
+2024-11-22T03:24:02.281381400:3,Se registro un voto para Unix
+2024-11-22T03:24:07.071830900:7,Se registro un voto para Linux
+2024-11-22T03:24:12.815103300:13,Se registro un voto para Linux
+2024-11-22T03:24:16.680304:17,Se registro un voto para MacOS
+2024-11-22T03:24:26.513:27,Se registro un voto para Windows
+2024-11-22T03:41:00.914043900:1,Se registro un voto para Unix
+2024-11-22T03:41:11.321190:11,Se registro un voto para Unix
+2024-11-22T03:41:42.560788600:43,Se registro un voto para Unix
+2024-11-22T03:41:47.678292600:48,Se registro un voto para Unix
+2024-11-22T03:43:31.213507800:32,Se registro un voto para Unix
+2024-11-22T03:43:34.410042200:34,Se registro un voto para Unix
+2024-11-22T03:45:48.391010700:49,Se registro un voto para Unix

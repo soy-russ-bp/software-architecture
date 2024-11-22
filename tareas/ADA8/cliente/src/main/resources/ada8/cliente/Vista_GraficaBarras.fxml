@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ada7_base.controller.GraficaBarrasControlador">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ada8.cliente.controller.GraficaBarrasControlador">
    <children>
        <Label alignment="CENTER" cache="true" layoutX="33.0" layoutY="14.0" prefHeight="94.0" prefWidth="534.0" text="Grafica de barras" textOverrun="CLIP">
            <font>

@@ -24,7 +24,8 @@ public class Cliente {
     
     //Debe devolver un json
     public static Mensaje enviarSolicitud(Mensaje mensajeSolicitud) throws IOException {
-        mensajeCliente.println(MensajeMapeador.deObjetoAJson(mensajeSolicitud));
+        var test = MensajeMapeador.deObjetoAJson(mensajeSolicitud);
+        mensajeCliente.println(test);
         String respuestaJson = respuestaServidor.readLine();
         Mensaje mensajeRespuesta = MensajeMapeador.deJsonAObjeto(respuestaJson);
         return mensajeRespuesta;

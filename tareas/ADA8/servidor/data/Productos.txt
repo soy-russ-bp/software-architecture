@@ -1,1 +1,4 @@
-Windows,14
+Unix,32
+Linux,66
+MacOS,2
+Windows,15

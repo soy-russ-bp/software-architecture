@@ -23,7 +23,7 @@ public abstract class Servidor extends Thread {
 
             while (true) {
                 Socket socketCliente = socketServidor.accept(); // Espera por clientes
-                System.out.println("Cliente conectado: " + socketCliente.getInetAddress());
+                System.out.println("Cliente conectado: " + socketCliente.getInetAddress() + ":" + socketCliente.getPort());
 
                 // Crea un nuevo hilo para manejar cada cliente
                 ClienteGestor clientHandler = new ClienteGestor(socketCliente, this);

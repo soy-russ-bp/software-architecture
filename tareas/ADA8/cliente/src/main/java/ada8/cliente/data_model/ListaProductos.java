@@ -29,10 +29,10 @@ public class ListaProductos {
 
     public void votarProducto(String nombre) throws IOException {
         Mensaje solicitud = new Mensaje(MensajeTipo.PETICION);
-        solicitud.setServicio("votar");
-        solicitud.setNumeroVariables(1);
-        solicitud.addVariable(new Variable("variable1", nombre));
-        solicitud.addVariable(new Variable("valor1", "1")); // Un voto
+        solicitud.setServicio("ejecutar");
+        solicitud.setNumeroVariables(2);
+        solicitud.addVariable(new Variable("servicio", "votar"));
+        solicitud.addVariable(new Variable(nombre, "1")); // Un voto
 
         Mensaje respuesta = Cliente.enviarSolicitud(solicitud);
 

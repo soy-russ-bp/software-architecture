@@ -148,6 +148,7 @@ public class MainControlador {
 
     private Stage mostrarEscenarioVistas(String fxmlRuta, Stage escenarioVista) throws IOException {
         FXMLLoader cargadorFXML = new FXMLLoader(getClass().getResource(fxmlRuta));
+        var test = getClass().getResource(fxmlRuta);
         Parent nodoRaiz = cargadorFXML.load();
         var controlador = (IObservador)cargadorFXML.getController();
         this.controladoresVistas.agregarObservador(controlador);

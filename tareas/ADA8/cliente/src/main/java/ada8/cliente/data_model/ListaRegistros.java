@@ -23,13 +23,13 @@ public class ListaRegistros {
 
     public static void registrarEvento(String nombre) throws IOException {
         Mensaje solicitud = new Mensaje(MensajeTipo.PETICION);
-        solicitud.setServicio("registrar");
-        solicitud.setNumeroVariables(2);
-        solicitud.addVariable(new Variable("variable1", "evento"));
-        solicitud.addVariable(new Variable("valor1", "Se registro un voto para " + nombre));
-        solicitud.addVariable(new Variable("variable2", "fecha"));
+        solicitud.setServicio("ejecutar");
+        solicitud.setNumeroVariables(3);
+        solicitud.addVariable(new Variable("servicio", "registrar"));
+        solicitud.addVariable(new Variable("evento", "Se registro un voto para " + nombre));
+        
         String fecha = LocalDateTime.now().toString();
-        solicitud.addVariable(new Variable("valor2", fecha));
+        solicitud.addVariable(new Variable("fecha", fecha));
         Mensaje respuesta = Cliente.enviarSolicitud(solicitud);
         
         for (int i = 1; i <= respuesta.getNumeroVariables(); i++) {
@@ -39,9 +39,12 @@ public class ListaRegistros {
     
     public void listarRegistros() throws IOException {
         Mensaje solicitud = new Mensaje(MensajeTipo.PETICION);
-        solicitud.setServicio("listar");
-        solicitud.setNumeroVariables(0);
+        solicitud.setServicio("ejecutar");
+        solicitud.setNumeroVariables(1);
+        solicitud.addVariable(new Variable("servicio", "listar"));
+
         Mensaje respuesta = Cliente.enviarSolicitud(solicitud);
+        
         for (int i = 1; i <= respuesta.getNumeroVariables(); i++) {
             String registro = respuesta.getVariable(i - 1).getValor();
             registros.add(registro);

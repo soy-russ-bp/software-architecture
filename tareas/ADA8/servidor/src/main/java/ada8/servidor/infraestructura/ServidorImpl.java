@@ -10,6 +10,7 @@ import ada8.servidor.dominio.ServidorRemoto;
 import ada8.servidor.infraestructura.parametros.*;
 import ada8.servidor.infraestructura.servicios.*;
 import ada8.comun.utilidades.Mensaje;
+import ada8.comun.utilidades.MensajeMapeador;
 import ada8.comun.utilidades.MensajeTipo;
 import ada8.comun.utilidades.Variable;
 
@@ -55,7 +56,13 @@ public class ServidorImpl extends ServidorRemoto {
                     }
                 };
                 mensaje.setContenido(contenido);
-                cliente.enviarMensaje(mensaje);
+                Mensaje respuesta = cliente.enviarMensaje(mensaje);
+                try {
+                    System.err.println(MensajeMapeador.deObjetoAJson(respuesta));
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             } catch (UnknownHostException e) {
                 e.printStackTrace();
             }

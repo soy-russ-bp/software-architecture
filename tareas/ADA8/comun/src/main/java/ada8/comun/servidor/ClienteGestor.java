@@ -1,7 +1,5 @@
 package ada8.comun.servidor;
 
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,15 +24,18 @@ class ClienteGestor implements Runnable {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
 
-            String mensajeClienteJson = "";
-            do {
-                mensajeClienteJson += in.readLine();
-            } while (in.ready());
+            while (true) {
+                String mensajeClienteJson = "";
+                do {
 
-            Mensaje mensajeCliente = MensajeMapeador.deJsonAObjeto(mensajeClienteJson);
-            Mensaje mensajeRespuesta = servidor.procesarMensaje(mensajeCliente);
+                    mensajeClienteJson += in.readLine();
+                } while (in.ready());
 
-            out.println(MensajeMapeador.deObjetoAJson(mensajeRespuesta));
+                Mensaje mensajeCliente = MensajeMapeador.deJsonAObjeto(mensajeClienteJson);
+                Mensaje mensajeRespuesta = servidor.procesarMensaje(mensajeCliente);
+
+                out.println(MensajeMapeador.deObjetoAJson(mensajeRespuesta));
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
