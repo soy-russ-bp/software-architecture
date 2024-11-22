@@ -16,3 +16,11 @@
 2024-11-22T03:43:31.213507800:32,Se registro un voto para Unix
 2024-11-22T03:43:34.410042200:34,Se registro un voto para Unix
 2024-11-22T03:45:48.391010700:49,Se registro un voto para Unix
+2024-11-22T04:23:26.174985400:26,Se registro un voto para Unix
+2024-11-22T04:44:11.420182900:12,Se registro un voto para Unix
+2024-11-22T04:51:25.242672300:26,Se registro un voto para Unix
+2024-11-22T04:54:08.766573300:9,Se registro un voto para Unix
+2024-11-22T05:05:27.115840300:31,Se registro un voto para Unix
+2024-11-22T05:14:58.667830600:59,Se registro un voto para Unix
+2024-11-22T05:20:46.618970800:47,Se registro un voto para Unix
+2024-11-22T05:26:08.074738600:9,Se registro un voto para Unix

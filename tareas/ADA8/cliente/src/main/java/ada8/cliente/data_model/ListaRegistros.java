@@ -14,6 +14,7 @@ public class ListaRegistros {
     private static int totalEventos = 0;
 
     public static ArrayList<String> obtenerRegistros() {
+        
         return registros;
     }
     
@@ -46,8 +47,9 @@ public class ListaRegistros {
         Mensaje respuesta = Cliente.enviarSolicitud(solicitud);
         
         for (int i = 1; i <= respuesta.getNumeroVariables(); i++) {
-            String registro = respuesta.getVariable(i - 1).getValor();
-            registros.add(registro);
+            String registro = respuesta.getVariable(i - 1).getNombre();
+            String fecha = respuesta.getVariable(i - 1).getValor();
+            registros.add(registro + " " + fecha); 
         }
     }
     

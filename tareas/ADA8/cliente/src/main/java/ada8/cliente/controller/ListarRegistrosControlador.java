@@ -1,26 +1,56 @@
 package ada8.cliente.controller;
 
+import java.util.ArrayList;
+
 import ada8.cliente.data_model.ListaRegistros;
 import ada8.cliente.observer.IObservador;
-
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class ListarRegistrosControlador implements IObservador {
 
+    private class ItemEvento {
+        private final SimpleStringProperty evento;
+
+        public ItemEvento(String evento) {
+            this.evento = new SimpleStringProperty(evento);
+        }
+
+        public SimpleStringProperty getevento() {
+            return evento;
+        }
+    }
+
     @FXML
     private VBox cajaVerticalRegistros;
+    @FXML
     private HBox cajaHorizontalCabecera;
+    @FXML
+    private TableView<ItemEvento> eventos;
+    @FXML
+    private TableColumn<ItemEvento, String> eventosCol;
 
     public void init() {
         crearCabecera();
+        eventosCol.setCellValueFactory(cellData -> cellData.getValue().getevento());
+        ArrayList<ItemEvento> data = new ArrayList<>();
         for (String registro : ListaRegistros.obtenerRegistros()) {
-            Label registroEtiqueta = crearEtiquetaRegistro(registro);
-            cajaVerticalRegistros.getChildren().add(registroEtiqueta);
+            data.add(new ItemEvento(registro));
+
         }
+
+        eventos.getItems().clear();
+        eventos.getItems().setAll(data);
+
     }
 
     private Label crearEtiquetaRegistro(String registro) {

@@ -32,6 +32,7 @@ public class MainControlador {
     private Map<String, Stage> escenariosVistas = new HashMap<>();
     private Map<String, Label> etiquetasVotos = new HashMap<>();
     private static ListaProductos listaProductos = new ListaProductos();
+    private static ListaRegistros ListaRegistros = new ListaRegistros();
 
     private Observable controladoresVistas = new Observable();
 
@@ -51,10 +52,11 @@ public class MainControlador {
         }
         this.escenariosVistas.put("Pastel", new Stage());
         this.escenariosVistas.put("Barras", new Stage());
+        this.escenariosVistas.put("Registros", new Stage());
 
         Button btnPastel = this.crearBotonAbrirVista("Gráfica de pastel");
         Button btnBarras = this.crearBotonAbrirVista("Gráfica de barras");
-        Button btnListar = this.crearBotonAbrirVista("Listar productos");
+        Button btnListar = this.crearBotonAbrirVista("Listar Eventos");
 
         HBox cajaHorizontalBoton = this.crearContenedorDeBotonesDeVistas(10, btnPastel, btnBarras, btnListar);
         cajaVerticalProductos.getChildren().add(cajaHorizontalBoton);
@@ -137,6 +139,7 @@ public class MainControlador {
                 }else if(nombreVista.equals("Gráfica de barras")){
                     mostrarBarras();
                 }else{
+                    ListaRegistros.listarRegistros();
                     mostrarRegistros();
                 }
             } catch (IOException exepcion) {
