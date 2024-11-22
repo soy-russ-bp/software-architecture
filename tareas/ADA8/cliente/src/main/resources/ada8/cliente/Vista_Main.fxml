@@ -3,7 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="cajaVerticalProductos" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.example.ada7_base.controller.MainControlador">
+<VBox fx:id="cajaVerticalProductos" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="ada8.cliente.controller.MainControlador">
   <padding>
     <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
   </padding>

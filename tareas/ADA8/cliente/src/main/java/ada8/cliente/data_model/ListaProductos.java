@@ -46,8 +46,9 @@ public class ListaProductos {
 
     public void contarProductos() throws IOException{
         Mensaje solicitud = new Mensaje(MensajeTipo.PETICION);
-        solicitud.setServicio("contar");
-        solicitud.setNumeroVariables(0);
+        solicitud.setServicio("ejecutar");
+        solicitud.setNumeroVariables(1);
+        solicitud.addVariable(new Variable("servicio", "contar"));
 
         Mensaje respuesta = Cliente.enviarSolicitud(solicitud);
 

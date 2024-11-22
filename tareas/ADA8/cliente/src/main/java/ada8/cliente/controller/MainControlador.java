@@ -38,9 +38,10 @@ public class MainControlador {
     @FXML
     public void initialize() throws IOException {
         listaProductos.contarProductos();
-        for (Producto producto : listaProductos.obtenerProductos()) {
-            ImageView imagenVista = this.crearImagenProducto(producto);
-            cajaVerticalProductos.getChildren().add(imagenVista);
+        for (Producto producto : ListaProductos.obtenerProductos()) {
+            // TODO: función insoporada
+            // ImageView imagenVista = this.crearImagenProducto(producto);
+            // cajaVerticalProductos.getChildren().add(imagenVista);
 
             Label conteo = this.crearEtiquetaVotos(producto);
             cajaVerticalProductos.getChildren().add(conteo);
@@ -62,21 +63,21 @@ public class MainControlador {
     }
     void mostrarPastel() throws IOException {
         Stage escenarioPastel = this.escenariosVistas.get("Pastel");
-        escenarioPastel  = this.mostrarEscenarioVistas("/com/example/ada7_base/Vista_GraficaPastel.fxml", escenarioPastel);
+        escenarioPastel  = this.mostrarEscenarioVistas("/ada8/cliente/Vista_GraficaPastel.fxml", escenarioPastel);
         this.escenariosVistas.get("Pastel").show();
     }
 
     void mostrarBarras() throws IOException {
         Stage escenarioBarras = this.escenariosVistas.get("Barras");
         escenarioBarras = this.escenariosVistas.get("Barras");
-        escenarioBarras  = this.mostrarEscenarioVistas("/com/example/ada7_base/Vista_GraficaBarras.fxml", escenarioBarras);
+        escenarioBarras  = this.mostrarEscenarioVistas("/ada8/cliente/Vista_GraficaBarras.fxml", escenarioBarras);
         this.escenariosVistas.get("Barras").show();
     }
 
     void mostrarRegistros() throws IOException {
         Stage escenarioRegistros = this.escenariosVistas.get("Registros");
         escenarioRegistros = this.escenariosVistas.get("Registros");
-        escenarioRegistros  = this.mostrarEscenarioVistas("/com/example/ada7_base/Vista_ListarRegistros.fxml", escenarioRegistros);
+        escenarioRegistros  = this.mostrarEscenarioVistas("/ada8/cliente/Vista_ListarRegistros.fxml", escenarioRegistros);
         this.escenariosVistas.get("Registros").show();
     }
 
