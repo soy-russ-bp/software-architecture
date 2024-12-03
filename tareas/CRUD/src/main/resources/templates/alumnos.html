@@ -20,24 +20,38 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="alumno : ${alumnos}">
-                <td>
-                    <input class="form-check-input" type="checkbox" th:value="${alumno.id}" name="idsSeleccionados" id="flexCheckDefault">
-                </td>
-                <td th:text="${alumno.id}"></td>
-                <td th:text="${alumno.nombre}"></td>
-                <td th:text="${alumno.matricula}"></td>
-                <td>
-                    <a th:href="@{/alumnos/editar/{id}(id=${alumno.id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <form th:action="@{/alumnos/eliminar/{id}(id=${alumno.id})}" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
+                <tr th:each="alumno : ${alumnos}">
+                    <td>
+                        <input class="form-check-input" type="checkbox" th:value="${alumno.id}" name="idsSeleccionados" id="flexCheckDefault">
+                    </td>
+                    <td th:text="${alumno.id}"></td>
+                    <td th:text="${alumno.nombre}"></td>
+                    <td th:text="${alumno.matricula}"></td>
+                    <td>
+                        <a th:href="@{/alumnos/editar/{id}(id=${alumno.id})}" class="btn btn-warning btn-sm">Editar</a>
+                        <button
+                                class="btn btn-danger btn-sm"
+                                th:onclick="|eliminarAlumno(${alumno.id}); return false|">
+                            Eliminar
+                        </button>
+
+
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
 </form>
+
+<script>
+    function eliminarAlumno(id) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = `/alumnos/eliminar/${id}`;
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
 
 </body>
 </html>

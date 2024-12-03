@@ -18,6 +18,7 @@ public class AlumnoControlador {
     @GetMapping
     public String listarAlumnos(Model model) {
         List<Alumno> alumnos = alumnoRepositorio.findAll();
+        System.out.println(alumnos);
         model.addAttribute("alumnos", alumnos);
         return "alumnos";
     }
@@ -48,10 +49,13 @@ public class AlumnoControlador {
     }
 
     @PostMapping("/eliminar-alumnos")
-    public String eliminarAlumnos(@RequestParam List<Long> idsSeleccionados) {
-        alumnoRepositorio.deleteAllById(idsSeleccionados);
-        return "redirect:/alumnos"; // Redirige a la lista de alumnos
+    public String eliminarAlumnos(@RequestParam(name = "idsSeleccionados", required = false) List<Long> idsSeleccionados) {
+        if (idsSeleccionados != null && !idsSeleccionados.isEmpty()) {
+            alumnoRepositorio.deleteAllById(idsSeleccionados);
+        }
+        return "redirect:/alumnos";
     }
+
 
 
 }
