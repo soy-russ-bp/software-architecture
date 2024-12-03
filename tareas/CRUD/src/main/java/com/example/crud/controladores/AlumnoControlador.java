@@ -47,4 +47,11 @@ public class AlumnoControlador {
         return "redirect:/alumnos";
     }
 
+    @PostMapping("/eliminar-alumnos")
+    public String eliminarAlumnos(@RequestParam List<Long> idsSeleccionados) {
+        alumnoRepositorio.deleteAllById(idsSeleccionados);
+        return "redirect:/alumnos"; // Redirige a la lista de alumnos
+    }
+
+
 }
