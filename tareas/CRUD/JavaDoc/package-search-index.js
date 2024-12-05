@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.proyecto.crud"},{"l":"com.proyecto.crud.controladores"},{"l":"com.proyecto.crud.entidades"},{"l":"com.proyecto.crud.repositorios"}];updateSearchResults();
